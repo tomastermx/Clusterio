@@ -1,0 +1,36 @@
+extends layout
+
+block content
+
+ style.
+   h1#title {
+   text-align: center;
+   }
+  
+	
+ h1#title REGISTRO DE USUARIO
+
+   div.ui.segment
+    form.ui.form(id="registerusernamex", method="post", action="/users/register")
+      h4.ui.dividing.header Selecciona nombre de usuario y rol
+      div.field
+           label(for="username") Selecciona un  nombre de usuario
+           input(type="text"  name="username" id="username")
+      div.ui.field
+          div.ui.selection.dropdown
+           input(type="hidden" name="rol" id="rol" placeholder="Rol")
+           i.dropdown.icon
+           div.default.text Rol
+           div.menu
+
+            div.item(data-value="Miembre de una empresa")  miembro de empresa
+            div.item(datavalue="Miembro de una Asociación") invesionista
+            div.item(datavalue="Investigador") investigador 
+
+      div.ui.field
+       div.ui.toggle.checkbox
+        input(type="checkbox" tabindex=0 class="hidden")
+        label Recibir noticias de la industria por correo electrónico   
+
+      div.ui.field
+         button.ui.green.button(type="submit") Guardar  

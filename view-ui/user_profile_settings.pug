@@ -1,0 +1,78 @@
+extends layout
+block variables
+
+  
+
+block content
+
+ script(src='/javascripts/jquery-profile.js') 
+  
+ 
+ style.
+   h1 , h2 {
+ 
+      text-align:center;
+    
+   }	
+
+ div.ui.container
+  div.ui.segment
+
+ 
+
+    
+   //-  h1#uname #{user.name}
+   //-  h1 #{user.email}
+  
+
+
+   h1#profileuser
+   h1#profileusermail
+   h1#profileuserrol 
+
+
+ 
+ 
+
+  div.ui.segment
+   div.ui.top.attached.tabular.menu
+    a.item.active(data-tab="first") Información del Usuario
+    a.item(data-tab="second") Notificaciones y Grupos
+    a.item(data-tab="third") Configuración y Seguridad
+
+   div.ui.bottom.attached.tab.segment.active(data-tab="first")
+     div.ui.segment   	
+      h2 Modificación de nombre de usuario
+      form.ui.form(id="usern-change" , method="post")
+        div.field
+         label(for="newusername") Usuario
+         input(type="text", name="newusername",  placeholder="Agrega nombre de usuario" value=`${user.username}`,id="newusername")
+        div.field    
+         div.ui.selection.dropdown
+          input(type="hidden" name="rol" id="rol" placeholder="Rol")
+          i.dropdown.icon
+          div.default.text Rol
+          div.menu
+           
+           div.item(data-value="emprendedor") emprendedor
+           div.item(datavalue="empresario") empresario
+           div.item(datavalue="investigador") investigador
+         div.field
+         button.ui.button.green#botonx(type="submit") Guardar
+
+
+
+
+
+   div.ui.bottom.attached.tab.segment(data-tab="second")
+     div.ui.segment
+        div.ui.toggle.checkbox
+         input(type="checkbox" tabindex=0 class="hidden")
+         label Recibir noticias de la industria por correo electrónico  
+    
+
+
+   div.ui.bottom.attached.tab.segment(data-tab="third")
+     h4 Opciones 3
+      div.ui.segment
+      

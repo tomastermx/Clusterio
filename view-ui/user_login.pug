@@ -1,0 +1,52 @@
+
+extends layout
+
+
+block content
+ style.
+  @import url('https://fonts.googleapis.com/css?family=quicksand&display=swap');
+ 
+
+   h1,h3 {
+ 
+      text-align:center;
+     
+     
+   }
+
+
+     body #fonts{
+     font-family: 'nunito';
+   } 
+ 
+ h1#fonts REGISTRATE
+ div.ui.container
+  
+  div.ui.segment
+   
+
+   
+  	
+    form.ui.large.form(id="signip", method="post", action="/users/login")
+      div.field
+      label(for="email") Correo electrónico*
+      input(type="email", name="email", id="email" required)
+      div.field
+      label(for="email") Constraseña* 
+      input(type="password", name="password", id="password" required)
+      a(href="/") ¿Perdiste tu password?  
+      div.field
+      button.ui.button.green(type="submit") Submit
+      
+      if  password === "falla"
+          p Contraseña Errónea
+  
+  div.ui.segment
+    div.ui.two.column.grid
+     div.column  
+      h3 Identificate con Google
+      a(href='/users/auth/google' class="button ui red button") Google 
+       i.google.plus.icon 
+     div.column
+      h3 Identificate con Facebook      
+      a(href='/users/auth/facebook' class="button ui blue button") Facebook

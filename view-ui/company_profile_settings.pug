@@ -1,0 +1,147 @@
+extends layout
+
+block content
+
+  script(src='/javascripts/mapsapi-profile.js')
+  script(src='/javascripts/jquery-company.settings.js') 
+  script.
+   
+   
+    $(document).ready(function(){
+  
+      var id = '#{company._id}';
+ 
+       var productArray =[];   
+       
+       var i = 0;
+      
+     $.get('/company/profile/json/'+ id , (data,status)=>{
+     console.log(data);
+
+      var name =    data.nombre  
+      var  pais    = data.pais
+      var state =   data.estado
+      var city =    data.ciudad 
+      var calle =  data.calle
+      
+      var  street = data.calle ;
+      var  address = city + "," + " " + state + "," + " "   + pais
+      productArray = data.productos;
+
+     
+
+        $('#title').text(name)
+        $('#addressw').text(address)
+        $('#addressx').text(street)
+       
+            for(i=0;i<productArray.length;i++){
+         
+ 
+             $("#list").append('<div class="ui segment id="'+i+'" "><div class="ui three column grid"><div class="column"><p class="product">'+ productArray[i].producto + '</p></div><div class="column"><p>' + productArray[i].descripcion + '</p></div><div class="column"> <button  class="ui button red" id="remove" >Eliminar</button></div></div></div>');
+         
+
+             }  
+
+                 console.log(productArray);
+    
+            });
+  
+           //////////////////////////////////////////////////Add products//////
+                        $("#add").click((e)=>{
+
+                                e.preventDefault();
+
+                               var product = $("#proditem").val();
+                               var description = $("#descripcion").val();
+
+                               item = {producto:product, descripcion:description}
+ 
+                               productArray.push(item); 
+
+                               var row = '<div class="ui segment id="'+i+'" "><div class="ui three column grid"><div class="column"><p class="product">'+ productArray[i].producto + '</p></div><div class="column"><p>' + productArray[i].descripcion + '</p></div><div class="column"> <button  class="ui button red" id="remove" >Eliminar</button></div></div></div>'  
+
+                                  $("#list").append(row);
+
+                                  i++;
+
+                                 console.log(productArray); 
+    
+                    });
+
+           //////////////////////////////////////////////////Delete///////////////////////
+
+                $("#list").on("click","button" ,function(e){
+
+                               /// Para que no haga post//////
+                   e.preventDefault();                
+      
+                  $(this).parent().parent().parent().fadeOut(1000).remove(1000);
+      
+                  var text = $(this).parent().parent().find("p.product").text();
+  
+                    var element = text.toString();
+
+
+                    for( j = 0 ; j < productArray.length ; j++){
+  
+                       if(productArray[j].producto===element){
+          
+                        productArray.splice(j,1);
+ 
+                              }
+
+                           } 
+
+
+                   console.log(productArray);
+
+                  });
+
+           $("#companyname").submit((event)=>{
+       
+           event.preventDefault();
+
+         $.post('/company/settings/profile/'+ id ,{products : productArray});
+
+    })
+                     
+ 
+
+
+
+    });
+
+                            
+
+
+  div.ui.container
+   div.ui.segment
+    form.ui.form(id="companyname", method="post", action="") 
+    
+        
+
+
+     div.field 
+      h2.textcenter Editar Productos
+      div.ui.segment#products
+        
+
+           div.ui.three.column.grid#entrada
+            div.column
+              h4 Producto
+              input(id="proditem" name="proditem")
+            div.column
+              h4 Descripción
+              input(id="descripcion" name="descripcion")
+            div.column
+               h4
+               br 
+
+               button.ui.button.blue#add Agregar
+                
+      div.ui.segment#list      
+               
+      div.field 
+      button.ui.button.green(type="submit") Guardar   
+      
+

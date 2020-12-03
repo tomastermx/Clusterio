@@ -1,0 +1,48 @@
+extends layout
+
+block content 
+ style.
+   @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap');
+
+    body .fonts {
+    
+    font-family: 'Nunito', sans-serif; 
+
+    }
+ 
+  
+
+ script(src='/javascripts/jquery-profile.js') 	
+
+ div.ui.segment
+   
+   
+  
+ div.ui.internally.divide.grid
+  div.three.wide.column
+   div.ui.segment
+    h2.fonts Hola
+    
+     each val in company
+      div.ui.segment  
+       h3.fonts #{val.nombre}
+       br
+
+
+       a(href="/company/profile/"+val._id  class="button ui blue button") Página
+       br
+       br 
+       a(href="/company/settings/profile/"+val._id  class="button ui green button") Modificar
+       br
+       br      
+       a(href="/company/settings/profile/delete/"+val._id  class="button ui red button") Borrar
+
+
+    a(href="/company/new/"  class="button ui blue button") Nueva 
+
+  div.ten.wide.column
+   div.ui.segment
+    div.ui.form
+     input#post(type="text") 	
+  div.three.wide.column
+   div.ui.segment

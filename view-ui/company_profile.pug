@@ -1,0 +1,135 @@
+
+
+extends layout
+
+block content
+ script.
+   
+  $(document).ready(()=>{
+    
+    var creator ;
+    var email ;
+    var id = '#{company._id}'
+    var owner = '#{owner}'
+	           
+     console.log(owner);
+
+      $.get('/company/profile/json/'+ id , (data,status)=>{
+
+     var name =    data.nombre 
+     var industry = data.industria
+     var subindustry = data.subindustry  
+     var  pais   = data.pais
+     var  state =   data.estado
+     var  city =    data.ciudad 
+     var  calle =  data.calle
+     var  numero = data.numero
+     var  telefono = data.telefono
+     var  website = data.web
+     var  description = data.description
+     var  badges = data.certificados
+
+     var  street = data.calle + " " + "#" + " " + data.numero
+     var  address = city + "," + " " + state 
+     var Array = data.productos;
+
+
+       
+        $('#title').text(name) 
+        $('#addressw').text(address)
+        $('#addressx').text(street)
+        $('#industry').text(industry)
+        $('#country').text(pais)
+        $('#phone').text(telefono)
+        $('#description').text(description)
+        $('#web').text(website)
+
+
+        for(i=0;i<Array.length;i++){
+         
+        $("#productlist").append('<tr><td>' + Array[i].producto + '</td><td>'+  Array[i].descripcion +'</td></tr>');
+
+                                }  
+
+    
+                  });
+
+    
+            
+              $("#update").submit((event)=>{
+                    event.preventDefault();
+
+                    
+
+             })
+
+         
+
+
+       })
+
+
+
+ div.ui.container
+  div.ui.placeholder.segment
+   div.ui.three.column.stackable.center.aligned.grid
+  
+    div.column
+       
+       
+       h2#title 
+       h3  #{company.pais} 🌍 
+       h3 Dirección 📍
+       p#addressx
+       p#addressw 
+       h3 Teléfono  📞
+       p#phone
+
+    div.column 
+       
+      h3 Sitio web 📡
+      p#web  
+    div.column
+    
+
+  div.ui.segment
+   div.ui.segment  
+    h2.textcenter Descripción
+    p.textcenter#description
+   div.ui.segment
+    button.ui.button.blue Mensaje 💬
+    button.ui.button.green Seguir 🙏
+  
+  div.ui.segment
+   div.ui.top.attached.tabular.menu
+     a.item.active(data-tab="first") Actualizaciones 🔔 
+     a.item(data-tab="second") Productos 🔩
+     a.item(data-tab="third") Anuncios 📰
+     a.item(data-tab="fourth") Blog 
+
+  div.ui.bottom.attached.tab.segment.active(data-tab="first")
+    div.ui.segment
+      h1 Actulizaciones
+      div.ui.segment  
+        form.ui.form(id="update") 
+         textarea(type="text" name="post" id="post" )
+         div.ui.container  
+          button.ui.button.green(type="submit") Guardar 
+
+
+  div.ui.bottom.attached.tab.segment(data-tab="second")
+   div.ui.segment
+     h1 Productos
+     table.ui.celled.table
+      thead
+       tr
+        th Nombre  
+        th Descripción
+      tbody#productlist     
+
+ 
+  div.ui.bottom.attached.tab.segment(data-tab="third")
+    div.ui.segment
+     h1 Anuncios
+
+  div.ui.bottom.attached.tab.segment(data-tab="fourth")   

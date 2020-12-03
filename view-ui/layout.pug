@@ -1,0 +1,99 @@
+
+block variables
+doctype html
+html
+  head
+   meta(charset='UTF-8') 
+   meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no') 
+   link(rel="stylesheet"  href="/stylesheets/style.css")
+   link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito") 
+   link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css")
+   link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous")   
+
+   script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js') 
+    
+   script(src='/javascripts/jquery.js')
+   
+
+  
+   
+
+
+   script(src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js")
+   
+  
+
+    
+
+   script( src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+    integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+     crossorigin="anonymous")
+
+   script.
+    
+  style.
+   #footer{
+  
+   width:100%;
+   position: fixed;
+   bottom: 0;
+    
+   }
+
+   #imageprofile{
+ 
+      height:45px;
+      width: 45px;
+      border-width: 3px;
+      border-style: solid;
+      border-color: black;
+      border-radius: 50%;
+
+
+   }
+
+   #img{
+    border-radius:50%;
+    max-width: 100%;
+    max-height: 100%;
+    display: block; /* remove extra space below image */
+
+   }
+
+
+  div.ui.container 
+    div.ui.fixed.inverted.main.menu
+     - var  url ="https://api.adorable.io/avatars/41/abott@adorable.png" 
+
+        div.header.item 
+         a(href="/users/profile") Cluster.io
+        a.ui.item(href="/") Link 
+        a.ui.item(href="/") Link 
+    
+        div.right.menu 
+           
+        
+         div.item
+          div.ui.transparent.inverted.icon.input
+           i.search.icon
+           input(type="text" placeholder="Search")  
+         div#imageprofile 
+           
+           img#img(src = `${ image || url} `)
+
+           
+
+         div.ui.dropdown.item Profile
+
+         
+           i.dropdown.icon
+           div.menu
+            a.item(href="/users/login") Log in
+            a.item(href="/users/profile/settings") Settings
+            a.item(href="/users/logout") Logout
+
+           
+
+  div#content
+     block content
+  div#footer

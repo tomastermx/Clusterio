@@ -1,0 +1,27 @@
+extends layout
+
+block content
+ style(type='text/css').
+     h1 {
+      text-align:center;
+     }
+
+     #delete{
+      margin-left:60px;
+     } 
+
+
+
+ div.ui.container
+  
+   h1 Eliminar Compañía	
+
+
+ div.ui.internally.divide.grid 
+    div.four.wide.column
+    div.eight.wide.column
+     div.ui.segment
+      h3 ¿ Seguro desea eliminar  la empresa?
+      a(href='/users/auth/google' class="button ui red button") Delete
+
+

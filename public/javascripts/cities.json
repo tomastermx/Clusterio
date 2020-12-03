@@ -1,0 +1,21 @@
+ {
+
+
+  "automotriz": [{"data":"automotriz","key":"automotriz"},{"data":"maquinaria pesada","value":"maquinaria-pesada"},
+  {"data":"Guadalajara","value":"gdl"}],
+
+ "agroindustria":[],
+
+  "alimenticia-bebidas-tabaco":[{"data":"consultoria","key":"consultoria"},{"data":"Medellín","value":"med"}],
+
+  
+  "maquinaria-componentes-instrumentos":[],
+
+ "metal-mecánica":[],
+
+  "tecnologías de la información":[],
+
+
+    "textil": []
+
+}

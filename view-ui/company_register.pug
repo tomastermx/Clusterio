@@ -1,0 +1,134 @@
+extends layout
+
+
+block content
+ script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8Aiaah4r5LWNR5vsGIrKxNSh7buf7C5o&libraries=places&callback=initAutocomplete"  async defer)
+
+ script(src='/javascripts/jquery-company.js')
+ script(src='/javascripts/mapsapi-profile.js')   
+
+
+
+
+ style.
+   h1 {
+ 
+      text-align:center;
+   }	
+
+   #products {
+   border:
+    background-color:red;
+   }
+
+ div.ui.container
+  h1#tock  ACERCA DE LA EMPRESA	
+  div.ui.segment
+     div.ui.bottom.attached.tab.segment(data-tab="second")
+
+     form.ui.form(id="companyname", method="post", action="/company/new/")
+         div.field
+           label(for="companyname") Nombre del empresa*	
+           input(type="text"  name="companyname" id="nameofcompany")
+           label(for="description") Breve Descripción de la empresa
+           input(type=text, name="description" id="description" maxlength="80") 
+         div.field 
+       
+      
+
+
+
+
+    
+         div.field
+
+
+
+
+         div#locationField
+          label(for="companyname") Ubicación* 
+          input(type="text"  name="companyname" id="autocomplete"  placeholder="Enter your address" onFocus= "geolocate()" )
+         div.field 
+
+          table#address
+           tbody
+             tr
+               td.label Street address
+               td.slimField
+                 input#street_number.field(disabled='true')
+               td.wideField(colspan='2')
+                 input#route.field(disabled ='true')
+             tr
+               td.label Ciudad
+               td.wideField(colspan='3')
+                 input#locality.field(type="text" name="city" disabled ='true')
+             tr
+               td.label Estado
+               td.slimField
+                 input#administrative_area_level_1.field(disabled='true')
+               td.label Zip code
+               td.wideField
+                 input#postal_code.field(disabled ='true')
+             tr
+               td.label País
+               td.wideField(colspan='3')
+                 input#country.field(disabled ='true')
+
+             tr
+               td.label Teléfono
+               td.wideField(colspan='3')
+                 input.field#phone(maxlength="10")
+
+              
+             tr
+               td.label Sitio Web
+               td.wideField(colspan='3')
+                 input.field#website(maxlength="18")    
+             
+        
+
+         div.field
+          div.ui.segment
+           div.ui.two.column.grid  
+            div.column 
+              br 
+              h2 Industria
+              select.ui.dropdown#industry(name="industry")
+               option(value="") 
+               option(value="automotriz") Automotríz
+               option(value="agroindustria") Agroindustria
+               option(value="alimenticia-bebidas-tabaco") Alimenticia, Bebidas y Tabaco
+               option(value="maquinaria-componentes-instrumentos") Maquinaria, Instrumentos y Componentes
+              br
+              br
+               
+              select.ui.dropdown#subindustry(name="subindustry")  
+              br
+              br
+            div.column
+              br
+              h2 Certificaciones
+              select.ui.fluid.dropdown#badge(multiple="" name="badge")  
+
+         div.field 
+          h1 Productos
+         div.ui.segment#products
+        
+
+           div.ui.three.column.grid#entrada
+            div.column
+              h4 Producto
+              input(id="proditem" name="proditem" maxlength="20"   )
+            div.column
+              h4 Descripción
+              input(id="descripcion" name="descripcion" maxlength="20")
+            div.column
+               h4
+               br 
+
+               button.ui.button.blue#add Agregar
+                
+         div.ui.segment#list      
+               
+         div.field 
+         button.ui.button.green(type="submit") Guardar
