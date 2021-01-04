@@ -7,6 +7,74 @@ const session = require('express-session');
  Company = require('../models/company');
  
 
+/**************************************************************************************************************************************
+
+                           Busqueda de toddas las empresas 
+
+***************************************************************************************************************************************/
+
+exports.searchCompanies =  async (req,res)=>{
+
+
+    try {
+    company = await  Company.find()
+
+    res.json(company);
+ 
+    }
+
+    catch(e){console.log(e)}
+
+}
+
+
+
+/*************************************************************************************************************************************
+                              Page of Company query ---Get
+
+*****************************************************************************************************************************************/
+
+exports.companyQueryResults =(req,res)=>{
+    
+    var query = req.query.searchunit
+    console.log(query);
+
+
+    res.render('company_results',{query:query});
+
+
+ 
+}
+
+
+
+/*********************************************************************************************************
+                        Company Query --- Post
+
+**********************************************************************************************************/
+
+
+exports.docompanyQueryResults = async (req,res)=>{
+    
+    console.log(req.body.query);
+
+    try {
+
+        company = await  Company.find()
+  //  company = await  Company.find({'productos.producto':new RegExp(req.body.query, 'i' )})
+
+    res.json(company);
+ 
+    }
+
+    catch(e){console.log(e)}
+
+
+
+
+
+
+}
 
 
 
@@ -15,6 +83,10 @@ const session = require('express-session');
                                     Create new Company ---Get
 
 *****************************************************************************************************************************/
+
+
+
+
 
 exports.newCompany = (req,res)=>{
 
