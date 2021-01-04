@@ -18,13 +18,8 @@ block content
  div.ui.container
   div.ui.segment
 
- 
 
-    
-   //-  h1#uname #{user.name}
-   //-  h1 #{user.email}
   
-
 
    h1#profileuser
    h1#profileusermail
@@ -35,12 +30,13 @@ block content
  
 
   div.ui.segment
-   div.ui.top.attached.tabular.menu
-    a.item.active(data-tab="first") Información del Usuario
-    a.item(data-tab="second") Notificaciones y Grupos
-    a.item(data-tab="third") Configuración y Seguridad
+   div.ui.grid.container  
+    div.ui.stackable.top.attached.tabular.menu
+     a.item.active(data-tab="first") Información del Usuario
+     a.item(data-tab="second") Notificaciones y Grupos
+     a.item(data-tab="third") Configuración y Seguridad
 
-   div.ui.bottom.attached.tab.segment.active(data-tab="first")
+    div.ui.bottom.attached.tab.segment.active(data-tab="first")
      div.ui.segment   	
       h2 Modificación de nombre de usuario
       form.ui.form(id="usern-change" , method="post")

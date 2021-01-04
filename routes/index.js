@@ -17,7 +17,7 @@ module.exports = (app)=>{
 
 	app.post('/', async(req,res)=>{
        
-      company = await  Company.find()
+
       res.json(company);
 
 

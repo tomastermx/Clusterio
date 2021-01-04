@@ -3,6 +3,12 @@
 extends layout
 
 block content
+ style.
+  #post{
+   min-height:6em;
+   height: 6em;
+  }
+
  script.
    
   $(document).ready(()=>{
@@ -70,56 +76,61 @@ block content
 
 
 
- div.ui.container
-  div.ui.placeholder.segment
-   div.ui.three.column.stackable.center.aligned.grid
+
+ div.ui.doubling.stackable.container
+  div.ui.segment
+   div.ui.three.column.doubing.stackable.grid
   
     div.column
        
        
-       h2#title 
-       h3  #{company.pais} 🌍 
-       h3 Dirección 📍
-       p#addressx
-       p#addressw 
-       h3 Teléfono  📞
-       p#phone
+       h2#title.textcenter 
+       h3.textcenter  #{company.pais} 🌍 
+       h3.textcenter Dirección 📍
+       p.textcenter#addressx
+       p.textcenter#addressw 
+       h3.textcenter Teléfono  📞
+       p.textcenter#phone
 
     div.column 
        
-      h3 Sitio web 📡
-      p#web  
+      h3.textcenter Sitio web 💻
+      p.textcenter#web  
     div.column
     
 
-  div.ui.segment
-   div.ui.segment  
+ div.ui.segment
+  div.ui.segment  
     h2.textcenter Descripción
     p.textcenter#description
-   div.ui.segment
-    button.ui.button.blue Mensaje 💬
-    button.ui.button.green Seguir 🙏
-  
   div.ui.segment
-   div.ui.top.attached.tabular.menu
+    button.ui.button.blue Mensaje 💬
+    button.ui.button.green Seguir 🤝
+
+
+ 
+
+  div.ui.stackable.top.attached.tabular.menu
      a.item.active(data-tab="first") Actualizaciones 🔔 
      a.item(data-tab="second") Productos 🔩
      a.item(data-tab="third") Anuncios 📰
-     a.item(data-tab="fourth") Blog 
+     a.item(data-tab="fourth") Más Información  💾
 
   div.ui.bottom.attached.tab.segment.active(data-tab="first")
-    div.ui.segment
-      h1 Actulizaciones
+      
+    h1.textcenter Actualizaciones
+    if owner
       div.ui.segment  
-        form.ui.form(id="update") 
+        form.ui.form(id="updates") 
          textarea(type="text" name="post" id="post" )
-         div.ui.container  
-          button.ui.button.green(type="submit") Guardar 
+         br    
+         br
+         button.fluid.ui.button.green(type="submit") Guardar 
 
 
   div.ui.bottom.attached.tab.segment(data-tab="second")
    div.ui.segment
-     h1 Productos
+     h1.textcenter Productos
      table.ui.celled.table
       thead
        tr
@@ -130,6 +141,13 @@ block content
  
   div.ui.bottom.attached.tab.segment(data-tab="third")
     div.ui.segment
-     h1 Anuncios
+     h1.textcenter Anuncios
+     if owner
+      form.ui.form(id="updates" method="post")
 
-  div.ui.bottom.attached.tab.segment(data-tab="fourth")   
+       button.fluid.ui.button.green(type="submit") Publicar 
+
+
+  div.ui.bottom.attached.tab.segment(data-tab="fourth")  
+    div.ui.segment
+     h2.textcenter Más información 

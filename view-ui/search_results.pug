@@ -1,0 +1,65 @@
+
+extends layout
+
+block content
+
+
+ script(src='/javascripts/search.js' id="searcher" data-search=`${query}`)   
+
+ style.
+     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
+
+     h1, h3, p , a, button{
+    
+    font-family: 'Nunito', sans-serif; 
+
+    }
+ 
+
+
+
+   #qduery{
+    position: fixed; 
+   }
+ 
+
+ 
+
+ div.ui.segment#query   
+  h1.textcenter#querytitle Resultados
+
+  
+
+   
+
+    form.ui.form( method="get" action="" id="searchengine")
+     div.ui.doubling.stackable.grid
+      div.eight.wide.column
+       label(for="searchunit") Producto ó empresa 	
+       input(type="text" name="searchunit" id="searchunit") 
+      div.three.wide.column
+       label(for="place") País, Estado ó Ciudad	
+       input(type="text" name="place" id="place" ) 
+      div.three.wide.column 
+       label(for="industria") Industria
+       div.ui.selection.dropdown
+        input(type="hidden" name="industria" id="industria" placeholder="Industria")
+        i.dropdown.icon
+        div.default.text Rol
+        div.menu
+           
+         div.item(data-value="emprendedor") emprendedor
+         div.item(datavalue="empresario") empresario
+         div.item(datavalue="investigador") investigador	
+       
+      div.two.wide.column 
+
+        br
+        button.fluid.ui.button.green(type="submit") Enviar	
+
+   
+ div.ui.internally.divide.grid
+      div.three.wide.column
+      div.ten.wide.column#results
+      	
+      

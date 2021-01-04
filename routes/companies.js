@@ -4,6 +4,36 @@
 module.exports  = (app,session,Company,controllerCompany) => {
 
 
+/**********************************************************************************************************
+           //  Search all companies
+
+***********************************************************************************************************/
+
+
+app.get('/company/search/all',controllerCompany.searchCompanies);
+
+
+
+
+/**************************************************************************************************************
+               /// Specific Search   Companies ----GET
+
+****************************************************************************************************************/
+
+
+app.get('/company/search',controllerCompany.companyQueryResults);
+
+
+
+
+/**************************************************************************************************************
+               /// Specific Search   Companies ----POST
+
+****************************************************************************************************************/
+
+
+app.post('/company/search',controllerCompany.docompanyQueryResults);
+
 
 /***********************************************************************************************************
 
@@ -107,6 +137,8 @@ app.get('/company/profile/json/:id',controllerCompany.ShowArrayproducts);
 
 
 app.post('/company/settings/profile/delete/:id', controllerCompany.doDeleteCompany);
+
+
 
 
 

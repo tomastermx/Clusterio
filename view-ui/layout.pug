@@ -3,8 +3,9 @@ block variables
 doctype html
 html
   head
+   title Cluster.io 
    meta(charset='UTF-8') 
-   meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no') 
+   meta(name='viewport' content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1") 
    link(rel="stylesheet"  href="/stylesheets/style.css")
    link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito") 
    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css")
@@ -13,7 +14,7 @@ html
    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js') 
     
    script(src='/javascripts/jquery.js')
-   
+    
 
   
    
@@ -29,7 +30,7 @@ html
     integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
      crossorigin="anonymous")
 
-   script.
+  script.
     
   style.
    #footer{
@@ -42,11 +43,9 @@ html
 
    #imageprofile{
  
-      height:45px;
-      width: 45px;
-      border-width: 3px;
-      border-style: solid;
-      border-color: black;
+      height:40px;
+      width: 40px;
+      padding:0;
       border-radius: 50%;
 
 
@@ -61,39 +60,28 @@ html
    }
 
 
-  div.ui.container 
-    div.ui.fixed.inverted.main.menu
-     - var  url ="https://api.adorable.io/avatars/41/abott@adorable.png" 
+  body
+   
+   div.ui.fixed.stackable.inverted.menu
+    - var  url ="https://api.adorable.io/avatars/41/abott@adorable.png" 
 
-        div.header.item 
-         a(href="/users/profile") Cluster.io
-        a.ui.item(href="/") Link 
-        a.ui.item(href="/") Link 
-    
-        div.right.menu 
-           
-        
-         div.item
-          div.ui.transparent.inverted.icon.input
-           i.search.icon
-           input(type="text" placeholder="Search")  
-         div#imageprofile 
-           
-           img#img(src = `${ image || url} `)
+    div.ui.container
+     a.active.item(href="/") Cluster.iO
+     a.item(href="/search") Directorio
+     a.item Avisos
+     a.item Clústers
+     div.right.menu
+      div.item
+       a(href="/users/login" class="ui orange button") Login
+      
 
-           
+     
 
-         div.ui.dropdown.item Profile
 
-         
-           i.dropdown.icon
-           div.menu
-            a.item(href="/users/login") Log in
-            a.item(href="/users/profile/settings") Settings
-            a.item(href="/users/logout") Logout
+   
 
-           
 
-  div#content
-     block content
-  div#footer
+   div#content
+    block content
+   
+
