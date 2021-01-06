@@ -6,21 +6,29 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const queryString = require('query-string');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 const db = require('./models/db');
+const multer = require('multer');
 
 /// Models/////////////////////////////
 const User = require('./models/users');
-const Post = require('./models/posts');
+const Post = require('./models/post');
 const Company = require('./models/company');
-const Offer = require('./models/offers');
+const Offer = require('./models/Offers');
+const Message = require('./models/messages');
+
+/// Modules////////////////////////
 
 const index = require('./routes/index');
 const session = require('express-session');
 const usersRouter = require('./routes/users'); 
 const passport = require('passport');
+const Google = require('./passports/strategies/google');
+
+
 const jwt = require('jsonwebtoken');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
@@ -33,13 +41,18 @@ const chai = require('chai');
 // Express objet created
 
 var app = express();
+var http = require('http').createServer(app);
+var io = require('socket.io')(http);
+
+
 
 // Helmet
 app.use(helmet());
 
 app.disable('x-powered-by');
 
-
+// Environment variables 
+require('dotenv').config();
 
 /*****************************************************************************************************
                                         Passport Strategies
@@ -47,9 +60,11 @@ app.disable('x-powered-by');
 ******************************************************************************************************/
 
 
-require('./passports/strategies/local')(passport,User);
+//require('./passports/strategies/local')(passport,User);
+
 require('./passports/strategies/google')(passport,User);
-require('./passports/passport')(passport,User);
+require('./passports/strategies/facebook')(passport,User);
+require('./passports/passport.js')(passport,User);
 
 
 
@@ -57,6 +72,7 @@ require('./passports/passport')(passport,User);
 // view engine setup
 //app.set('views', path.join(__dirname, 'views'));
 app.set('views', path.join(__dirname, 'view-ui'));
+
 
 app.set('view engine', 'pug');
 
@@ -91,8 +107,14 @@ app.use(passport.session());
 *
 ******************************************************************************************/
 //Controllers
+
 var controllerCompany = require('./controllers/companies');
+
 var controllerUser = require('./controllers/userController');
+
+var controllerMessage = require('./controllers/messages');
+
+var searchController = require('./controllers/search');
 
 
 
@@ -103,12 +125,15 @@ var controllerUser = require('./controllers/userController');
 ******************************************************************************************/
 
 
-require('./routes/index.js')(app);
+require('./routes/index.js')(app,session,Company);
 
 require('./routes/users.js')(app,passport,session,jwt,User,Company,controllerUser);
 
 require('./routes/companies.js')(app,session,Company,controllerCompany);
 
+require('./routes/search')(app,session,Company,searchController);
+
+require('./routes/messages.js')(app,session,Company,Message,controllerMessage);
 
 
 
@@ -129,7 +154,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 
 
 
