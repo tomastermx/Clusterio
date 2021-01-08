@@ -15,7 +15,7 @@ module.exports = function(passport,User){
 
         clientID:'391669221808-19gom0qot1tir0bj2npufjavt0q1b49k.apps.googleusercontent.com',
         clientSecret:process.env.googleClientSECRET,
-        callbackURL:'/users/auth/google/callback'}, function(token, refreshToken, profile, done){
+        callbackURL:'https://clusterio.herokuapp.com/users/auth/google/callback'}, function(token, refreshToken, profile, done){
        
           console.log(profile.photos[0].value);
           
