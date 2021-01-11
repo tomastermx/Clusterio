@@ -13,9 +13,9 @@ module.exports = function(passport,User){
     //   profile), and invoke a callback with a user object.
     passport.use(new GoogleStrategy({
 
-        clientID:'391669221808-19gom0qot1tir0bj2npufjavt0q1b49k.apps.googleusercontent.com',
+        clientID: process.env.googleClientID,
         clientSecret:process.env.googleClientSECRET,
-        callbackURL:'https://clusterio.herokuapp.com/users/auth/google/callback'}, function(token, refreshToken, profile, done){
+        callbackURL:process.env.googleCallBackURL}, function(token, refreshToken, profile, done){
        
           console.log(profile.photos[0].value);
           
