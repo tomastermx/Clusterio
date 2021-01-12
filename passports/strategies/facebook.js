@@ -7,9 +7,9 @@ module.exports = function(passport,User){
 
 
     passport.use(new FacebookStrategy({
-    clientID: '741548203276082',
-    clientSecret: '4f3860ffb8d67417a800a66ceb812d1f',
-    callbackURL: '/users/auth/facebook/callback',
+    clientID: process.env.facebookClientID,
+    clientSecret: process.env.facebookClientSECRET,
+    callbackURL: process.env.facebookCallBackURL,
     profileFields: ['id', 'displayName','photos' ,'email']
 },
     (accessToken, refreshToken, profile, done)=>{
