@@ -111,22 +111,13 @@ block content
  
 
   div.ui.stackable.top.attached.tabular.menu
-     a.item(data-tab="second") Productos 🔩
-     a.item(data-tab="fourth") Más Información  💾
-
-  div.ui.bottom.attached.tab.segment.active(data-tab="first")
-      
-    h1.textcenter Actualizaciones
-    if owner
-      div.ui.segment  
-        form.ui.form(id="updates") 
-         textarea(type="text" name="post" id="post" )
-         br    
-         br
-         button.fluid.ui.button.green(type="submit") Guardar 
+     a.item.active(data-tab="first") Productos 🔩
+     a.item(data-tab="second") Más Información  💾
 
 
-  div.ui.bottom.attached.tab.segment(data-tab="second")
+
+
+  div.ui.bottom.attached.tab.segment(data-tab="first")
    div.ui.segment
      h1.textcenter Productos
      table.ui.celled.table
@@ -137,15 +128,9 @@ block content
       tbody#productlist     
 
  
-  div.ui.bottom.attached.tab.segment(data-tab="third")
-    div.ui.segment
-     h1.textcenter Anuncios
-     if owner
-      form.ui.form(id="updates" method="post")
-
-       button.fluid.ui.button.green(type="submit") Publicar 
 
 
-  div.ui.bottom.attached.tab.segment(data-tab="fourth")  
+
+  div.ui.bottom.attached.tab.segment(data-tab="second")  
     div.ui.segment
      h2.textcenter Más información 
