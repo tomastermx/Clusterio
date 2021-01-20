@@ -47,3 +47,31 @@ height:100%;
 }
 
 
+
+.large.inverted.menu .toc.item {
+      display: none;
+    }   
+
+
+
+  @media only screen and (max-width: 700px) { 
+
+   .ui.large.inverted.menu .toc.item {
+      display: block;
+    } 
+
+     
+    .ui.dropdown.item#test{
+    	display:block;
+    }
+
+
+   .ui.large.inverted.menu .active.item {
+   	display:none;
+   } 
+   
+    .ui.large.inverted.menu .item{
+   	display:none;
+   }
+
+  }	

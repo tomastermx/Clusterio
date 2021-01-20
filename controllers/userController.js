@@ -176,7 +176,7 @@ exports.userdisplayjson = (req,res)=>{
 *
 ****************************************************************************************************************************************************************/
 
-exports.doConfig = (req,res)=>{
+exports.doConfig = async (req,res)=>{
 
 console.log(req.body.usernamevalue);
 
@@ -185,10 +185,14 @@ req.session.user.username = req.body.usernamevalue;
 
 req.session.save(()=>{console.log(req.session.user)});
 
-//const  alias = await User.findOne({'user.username':req.body.newusername});
+try {
+const  alias = await User.findOne({'user.username':req.body.newusername});
 
- //const user = await User.findOne({$or:[{'google.email':req.session.user.email},{'facebook.email':req.session.user.email}]});
- 
+const user = await User.findOne({$or:[{'google.email':req.session.user.email},{'facebook.email':req.session.user.email}]});
+
+} catch(err){}
+
+   
  
 
 

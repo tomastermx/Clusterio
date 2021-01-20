@@ -1,6 +1,6 @@
 
-
 $(document).ready(function(){
+
 
  $('.menu .item')
    .tab();
@@ -31,10 +31,9 @@ $('.ui.search')
 
 
 
-
-  
- 
-
+     $('.ui.sidebar')
+        .sidebar('attach events', '.toc.item')
+      ;
  
 
 }); 
