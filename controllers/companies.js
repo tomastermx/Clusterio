@@ -158,7 +158,7 @@ exports.donewCompany = function(req , res){
 
 exports.ProfileCompany = async (req,res)=>{
 
-var  owner;
+var  owner
  
   
    /////////////// Poner la imagen  de perfil de redes sociale
@@ -172,21 +172,17 @@ var  owner;
 
     try {
     const company = await Company.findOne({'_id':req.params.id}) 
-     
-           if(!req.session.user){
-           owner =false;
-           console.log("usuario no encontrado");
-        
-           res.render('company_profile',{company:company,owner:owner,image:image,name:name}); 
+       
+       if(req.session.user){
 
+        var owner = req.session.user.email === company.creador ? true : false
 
-       }  else if (company.creador === req.session.user.email) {
-        
-            owner = true
-            console.log("el usuario es el dueño del sitio");
-            res.render('company_profile',{company:company,owner:owner,image:image,name:name});
-      }
- 
+        res.render('company_profile',{company:company,image:image,name:name,owner:owner}); 
+
+       } else
+
+        {res.render('company_profile',{company:company,image:image,name:name}); }     
+
  
      } catch(e) {console.log(e)} 
  

@@ -74,8 +74,6 @@ if(product!=="" && description!==""){
 
 item = {producto:product, descripcion:description}
  
-  $("#proditem").val('');
-   $("#descripcion").val(''); 
 
  productArray.push(item);
 
