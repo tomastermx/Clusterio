@@ -2,19 +2,40 @@ extends layout
 
 block content
 
-  script(src='/javascripts/mapsapi-profile.js')
-  script(src='/javascripts/jquery-company.settings.js') 
-  script.
+   style.
+     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
+
+     h1, h2, h3, p , a, .ui.button{
+    
+    font-family: 'Nunito', sans-serif; 
+
+    }
+
+    
+
+   script(src='/javascripts/mapsapi-profile.js')
+   script(src='/javascripts/jquery-company.settings.js') 
+   script.
    
    
     $(document).ready(function(){
+
+
+        
+     
   
       var id = '#{company._id}';
  
        var productArray =[];   
        
        var i = 0;
+
+       var descripcion ="";
+       var moreinfo="";
+       var callenueva="";
+       var numnuevo="";
       
+     ///////////////////Populate Fields//////////////////////////////////////////////7 
      $.get('/company/profile/json/'+ id , (data,status)=>{
      console.log(data);
 
@@ -23,8 +44,9 @@ block content
       var state =   data.estado
       var city =    data.ciudad 
       var calle =  data.calle
-      
-      var  street = data.calle ;
+      var num =    data.numero
+      var description = data.description
+      var more_info = data.masinformacion
       var  address = city + "," + " " + state + "," + " "   + pais
       productArray = data.productos;
 
@@ -32,7 +54,14 @@ block content
 
         $('#title').text(name)
         $('#addressw').text(address)
-        $('#addressx').text(street)
+        $('#addressx').text(calle)
+
+        $('#modify_description').val(description);
+        $('#modify_moreinfo').val(more_info);
+        $("#modify_street").val(calle);
+        $("#modify_number").val(num);
+
+
        
             for(i=0;i<productArray.length;i++){
          
@@ -46,13 +75,15 @@ block content
     
             });
   
-           //////////////////////////////////////////////////Add products//////
+           //////////////////////////////////////////////////Add products///////////////////////////
                         $("#add").click((e)=>{
 
                                 e.preventDefault();
 
                                var product = $("#proditem").val();
                                var description = $("#descripcion").val();
+                               
+                               
 
                                item = {producto:product, descripcion:description}
  
@@ -65,6 +96,8 @@ block content
                                   i++;
 
                                  console.log(productArray); 
+
+                                
     
                     });
 
@@ -97,51 +130,150 @@ block content
 
                   });
 
+     //////////////////////////////Modificación de entradas/////////////////////////////////////////
+  
+           $("#modify_description").change(()=>{
+            descripcion = $("#modify_description").val();
+           });
+
+          
+             $("#modify_moreinfo").change(()=>{
+            moreinfo = $("#modify_moreinfo").val();
+           });
+
+
+
+            $("#modify_street").change(()=>{
+            callenueva  = $("#modify_street").val();
+           });
+
+
+             $("#modify_number").change(()=>{
+             numnuevo  = $("#modify_number").val();
+           });
+
+
+      //////////////////////////////////////////Postear los cambios primera pestaña///////////////////                
+
            $("#companyname").submit((event)=>{
        
            event.preventDefault();
 
-         $.post('/company/settings/profile/'+ id ,{products : productArray});
+          //var description = $("#modify_description").val();
+          //var moreinfo = $("#modify_moreinfo").val();
+
+
+         
+
+
+         $.post('/company/settings/profile/'+ id ,{products : productArray,description:descripcion,moreinfo:moreinfo})
+
+          $('#example').progress({
+         percent: 100  });
+
 
     })
                      
- 
+    ////////////////////////////////////////////////////////////Poster cambios segunda pestaña/////////////////
 
+
+         $("#contact").submit((event)=>{
+
+           event.preventDefault();
+
+          
+          $.post('/company/settings/profile/'+ id,{calle:callenueva,num:numnuevo});  
+
+           $('#example').progress({
+         percent: 100  });
+
+
+         })
+             
 
 
     });
 
-                            
+  
 
-
-  div.ui.container
-   div.ui.segment
-    form.ui.form(id="companyname", method="post", action="") 
+   div.ui.container
+   
+    h1.textcenter#title
+    h2.textcenter Configuración
     
+     div.ui.segment
+      div.ui.stackable.top.attached.tabular.menu
+       a.item.active(data-tab="first") Información General
+       a.item(data-tab="second") Ubicación y contacto
+       a.item(data-tab="third")  Otro
+
+     div.ui.bottom.attached.tab.segment.active(data-tab="first")
+      div.ui.container
         
-
-
-     div.field 
-      h2.textcenter Editar Productos
-      div.ui.segment#products
+      div.ui.segment
+       form.ui.form(id="companyname", method="post", action="") 
+       
+           
+   
+         
+         div.field 
+          h2  Editar Descripción
+          input(type=text, name="description" id="modify_description"  maxlength="80") 
+          
+          h2 Editar Más Información
+          input(type=text, name="description" id="modify_moreinfo"  maxlength="80") 
+   
+            
+   
+          h2.textcenter Editar Productos
+          div.ui.segment#products
+            
+   
+               div.ui.three.column.grid#entrada
+                div.column
+                  h4 Producto
+                  input(id="proditem" name="proditem"  )
+                div.column
+                  h4 Descripción
+                  input(id="descripcion" name="descripcion")
+                div.column
+                   h4
+                   br 
+   
+                   button.ui.button.blue#add Agregar
+                    
+          div.ui.segment#list      
+                   
+          div.field 
+          button.ui.button.green(type="submit") Guardar  
+   
+          a(href='/users/profile/' class="button ui button blue") Cancelar    
+     
+     div.ui.bottom.attached.tab.segment(data-tab="second")
+      div.ui.container
+       div.ui.segment  
         
+        form.ui.form(id="contact",name="contactdata" action="")
+          h1 Ubicación 
+          div.ui.two.column.stackable.grid  
+           div.column
+            label(for="street") Calle
+            input(type="text" id="modify_street" name="street")
+           div.column
+            label(for="number") Número
+            input(type="text" id="modify_number" name="number")
+          h1 Contacto
+          div.ui.two.column.stackable.grid
+           div.column
+            label(for="phone") Teléfono
+            input(type="text" id="modify_phone" name="phone") 
+           div.column 
+            label(for="web") Sitio web
+            input(type="text" id="web" name="web")
 
-           div.ui.three.column.grid#entrada
-            div.column
-              h4 Producto
-              input(id="proditem" name="proditem")
-            div.column
-              h4 Descripción
-              input(id="descripcion" name="descripcion")
-            div.column
-               h4
-               br 
-
-               button.ui.button.blue#add Agregar
-                
-      div.ui.segment#list      
-               
-      div.field 
-      button.ui.button.green(type="submit") Guardar   
-      
-
+          div.ui.container
+            button.ui.button.green(type="submit") Guardar     
+        
+   div.ui.progress#example
+     div.bar
+     div.progress           

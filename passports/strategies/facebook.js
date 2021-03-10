@@ -10,7 +10,7 @@ module.exports = function(passport,User){
     clientID: process.env.facebookClientID,
     clientSecret: process.env.facebookClientSECRET,
     callbackURL: '/users/auth/facebook/callback',
-    profileFields: ['id', 'displayName','photos' ,'email']
+    profileFields: ['id', 'displayName','photos' ,'emails']
 },
     (accessToken, refreshToken, profile, done)=>{
         console.log(profile);

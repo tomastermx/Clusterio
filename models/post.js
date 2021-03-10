@@ -10,14 +10,15 @@ var mongoose = require('mongoose');
 
 const postSchema  = new  mongoose.Schema({
 
-created: Date,
-creator: String,
-text : String,
-ranking : Number 
+creado: Date,
+creador: String,
+texto : String,
+ranking : Number,
+categoria: String 
 
 })
 
 
-const Post = mongoose.model('postSchema', postSchema);
+const Post = mongoose.model('Post', postSchema);
 
 module.exports = Post;

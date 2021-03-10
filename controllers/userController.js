@@ -22,7 +22,9 @@ var useralias;
 
 exports.Login = (req,res)=>{
 
-res.render('user_login',{password:failpassword});
+var image   = req.session.loggedIn?  req.session.user.image : "https://avataaars.io/?avatarStyle=Transparent&topType=LongHairStraightStrand&accessoriesType=Round&hairColor=Blonde&facialHairType=Blank&clotheType=CollarSweater&clotheColor=Red&eyeType=Wink&eyebrowType=SadConcernedNatural&mouthType=Smile&skinColor=Light" 
+
+res.render('user_login',{image:image});
 }
 
 
@@ -53,14 +55,25 @@ exports.doLogin =(req,res,next)=>{
 
 exports.Profile = async(req,res)=>{
 
-
+try{
 
 const company = await  Company.find({'creador':req.session.user.email});
 
-res.render('user_profile',{user:req.session.user,image:req.session.user.image,company:company});
+var str = req.session.user.username;
 
-console.log("su empresa es" + company);
+var name = str.split(" ")[0];
 
+
+
+console.log(name);
+
+
+
+
+res.render('user_profile',{image:req.session.user.image,name:name,company:company});
+
+
+   } catch(e){console.log(e)}
 
 }
 
@@ -99,7 +112,7 @@ exports.googleAuth = passport.authenticate('google', { failureRedirect: '/' }),(
 
 //{scope:['user_photos']}
 
-exports.facebookLogin = passport.authenticate('facebook'); 
+exports.facebookLogin = passport.authenticate('facebook',{scope:['email']}); 
 
 
 
@@ -107,7 +120,11 @@ exports.facebookLogin = passport.authenticate('facebook');
 
 
 exports.Register =(req,res)=>{
-	res.render('user_register',{image:req.session.user.image});
+     
+   var image   = req.session.loggedIn?  req.session.user.image : "https://avataaars.io/?avatarStyle=Transparent&topType=LongHairStraightStrand&accessoriesType=Round&hairColor=Blonde&facialHairType=Blank&clotheType=CollarSweater&clotheColor=Red&eyeType=Wink&eyebrowType=SadConcernedNatural&mouthType=Smile&skinColor=Light" 
+
+
+	res.render('user_register',{image:image});
 
 }
 
@@ -115,10 +132,11 @@ exports.Register =(req,res)=>{
 
 exports.doRegister = async (req , res)=>{
   
-
+   try{
  const  user = await  User.findOne({'_id':req.user._id});
 
  user.username = req.body.username;
+
 
  user.role = req.body.rol;
 
@@ -131,6 +149,10 @@ req.session.user.username = req.body.username;
  console.log(req.session.user);
 
 res.redirect("/company/new");   
+ }
+
+
+catch(e){}
  
 }
 
@@ -142,10 +164,15 @@ res.redirect("/company/new");
 ****************************************************************************************************************************************************************/
 
 exports.Config=(req,res)=>{
-
+ 
+   //////////// Poner el nombre  usuario, si el usuario esta loggeado  
+      
+  var name =  req.session.loggedIn ?  req.session.user.username.split(" ")[0] : "Profile"
+  
+ 
   
   
-          res.render('user_profile_settings',{user: req.session.user,image:req.session.user.image})    
+          res.render('user_profile_settings',{user: req.session.user,image:req.session.user.image,name:name})    
            console.log(req.session.user.name);
             
        
@@ -178,19 +205,23 @@ exports.userdisplayjson = (req,res)=>{
 
 exports.doConfig = async (req,res)=>{
 
+
+////El post se hace con jquery con  modify user name
+       try {
 console.log(req.body.usernamevalue);
 
 req.session.user.username = req.body.usernamevalue;
 
 
+
 req.session.save(()=>{console.log(req.session.user)});
 
-try {
+
 const  alias = await User.findOne({'user.username':req.body.newusername});
 
 const user = await User.findOne({$or:[{'google.email':req.session.user.email},{'facebook.email':req.session.user.email}]});
 
-} catch(err){}
+     } catch(err){console.log(err)}
 
    
  

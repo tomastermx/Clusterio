@@ -2,6 +2,8 @@
 
 extends layout
 
+block variables
+
 block content
  style.
   #post{
@@ -15,11 +17,12 @@ block content
     
     var creator ;
     var email ;
+
     var id = '#{company._id}'
     var owner = '#{owner}'
-	           
+      
      console.log(owner);
-
+    ///////////////////////////////////Send data to the server //////////////////////////////
       $.get('/company/profile/json/'+ id , (data,status)=>{
 
      var name =    data.nombre 
@@ -34,6 +37,7 @@ block content
      var  website = data.web
      var  description = data.description
      var  badges = data.certificados
+     var  moreinfo  =data.masinformacion
 
      var  street = data.calle + " " + "#" + " " + data.numero
      var  address = city + "," + " " + state 
@@ -49,34 +53,56 @@ block content
         $('#phone').text(telefono)
         $('#description').text(description)
         $('#web').text(website)
+        $('#moreinfo').text(moreinfo)
 
-
+       ///////////////////////////////////////Poblar la lista de productos
         for(i=0;i<Array.length;i++){
          
         $("#productlist").append('<tr><td>' + Array[i].producto + '</td><td>'+  Array[i].descripcion +'</td></tr>');
 
-                                }  
+                       }
+        /////////////////////////////////////////////Poblar certificados
+           badges.forEach(b=>{
+            console.log(b);
+            })             
 
     
-                  });
+          });
 
-    
+              
+
+        /////////////////////////////////////////////////////Post ///////////////////////
             
-              $("#update").submit((event)=>{
+              $("#updates").submit((event)=>{
                     event.preventDefault();
 
-                    
+                    var update = $("#post").val();
+                    console.log(update);
+
+
+               $.post('/update/company/new',{update:update,id:id});     
 
              })
 
-         
+           //////////////////////////////////////////////Mandar E-MAIL////////////////////////////
+
+        $("#email").click(()=>{
+
+           
+         $('.fullscreen.modal').modal('show')
+          
 
 
-       })
+
+        })
+  
+          
+   
+
+    })     
 
 
-
-
+    
  div.ui.doubling.stackable.container
   div.ui.segment
    div.ui.three.column.doubing.stackable.grid
@@ -99,13 +125,13 @@ block content
     div.column
     
 
- div.ui.segment
+ div.ui.container
   div.ui.segment  
-    h2.textcenter Descripción
+    h2.textcenter Descripción 📃
     p.textcenter#description
   div.ui.segment
-    button.ui.button.blue Mensaje 💬
-    button.ui.button.green Correo Electrónico 🤝
+    a(href='/messages/send' class="button ui button blue") Mensaje 💬
+    button.ui.button.green#email Correo Electrónico 🤝
 
 
  
@@ -118,7 +144,7 @@ block content
 
   div.ui.bottom.attached.tab.segment.active(data-tab="first")
       
-    h1.textcenter Actualizaciones
+    h2.textcenter Actualizaciones
     if owner
       div.ui.segment  
         form.ui.form(id="updates") 
@@ -130,7 +156,7 @@ block content
 
   div.ui.bottom.attached.tab.segment(data-tab="second")
    div.ui.segment
-     h1.textcenter Productos
+     h2.textcenter Productos 📦
      table.ui.celled.table
       thead
        tr
@@ -141,7 +167,7 @@ block content
  
   div.ui.bottom.attached.tab.segment(data-tab="third")
     div.ui.segment
-     h1.textcenter Anuncios
+     h2.textcenter Anuncios
      if owner
       form.ui.form(id="updates" method="post")
 
@@ -150,4 +176,15 @@ block content
 
   div.ui.bottom.attached.tab.segment(data-tab="fourth")  
     div.ui.segment
-     h2.textcenter Más información 
+     h2.textcenter Más información
+     p.textcenter#moreinfo
+
+
+  div.ui.fullscreen.modal 
+   div.header Envía un Correo
+   div.ui.content
+    form.ui.form
+     textarea(type="text" name="email" id="email" )
+     br
+     br
+     button.ui.button.green(type="submit") Enviar 

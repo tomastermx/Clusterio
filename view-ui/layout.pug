@@ -33,6 +33,17 @@ html
   script.
     
   style.
+
+  
+     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
+   
+       .menu  {
+
+          font-family: 'Nunito', sans-serif; 
+       }
+
+   
+
    #footer{
   
    width:100%;
@@ -49,23 +60,28 @@ html
       border-radius: 50%;
 
 
+
    }
 
    #img{
+    padding:auto;
     border-radius:50%;
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 2.5em;
+    max-height: 2.5em;
     display: block; /* remove extra space below image */
-
-   }
+     
+     border-style:solid;
+     border-color: white;
+     border-width:2px;
+    }
 
 
   body#pusher
   
 
-   div.ui.large.inverted.menu
+   div.ui.fixed.large.inverted.menu#menuu
   
-    - var  url ="https://api.adorable.io/avatars/41/abott@adorable.png" 
+    - var  url ="https://avataaars.io/?avatarStyle=Transparent&topType=LongHairStraightStrand&accessoriesType=Round&hairColor=Blonde&facialHairType=Blank&clotheType=CollarSweater&clotheColor=Red&eyeType=Wink&eyebrowType=SadConcernedNatural&mouthType=Smile&skinColor=Light" 
 
      a.toc.item
       i.sidebar.icon
@@ -74,7 +90,9 @@ html
      a.item Avisos
      a.item Clústers
     div.right.menu
-      div.ui.dropdown.item#test Profile 
+      div#imageprofile 
+        img#img(src = `${image} `)
+      div.ui.dropdown.item#test #{name}
        i.dropdown.icon
        div.menu
         a.item(href="/users/login") Login
@@ -97,6 +115,6 @@ html
 
    
    div#content
-     block content
+    block content
    
 

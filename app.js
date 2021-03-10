@@ -116,7 +116,11 @@ var controllerMessage = require('./controllers/messages');
 
 var searchController = require('./controllers/search');
 
+var updatesController = require('./controllers/updates');
 
+var postsController = require('./controllers/posts');
+
+var emailController = require('./controllers/email');
 
 /*****************************************************************************************                
 *
@@ -133,10 +137,13 @@ require('./routes/companies.js')(app,session,Company,controllerCompany);
 
 require('./routes/search')(app,session,Company,searchController);
 
-require('./routes/messages.js')(app,session,Company,Message,controllerMessage);
+require('./routes/updates')(app,Company,Post,updatesController);
 
+require('./routes/messages')(app,session,Company,Message,controllerMessage);
 
+require('./routes/posts')(app,session,Post,postsController);
 
+require('./routes/email');
 
 
 // catch 404 and forward to error handler

@@ -60,16 +60,22 @@ var i = 0;
 $("#add").click((e)=>{
 
 
-e.preventDefault();
 
-var product = $("#proditem").val();
-var description = $("#descripcion").val();
+ e.preventDefault();
+ 
+ 
+ var product = $("#proditem").val();
+ var description = $("#descripcion").val();
+
+  
 
 
+if(product!=="" && description!==""){
 
 item = {producto:product, descripcion:description}
  
- 
+  $("#proditem").val('');
+   $("#descripcion").val(''); 
 
  productArray.push(item);
 
@@ -88,6 +94,10 @@ item = {producto:product, descripcion:description}
 i++;
 
  console.log(productArray);
+
+   } else {alert("espacio vacio")}
+
+
 
 });
   
@@ -146,27 +156,21 @@ $(this).parent().parent().parent().fadeOut(1000).remove(1000);
             var phone = $('#phone').val();
             var website = $('#website').val();
             var badges  = $('#badge').val(); 
-
+            var moreinfo = $('#masinfo').val();
+        
+           ///// Redirige al usuario a la página
             window.location.assign('/users/profile');   
           
            //event.preventDefault();
              $.post('/company/new',{companyname:cname,street:street,description:description,streetnumber:streetnumber,city:city,state:state,country:country,industry:industry,
-              subindustry:subindustry, phone:phone ,products : productArray,badges:badges, website:website });
+              subindustry:subindustry, phone:phone ,products : productArray,badges:badges, website:website,moreinfo:moreinfo});
 
             
            });
              
 
 
-
-
-
-
-
-
-
-
-
+ 
 
 
 

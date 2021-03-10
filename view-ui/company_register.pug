@@ -111,17 +111,21 @@ block content
               select.ui.fluid.dropdown#badge(multiple="" name="badge")  
 
          div.field 
-          h1 Productos
+          h2.textcenter  Más información
+          div.ui.segment 
+           textarea(type="text" name="masinfo" id="masinfo")  
+
+          h2.textcenter Productos
          div.ui.segment#products
         
 
            div.ui.three.column.grid#entrada
             div.column
               h4 Producto
-              input(id="proditem" name="proditem" maxlength="20"   )
+              input(id="proditem" name="proditem" maxlength="20"  required )
             div.column
               h4 Descripción
-              input(id="descripcion" name="descripcion" maxlength="20")
+              input(id="descripcion" name="descripcion" maxlength="40" required )
             div.column
                h4
                br 
@@ -132,3 +136,4 @@ block content
                
          div.field 
          button.ui.button.green(type="submit") Guardar
+         a(href="/users/profile" class=" ui blue button" ) Cancelar

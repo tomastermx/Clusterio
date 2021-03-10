@@ -34,7 +34,7 @@ module.exports = function(passport,User){
 
                     newUser.google.id = profile.id;
                     newUser.google.token = token;
-                    newUser.google.name = profile.displayName;
+            //   newUser.google.name = profile.displayName;
                     newUser.google.email = profile.emails[0].value;
                     newUser.google.picture = profile.photos[0].value;
                     
@@ -52,7 +52,7 @@ module.exports = function(passport,User){
 
 
 
-        })
+           }) 
 
     
         }

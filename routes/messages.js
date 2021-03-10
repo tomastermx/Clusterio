@@ -3,7 +3,15 @@
 module.exports = (app,session,Company,Message,controllerMessage)=>{
 
 
-app.get('/messages/new/sent/:to', controllerMessage.newMessage);
+app.get('/messages/send', controllerMessage.newMessage);
+
+
+
+
+
+
+app.get('messages/inbox', controllerMessage.Inbox);
+
 
 
 
@@ -11,4 +19,5 @@ app.get('/messages/new/sent/:to', controllerMessage.newMessage);
 
 }
   
+
 

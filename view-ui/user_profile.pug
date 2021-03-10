@@ -1,6 +1,5 @@
 extends layout
 block variables
-  -var img = "d"
 block content 
  style.
    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap');
@@ -20,30 +19,32 @@ block content
    
   
   div.ui.internally.divide.grid
-   div.three.wide.column
+   div.two.wide.column
+ 
+
+   div.twelve.wide.column
     div.ui.segment
-     h2.fonts Hola
+     div.ui.stackable.top.attached.tabular.menu
+      a.item.active(data-tab="first") Post
+      a.item(data-tab="second") Anuncios
+      a.item(data-tab="third") 
+
+     div.ui.bottom.attached.tab.segment.active(data-tab="first") 
+      h2.textcenter Posts
+      form.ui.form(id="userpost")
+       textarea(type="text" name="posting" id="posting" ) 
+       select.ui.dropdown(name="postcategory" id="postcategory")
+               option(value="Plástico") Plástico 
+               option(value="automotriz") Automotríz
+               option(value="agroindustria") Agroindustria
+               option(value="alimenticia-bebidas-tabaco") Alimenticia, Bebidas y Tabaco
+       br
+       br
+       button.ui.button.green(type="submit") Guardar  
+
+     div.ui.bottom.attached.tab.segment(data-tab="second")
+      h2.textcenter Anuncios
+     div.ui.bottom.attached.tab.segment(data-tab="third")   
+     	
+   div.three.wide.column
     
-      each val in company
-       div.ui.segment  
-        h3.fonts #{val.nombre}
-        br
-
-
-        a(href="/company/profile/"+val._id  class="button ui blue button") Página
-        br
-        br 
-        a(href="/company/settings/profile/"+val._id  class="button ui green button") Modificar
-        br
-        br      
-        a(href="/company/settings/profile/delete/"+val._id  class="button ui red button") Borrar
-
-
-        a(href="/company/new/"  class="button ui blue button") Nueva 
-
-   div.ten.wide.column
-    div.ui.segment
-     div.ui.form
-      input#post(type="text") 	
-   div.three.wide.column
-    div.ui.segment

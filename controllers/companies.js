@@ -7,6 +7,8 @@ const session = require('express-session');
  Company = require('../models/company');
  
 
+
+
 /**************************************************************************************************************************************
 
                            Busqueda de toddas las empresas 
@@ -90,7 +92,16 @@ exports.docompanyQueryResults = async (req,res)=>{
 
 exports.newCompany = (req,res)=>{
 
-res.render('company_register',{image:req.session.user.image });
+var image   = req.session.loggedIn?  req.session.user.image : "https://avataaars.io/?avatarStyle=Transparent&topType=LongHairStraightStrand&accessoriesType=Round&hairColor=Blonde&facialHairType=Blank&clotheType=CollarSweater&clotheColor=Red&eyeType=Wink&eyebrowType=SadConcernedNatural&mouthType=Smile&skinColor=Light" 
+
+
+//////////// Poner el nombre  usuario, si el usuario esta loggeado 
+var str = req.session.user.username;
+
+var name = str.split(" ")[0];
+
+
+res.render('company_register',{image:image,name:name});
 console.log("a" + req.session.user);
 } 
 
@@ -108,7 +119,7 @@ console.log("a" + req.session.user);
 
 exports.donewCompany = function(req , res){
  
-       console.log(req.body);
+       console.log(req.body.moreinfo);
   
 
     var newCompany = new Company();
@@ -126,7 +137,8 @@ exports.donewCompany = function(req , res){
      newCompany.subindustria = req.body.subindustry;
      newCompany.certificados = req.body.badges;
      newCompany.creador = req.session.user.email;
-     newCompany.productos = req.body.products
+     newCompany.productos = req.body.products;
+     newCompany.masinformacion = req.body.moreinfo;
 
        newCompany.save((err,company)=>{
         console.log(company)
@@ -147,6 +159,16 @@ exports.donewCompany = function(req , res){
 exports.ProfileCompany = async (req,res)=>{
 
 var  owner;
+ 
+  
+   /////////////// Poner la imagen  de perfil de redes sociale
+   var image   = req.session.loggedIn?  req.session.user.image : "https://avataaars.io/?avatarStyle=Transparent&topType=LongHairStraightStrand&accessoriesType=Round&hairColor=Blonde&facialHairType=Blank&clotheType=CollarSweater&clotheColor=Red&eyeType=Wink&eyebrowType=SadConcernedNatural&mouthType=Smile&skinColor=Light" 
+
+
+   //////////// Poner el nombre  usuario, si el usuario esta loggeado  
+      
+    var name =  req.session.loggedIn ?  req.session.user.username.split(" ")[0] : "Profile"
+
 
     try {
     const company = await Company.findOne({'_id':req.params.id}) 
@@ -155,14 +177,14 @@ var  owner;
            owner =false;
            console.log("usuario no encontrado");
         
-           res.render('company_profile',{company:company,owner:owner}); 
+           res.render('company_profile',{company:company,owner:owner,image:image,name:name}); 
 
 
        }  else if (company.creador === req.session.user.email) {
         
             owner = true
             console.log("el usuario es el dueño del sitio");
-            res.render('company_profile',{company:company,owner:owner});
+            res.render('company_profile',{company:company,owner:owner,image:image,name:name});
       }
  
  
@@ -182,12 +204,14 @@ var  owner;
 
 exports.CompanySettings = async (req,res)=>{
 
-     
+      try {
   const company = await Company.findOne({'_id':req.params.id})
 
   var companyid = company._id;
 
-  res.render('company_profile_settings',{company:companyid});
+  res.render('company_profile_settings',{company:companyid,image:req.session.user.image});
+
+      }   catch(e){console.log(e)}
 
 
 
@@ -228,13 +252,47 @@ res.json(unit);
 
   exports.doCompanySettings = async (req,res)=>{
 
+  try {
   const company = await Company.findOne({'_id':req.params.id})
 
-  company.productos = req.body.products;
   
+   if(req.body.products) {
+   company.productos = req.body.products;
+   }
+ 
+   if(req.body.description){
+    console.log(req.body.description)
+    company.description = req.body.description;
+   }
+
+   if(req.body.moreinfo){
+     console.log(req.body.moreinfo)
+     company.masinformacion = req.body.moreinfo;
+   }
+
+    if(req.body.calle){
+     console.log(req.body.calle)
+     company.calle= req.body.calle;
+
+   }
+
+
+    if(req.body.num){
+      
+    console.log(req.body.num)
+    company.numero=req.body.num;
+
+    }
+
+
+
+
    const unit = await company.save();
 
-   
+   }
+
+   catch(e){console.log(e)}
+
 
  
 

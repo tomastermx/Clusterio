@@ -2,12 +2,17 @@
 
 $(document).ready(function(){
 
-
+  
   var script_tag = document.getElementById('searcher')
   var query = script_tag.getAttribute("data-search");
-  
+   
 
-  $.post('/search',{query:query}).done((data)=>{
+  var script_tag = document.getElementById('searcher')
+  var place = script_tag.getAttribute("data-place"); 
+
+
+
+  $.post('/search',{query:query,place:place}).done((data)=>{
 
     $.each(data,(i, value)=>{
 
@@ -28,7 +33,7 @@ $(document).ready(function(){
     	var button  = '<a href="/company/profile/'+value._id + ' " class="ui orange button">  Más información </a>'
 
 
-        $("#results").append(' <div class="ui message"><div class ="ui doubling stackable grid"><div class="eight wide column">' + name + country +  descripcion +' </div> <div class="eight wide column">' + phone +  productos + button  + '</div> </div><div class="container"> <div class="ui doubling stackable grid">' + updates + posts + ' </div> </div></div>')
+        $("#results").append(' <div class="ui segment"><div class ="ui doubling stackable grid"><div class="eight wide column">' + name + country +  descripcion +' </div> <div class="eight wide column">' + phone +  productos + button  + '</div> </div><div class="container"> <div class="ui doubling stackable grid">' + updates + posts + ' </div> </div></div>')
 
     	console.log(i + value.nombre)
          

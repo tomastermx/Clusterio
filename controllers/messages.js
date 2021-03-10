@@ -1,12 +1,32 @@
 
 
+const passport = require('passport');
+const session = require('express-session');
+ 
+ Company = require('../models/company');
+ 
+
+
+
+exports.Inbox =(req,res)=>{
+
+	res.render('message_inbox');
+}
+
+
+
+
+
+
+/************************************************************************************************************
+
+                              Get-- mandar nuevo msg
+*************************************************************************************************************/
+
 
 exports.newMessage = (req,res)=>{
 
-  console.log(req.params.to);
-  console.log(req.session.user);
-  res.render('message');
-
+res.render('message_send');
 
 
   

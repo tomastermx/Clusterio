@@ -25,7 +25,8 @@ const companySchema = new  mongoose.Schema({
   industria: String,
   subindustria:String,
   productos:[{}],
-  certificados: [String]
+  certificados: [String],
+  masinformacion:String
 
 })
 

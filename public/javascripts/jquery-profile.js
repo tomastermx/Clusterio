@@ -56,9 +56,20 @@ var i = 0;
 
 
             
-
+///////////////////////////  Create a Post/////////////////////////////////////////////
   
+              $('#userpost').submit((event)=>{
 
+                 event.preventDefault();
+
+
+                 var postdata = $('#posting').val();
+
+                 var postcategory = $('#postcategory').val();
+
+                 $.post('/posts/new',{post:postdata, postcategory:postcategory});
+
+              })
   
        
 
