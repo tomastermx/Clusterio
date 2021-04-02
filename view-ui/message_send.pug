@@ -3,4 +3,30 @@ extends layout
 
 block content
 
- h1 Mensajes
+ script(src='/javascripts/messajes.js')
+
+ style.
+  
+     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
+
+     h1, h3, p , a, button{
+    
+    font-family: 'Nunito', sans-serif; 
+
+    }
+ 
+
+
+    
+ 
+
+
+ div.ui.container
+   div.ui.container
+   
+   
+    div.ui.container
+     form.ui.form(id="messageform", method="post", action="")
+      div.ui.segment
+       input(type="text" , id="message" , name="message")
+       button.ui.button.green(type="submit" id="sendmessage") Enviar

@@ -6,10 +6,30 @@ block variables
 
 block content
  style.
+   @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
+
+     h1, h2, h3, h4, p , a, button{
+    
+    font-family: 'Nunito', sans-serif; 
+
+    }
+
+
+
+
+
+    #pusher{
+   height:900px;
+   }   
+   
+
+
   #post{
    min-height:6em;
    height: 6em;
   }
+
+
 
  script.
    
@@ -130,7 +150,7 @@ block content
     h2.textcenter Descripción 📃
     p.textcenter#description
   div.ui.segment
-    a(href='/messages/send' class="button ui button blue") Mensaje 💬
+    a(href="/messages/send/to/" + company._id  class="button ui button blue") Mensaje 💬
     button.ui.button.green#email Correo Electrónico 🤝
 
 
@@ -176,9 +196,13 @@ block content
 
   div.ui.bottom.attached.tab.segment(data-tab="fourth")  
     div.ui.segment
-     h2.textcenter Más información
-     p.textcenter#moreinfo
 
+     h2.textcenter Más información
+     div.ui.text.container
+      p.textcenter#moreinfo
+      div.ui.text.container
+      div.field   
+       h2.textcenter Certificaciones   
 
   div.ui.fullscreen.modal 
    div.header Envía un Correo

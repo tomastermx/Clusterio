@@ -112,6 +112,8 @@ var controllerCompany = require('./controllers/companies');
 
 var controllerUser = require('./controllers/userController');
 
+var controllerOrg = require('./controllers/organization');
+
 var controllerMessage = require('./controllers/messages');
 
 var searchController = require('./controllers/search');
@@ -121,6 +123,8 @@ var updatesController = require('./controllers/updates');
 var postsController = require('./controllers/posts');
 
 var emailController = require('./controllers/email');
+
+
 
 /*****************************************************************************************                
 *
@@ -134,6 +138,8 @@ require('./routes/index.js')(app,session,Company);
 require('./routes/users.js')(app,passport,session,jwt,User,Company,controllerUser);
 
 require('./routes/companies.js')(app,session,Company,controllerCompany);
+
+require('./routes/organization.js')(app,session,controllerOrg);
 
 require('./routes/search')(app,session,Company,searchController);
 

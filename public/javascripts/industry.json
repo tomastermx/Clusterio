@@ -1,15 +1,28 @@
  { "automotriz":{"sub": [{"data":"automotriz","key":"automotriz"},{"data":"maquinaria pesada","value":"maquinaria-pesada"},
   {"data":"Guadalajara","value":"gdl"}],
+
+ 
+
    "badges":[{"data":"iso-9000","key":"Iso-9000"},{"data":"ts","key":"ts"}]
+
 
   },
 
 
+
+
+
  "agroindustria":{},
 
+
   "alimenticia-bebidas-tabaco":{"sub":[{"data":"consultoria","key":"consultoria"},{"data":"Medellín","value":"med"}],
-                                "badges":[{"data":"Iso-9000","key":"Iso-9000"}]
-          },
+       
+
+   "badges":[{"data":"Iso-9000","key":"Iso-9000"}]
+         },
+
+
+
 
   
   "maquinaria-componentes-instrumentos":[],
@@ -19,6 +32,6 @@
   "tecnologías de la información":[],
 
 
-    "textil": []
+   "textil": []
 
 }

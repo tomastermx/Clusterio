@@ -22,7 +22,7 @@ var useralias;
 
 exports.Login = (req,res)=>{
 
-var image   = req.session.loggedIn?  req.session.user.image : "https://avataaars.io/?avatarStyle=Transparent&topType=LongHairStraightStrand&accessoriesType=Round&hairColor=Blonde&facialHairType=Blank&clotheType=CollarSweater&clotheColor=Red&eyeType=Wink&eyebrowType=SadConcernedNatural&mouthType=Smile&skinColor=Light" 
+var image   = req.session.loggedIn?  req.session.user.image : "/images/avataaars4.svg" 
 
 res.render('user_login',{image:image});
 }
@@ -55,6 +55,8 @@ exports.doLogin =(req,res,next)=>{
 
 exports.Profile = async(req,res)=>{
 
+ if(req.session.loggedIn===true){
+
 try{
 
 const company = await  Company.find({'creador':req.session.user.email});
@@ -63,17 +65,20 @@ var str = req.session.user.username;
 
 var name = str.split(" ")[0];
 
+var logged = req.session.loggedIn
 
 
 console.log(name);
 
 
+           res.render('user_profile',{image:req.session.user.image,name:name,logged:logged});
 
 
-res.render('user_profile',{image:req.session.user.image,name:name,company:company});
+               } catch(e){console.log(e)}
 
 
-   } catch(e){console.log(e)}
+       } else {   res.redirect('/');       }
+
 
 }
 
@@ -120,8 +125,10 @@ exports.facebookLogin = passport.authenticate('facebook',{scope:['email']});
 
 
 exports.Register =(req,res)=>{
-     
-   var image   = req.session.loggedIn?  req.session.user.image : "https://avataaars.io/?avatarStyle=Transparent&topType=LongHairStraightStrand&accessoriesType=Round&hairColor=Blonde&facialHairType=Blank&clotheType=CollarSweater&clotheColor=Red&eyeType=Wink&eyebrowType=SadConcernedNatural&mouthType=Smile&skinColor=Light" 
+ 
+
+
+   var image   = req.session.loggedIn?  req.session.user.image : "/images/avataaars4.sv" 
 
 
 	res.render('user_register',{image:image});
@@ -131,28 +138,42 @@ exports.Register =(req,res)=>{
 ///////////////// User Profile  Register POST --GOOGLE--FACEBOKK--TWITTER///////////////////////////////////
 
 exports.doRegister = async (req , res)=>{
+
+
+
   
    try{
  const  user = await  User.findOne({'_id':req.user._id});
 
  user.username = req.body.username;
 
+ user.rol = req.body.rol;
 
- user.role = req.body.rol;
 
  const persona = await user.save();
 
-req.session.user.username = req.body.username; 
+ req.session.user.username = req.body.username; 
 
-// console.log(persona);
+ // console.log(persona);
 
  console.log(req.session.user);
+ console.log(req.body.rol);
 
-res.redirect("/company/new");   
+   if(req.body.rol === "company" )
+          { res.redirect("/company/new"); 
+
+            } else if (req.body.rol ==="org") {
+         
+         res.redirect("/organization/new")
+
+       } else if (req.body.rol ==="univ" ) {res.send("universidad");}
+
+
+ 
  }
 
 
-catch(e){}
+        catch(e){ console.log(e);}
  
 }
 
@@ -170,12 +191,12 @@ exports.Config=(req,res)=>{
   var name =  req.session.loggedIn ?  req.session.user.username.split(" ")[0] : "Profile"
   
  
-  
+              if(req.session.loggedIn === true){ 
   
           res.render('user_profile_settings',{user: req.session.user,image:req.session.user.image,name:name})    
            console.log(req.session.user.name);
-            
-       
+
+               }   else {  res.redirect('/');    }       
 
 }
 

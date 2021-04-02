@@ -15,7 +15,7 @@ const session = require('express-session');
     
  
  /////////////// Poner la imagen  de perfil de redes sociales  
-    var image   = req.session.loggedIn?  req.session.user.image : "https://avataaars.io/?avatarStyle=Transparent&topType=LongHairStraightStrand&accessoriesType=Round&hairColor=Blonde&facialHairType=Blank&clotheType=CollarSweater&clotheColor=Red&eyeType=Wink&eyebrowType=SadConcernedNatural&mouthType=Smile&skinColor=Light" 
+    var image   = req.session.loggedIn?  req.session.user.image : "/images/avataaars4.svg"  
 
 
   //////////// Poner el nombre  usuario, si el usuario esta loggeado  
@@ -62,12 +62,12 @@ const session = require('express-session');
 
     company = await  Company.find({  $and:[
         {$or:[{ 'productos.producto':new RegExp( pattern, 'i' )}, { 'nombre':new RegExp( pattern, 'i' )}, { 'industria':new RegExp( pattern, 'i' )} ]},
-        {$or:[{'ciudad': new RegExp (lugar , 'i')  },{estado: new RegExp (lugar , 'i') }] } 
+        {$or:[{'ciudad': new RegExp (lugar , 'i')  },{'estado': new RegExp (lugar , 'i') },{'pais': new RegExp(lugar, 'i')}] } 
 
 
-          ]})
+          ]},{'calle':0,'numero':0,'productos':0, 'creador':0 , 'created':0, 'certificados':0, '__v':0 })
 
-
+    console.log(company);
     res.json(company);
  
     }

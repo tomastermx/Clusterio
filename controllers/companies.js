@@ -92,7 +92,7 @@ exports.docompanyQueryResults = async (req,res)=>{
 
 exports.newCompany = (req,res)=>{
 
-var image   = req.session.loggedIn?  req.session.user.image : "https://avataaars.io/?avatarStyle=Transparent&topType=LongHairStraightStrand&accessoriesType=Round&hairColor=Blonde&facialHairType=Blank&clotheType=CollarSweater&clotheColor=Red&eyeType=Wink&eyebrowType=SadConcernedNatural&mouthType=Smile&skinColor=Light" 
+ var image   = req.session.loggedIn?  req.session.user.image : "/images/avataaars4.svg" 
 
 
 //////////// Poner el nombre  usuario, si el usuario esta loggeado 
@@ -162,7 +162,7 @@ var  owner
  
   
    /////////////// Poner la imagen  de perfil de redes sociale
-   var image   = req.session.loggedIn?  req.session.user.image : "https://avataaars.io/?avatarStyle=Transparent&topType=LongHairStraightStrand&accessoriesType=Round&hairColor=Blonde&facialHairType=Blank&clotheType=CollarSweater&clotheColor=Red&eyeType=Wink&eyebrowType=SadConcernedNatural&mouthType=Smile&skinColor=Light" 
+   var image   = req.session.loggedIn?  req.session.user.image : "/images/avataaars4.svg" 
 
 
    //////////// Poner el nombre  usuario, si el usuario esta loggeado  

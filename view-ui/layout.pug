@@ -34,13 +34,13 @@ html
     
   style.
 
-  
      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
-   
-       .menu  {
 
-          font-family: 'Nunito', sans-serif; 
-       }
+     h1, h3, p , a, menu, .ui.button {
+    
+    font-family: 'Nunito', sans-serif; 
+
+     }
 
    
 
@@ -76,8 +76,15 @@ html
     }
 
 
+     #signup{
+      padding-top: 4px;
+      padding-bottom:auto;
+     }
+
+
+
   body#pusher
-  
+   
 
    div.ui.fixed.large.inverted.menu#menuu
   
@@ -90,16 +97,22 @@ html
      a.item Avisos
      a.item Clústers
     div.right.menu
+  
       div#imageprofile 
-        img#img(src = `${image} `)
+        img#img(src = `${image} ` )
+
+    if logged    
       div.ui.dropdown.item#test #{name}
+
        i.dropdown.icon
        div.menu
         a.item(href="/users/login") Login
         a.item(href="/users/profile/settings") Settings
         a.item(href="/users/logout") Logout  
-       
-      
+
+    else
+      item#signup   
+        a(href="/users/login" class="button ui green") Sign Up 
 
    
 

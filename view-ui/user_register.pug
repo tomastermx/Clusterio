@@ -14,10 +14,9 @@ block content
    form.ui.form(id="registerusernamex", method="post", action="/users/register")
       
        div.field
-            label(for="username") Escribe tu nombre
+            label(for="username") Escribe tu nombre completo
             input(type="text"  name="username" id="username")
-            label(for="lastname") Escribe tu apellido
-            input(type="text"  name="lastname" id="lastname")  
+           
        div.ui.field
            div.ui.selection.dropdown
             input(type="hidden" name="rol" id="rol" placeholder="Rol")
@@ -25,9 +24,9 @@ block content
             div.default.text Rol
             div.menu
 
-             div.item(data-value="Miembre de una empresa")  miembro de empresa
-             div.item(datavalue="Miembro de una Asociación") invesionista
-             div.item(datavalue="Investigador") investigador 
+             div.item(data-value="company") Empleado ó parte de un equipo de una empresa
+             div.item(data-value="org") Parte del equipo de trabajo de una Depedencia, Cámara ó Asociación
+             div.item(data-value="univ") Parte del equipo de trabajo del área de vinculación de una Universidad
 
        div.ui.field
         div.ui.toggle.checkbox

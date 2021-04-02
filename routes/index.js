@@ -10,26 +10,56 @@ module.exports = (app)=>{
 
 	app.get('/', async(req,res)=>{
 
-      var image   = req.session.loggedIn?  req.session.user.image : "https://avataaars.io/?avatarStyle=Transparent&topType=LongHairStraightStrand&accessoriesType=Round&hairColor=Blonde&facialHairType=Blank&clotheType=CollarSweater&clotheColor=Red&eyeType=Wink&eyebrowType=SadConcernedNatural&mouthType=Smile&skinColor=Light" 
+
+
+      var image   = req.session.loggedIn?  req.session.user.image :"/images/avataaars4.svg" 
       //////////// Poner el nombre  usuario, si el usuario esta loggeado  
       
+
        var name =  req.session.loggedIn ?  req.session.user.username.split(" ")[0] : "Profile"
   
+       var logged = req.session.loggedIn
 
-      res.render('index',{image:image,name:name});
-   
-
+      res.render('index',{image:image,name:name,logged:logged});
+    
+      console.log(req.session.loggedIn);
 })
 
 
+  //////////////////////////////////////////////////////////////////////////////////////////77
 
-
-	app.post('/', async(req,res)=>{
+	app.get('/faq', async(req,res)=>{
        
+         res.render('faq');
+      
 
-      res.json(company);
+
+	 })
+
+   
+
+ //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	app.get('/nosotros', async(req,res)=>{
+       
+         res.render('us');
+      
 
 
-	    })
+	 })
+
+
+ ////////////////////////////////////////////////////////////////////////////////////////////////////// 
+   	app.get('/contacto', async(req,res)=>{
+       
+         res.render('contacto');
+      
+
+
+	 })
+
+
+
+
 
 }

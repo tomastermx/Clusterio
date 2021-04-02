@@ -1,0 +1,49 @@
+
+
+extends layout
+ 
+block content
+ 
+ style.
+     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
+
+     h1, h3, p , a, button{
+    
+    font-family: 'Nunito', sans-serif; 
+
+    }
+
+ div.ui.container
+  h1.textcenter Registra una Organización	
+  div.ui.segment
+    form.ui.form(id="orgregistar")
+     label(for="orgname") Nombre de la Organización
+     input(type="text" id="orgname" name="orgname")
+  
+     div.field    
+
+     div.ui.selection.dropdown
+      input(type="hidden" name="tipo" id="tipo" placeholder="tipo")
+      i.dropdown.icon
+      div.default.text tipo de organización
+      
+      div.menu     
+        div.item(data-value="camara") Cámara
+        div.item(datavalue="dependencia") Dependencia Gubernamental
+
+
+     div.field    
+
+     div.ui.selection.dropdown
+      input(type="hidden" name="tipo" id="tipo" placeholder="tipo")
+      i.dropdown.icon
+      div.default.text industria
+      
+      div.menu     
+       div.item(data-value="camara") Nacional
+       div.item(datavalue="dependencia") Estatal
+     
+     div.field
+
+     button.ui.button.green(type="submit") Guardar    
+  

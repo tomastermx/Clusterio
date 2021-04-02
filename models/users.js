@@ -15,7 +15,7 @@ var userSchema = new mongoose.Schema({
  modifiedOn: Date,
  lastLogin: Date, 
  username:String,
- role: String,
+ rol: String,
 
 /**********************************
 	local:{

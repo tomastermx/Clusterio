@@ -4,9 +4,10 @@ const mongoose = require('mongoose');
 const messageSchema = new  mongoose.Schema({
 
 
- createdOn: { type: Date, default: Date.now },
+ Date: { type: Date, default: Date.now },
  from: String,
  to : String,
+ message : String,
  view: String
 
 
