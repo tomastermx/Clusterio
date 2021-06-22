@@ -3,6 +3,8 @@
 User = require('../models/users');
 const passport = require('passport');
 const session = require('express-session');
+
+require('dotenv').config();
  
  Company = require('../models/company');
  
@@ -94,6 +96,9 @@ exports.docompanyQueryResults = async (req,res)=>{
 
 exports.newCompany = (req,res)=>{
 
+ /// Variable de entorno donde esta  la API de Google
+var  keyapi = process.env.maps  
+
  var image   = req.session.loggedIn?  req.session.user.image : "/images/avataaars4.svg" 
 
 
@@ -104,7 +109,7 @@ var name = str.split(" ")[0];
 
 var logged = req.session.loggedIn;
 
-res.render('company_register',{image:image,name:name,logged:logged});
+res.render('company_register',{image:image,name:name,logged:logged,keyapi:keyapi});
 console.log("a" + req.session.user);
 } 
 
@@ -169,6 +174,8 @@ exports.donewCompany = function(req , res){
 
 exports.ProfileCompany = async (req,res)=>{
 
+ var  keyapi = process.env.maps     
+
 var  owner
  
   
@@ -190,11 +197,11 @@ var  owner
 
         var owner = req.session.user.email === company.creador ? true : false
 
-        res.render('company_profile',{company:company,image:image,name:name,owner:owner,logged:logged}); 
+        res.render('company_profile',{company:company,image:image,name:name,owner:owner,logged:logged,keyapi:keyapi}); 
 
        } else
 
-        {res.render('company_profile',{company:company,image:image,name:name}); }     
+        {res.render('company_profile',{company:company,image:image,name:name,keyapi:keyapi}); }     
 
  
      } catch(e) {console.log(e)} 
@@ -212,6 +219,9 @@ var  owner
 
 
 exports.CompanySettings = async (req,res)=>{
+    
+      var  keyapi = process.env.maps  
+
 
       /////////////// Poner la imagen  de perfil de redes sociale
        var image   = req.session.loggedIn?  req.session.user.image : "/images/avataaars4.svg" 
@@ -231,7 +241,7 @@ exports.CompanySettings = async (req,res)=>{
 
      var companyid = company._id;
 
-      res.render('company_profile_settings',{company:companyid,image:image,name:name, logged:logged});
+      res.render('company_profile_settings',{company:companyid,image:image,name:name, logged:logged,keyapi:keyapi});
 
       }   catch(e){console.log(e)}
 

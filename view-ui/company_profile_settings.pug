@@ -88,13 +88,13 @@ block content
                                var product = $("#proditem").val();
                                var description = $("#descripcion").val();
                                
-                               
+      j                         
 
                                item = {producto:product, descripcion:description}
  
                                productArray.push(item); 
 
-                               var row = '<div class="ui segment id="'+i+'" "><div class="ui three column grid"><div class="column"><p class="product">'+ productArray[i].producto + '</p></div><div class="column"><p>' + productArray[i].descripcion + '</p></div><div class="column"> <button  class="ui button red" id="remove" >Eliminar</button></div></div></div>'  
+                               var row = '<div class="ui segment id="'+i+'" "><div class="ui stackable three column grid"><div class="column"><p class="product">'+ productArray[i].producto + '</p></div><div class="column"><p>' + productArray[i].descripcion + '</p></div><div class="column"> <button  class="ui button red" id="remove" >Eliminar</button></div></div></div>'  
 
                                   $("#list").append(row);
 
@@ -197,7 +197,7 @@ block content
      
              
 
-            setTimeout( ()=>{ $("#example").load('/company/settings/profile/' + id +' #example' ) }, 5000);   
+            setTimeout( ()=>{ $("#example").load('/company/settings/profile/' + id +' #example' ) }, 500);   
     
 
     })
@@ -214,7 +214,7 @@ block content
 
            $('#example').progress({percent: 100  }); 
              
-            setTimeout( window.location.reload(), 10000);
+             setTimeout( ()=>{ $("#example").load('/company/settings/profile/' + id +' #example' ) }, 500);   
                   
 
 
@@ -259,7 +259,7 @@ block content
           div.ui.segment#products
             
    
-               div.ui.three.column.grid#entrada
+               div.ui.stackable.three.column.grid#entrada
                 div.column
                   h4 Producto
                   input(id="proditem" name="proditem"  )
@@ -272,7 +272,7 @@ block content
    
                    button.ui.button.blue#add Agregar
                     
-          div.ui.segment#list      
+          div.ui.container#list      
                    
           div.field 
           button.ui.button.green(type="submit") Guardar  
