@@ -19,6 +19,8 @@ const companySchema = new  mongoose.Schema({
   ciudad: String,
   calle: String,
   numero:String,
+  latitud:Number,
+  longitud:Number,
   telefono:String,
   web:String,
   creador:String,

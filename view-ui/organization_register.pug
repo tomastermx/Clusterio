@@ -3,7 +3,23 @@
 extends layout
  
 block content
+   
+ script.
+
+
+
+ script(src="https://polyfill.io/v3/polyfill.min.js?features=default")
+ script(src="https://maps.googleapis.com/maps/api/js?key=" + keyapi +"&libraries=places&callback=initAutocomplete" async defer)
+
+  
+ script(src='/javascripts/mapsapi-places.js') 
  
+ script(src='/javascripts/organizations.js')
+ 
+
+
+      
+
  style.
      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
 
@@ -13,37 +29,120 @@ block content
 
     }
 
+    
+
+    
+    #map {
+     position:relative;
+     height:400px;
+    }   
+
+
+ 
+    #placemap{
+     
+     position:relative;  
+     border-color:rgb(240 240 241);
+     border-style:solid;
+     border-width:1px;
+     width:100%;
+   
+    } 
+
+
+
  div.ui.container
   h1.textcenter Registra una Organización	
+
   div.ui.segment
-    form.ui.form(id="orgregistar")
+    form.ui.form(id="orgregistrar"  method="post"  action="/organization/new/")
      label(for="orgname") Nombre de la Organización
-     input(type="text" id="orgname" name="orgname")
-  
-     div.field    
-
-     div.ui.selection.dropdown
-      input(type="hidden" name="tipo" id="tipo" placeholder="tipo")
-      i.dropdown.icon
-      div.default.text tipo de organización
-      
-      div.menu     
-        div.item(data-value="camara") Cámara
-        div.item(datavalue="dependencia") Dependencia Gubernamental
-
-
-     div.field    
-
-     div.ui.selection.dropdown
-      input(type="hidden" name="tipo" id="tipo" placeholder="tipo")
-      i.dropdown.icon
-      div.default.text industria
-      
-      div.menu     
-       div.item(data-value="camara") Nacional
-       div.item(datavalue="dependencia") Estatal
-     
      div.field
+      input(type="text" id="orgname" name="orgname")
+  
+     div.ui.field   
+
+      label(for="description") Descripción
+      input(type="text" id="description"  name="description")
+
+
+     div.ui.field
+      label(for="tipo") Tipo de Organización
+     
+      div.ui.selection.dropdown
+       input(type="hidden" name="tipo" id="tipo" placeholder="tipo")
+       i.dropdown.icon
+       div.default.text tipo de organización
+      
+       div.menu     
+        div.item(data-value="camara") Cámara
+        div.item(data-value="dependencia") Dependencia Gubernamental
+  
+
+     
+     div.ui.field
+      div#locationField
+       label(for="companyname") Ubicación* 
+       input(type="text"  name="companyname" id="autocomplete"  placeholder="Enter your address" onFocus= "geolocate()" )
+     
+     div.field  
+          table#address
+           tbody
+             tr
+               td.label Street address
+               td.slimField
+                 input#street_number.field(disabled='true')
+               td.wideField(colspan='2')
+                 input#route.field(disabled ='true')
+               td( width="60%" colspan='11' rowspan='11')
+                div#placemap
+                 h3.textcenter(height="30%" ) Con el marcador, Indique el lugar exacto del domicilio 
+                 div#map(height="70%")                  
+
+             tr
+               td.label Ciudad
+               td.wideField(colspan='3')
+                 input#locality.field(type="text" name="city" disabled ='true')
+             tr
+               td.label Estado
+               td.slimField
+                 input#administrative_area_level_1.field(disabled='true')
+               td.label Zip code
+               td.wideField
+                 input#postal_code.field(disabled ='true')
+             tr
+               td.label País
+               td.wideField(colspan='3')
+                 input#country.field(disabled ='true')
+
+             tr
+               td.label Teléfono
+               td.wideField(colspan='3')
+                 input.field#phone(maxlength="10")
+
+              
+             tr
+               td.label Sitio Web
+               td.wideField(colspan='3')
+                 input.field#website(maxlength="18") 
+
+              
+             tr
+               td.label Latitud    
+               td.wideField(colspan='3')
+                 input#latitud(disabled='true') 
+
+             tr
+               td.label Longitud    
+               td.wideField(colspan='3')
+                 input#longitud(disabled='true') 
+
+
+       
+     div.ui.field
+
+      
+     div.ui.field 
 
      button.ui.button.green(type="submit") Guardar    
   

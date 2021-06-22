@@ -30,45 +30,40 @@ block content
  
 
   div.ui.segment
-   div.ui.grid.container  
-    div.ui.stackable.top.attached.tabular.menu
-     a.item.active(data-tab="first") Información del Usuario
-     a.item(data-tab="second") Notificaciones y Grupos
-     a.item(data-tab="third") Configuración y Seguridad
-
-    div.ui.bottom.attached.tab.segment.active(data-tab="first")
+ 
      div.ui.segment   	
       h2 Modificación de nombre de usuario
       form.ui.form(id="usern-change" , method="post")
-        div.field
+        
          label(for="newusername") Usuario
          input(type="text", name="newusername",  placeholder="Agrega nombre de usuario" value=`${user.username}`,id="newusername")
-        div.field    
-         div.ui.selection.dropdown
-          input(type="hidden" name="rol" id="rol" placeholder="Rol")
-          i.dropdown.icon
-          div.default.text Rol
-          div.menu
-           
-           div.item(data-value="emprendedor") emprendedor
-           div.item(datavalue="empresario") empresario
-           div.item(datavalue="investigador") investigador
-         div.field
+   
+   
+         div.ui.field
          button.ui.button.green#botonx(type="submit") Guardar
 
+     
+  div.ui.segment  
+    h2.textcenter Configura  el sitio de tu Organización
+
+    div.ui.segment  
+     h2.textcenter #{unit.nombre}
+     div.ui.field
+
+    if unit.industria 
+      div.ui.two.column.stackable.grid
+       div.ui.column  
+        a(href="/company/profile/" + unit._id      class="button ui blue button")  Ver Sitio
+       div.ui.column 
+        a(href="/company/settings/profile/" + unit._id      class="button ui orange button")  Editar 
+     
+    if unit.tipo 
+      div.ui.two.column.stackable.grid
+       div.ui.column  
+        a(href="/organization/profile/" + unit._id      class="button ui blue button")  Ver Sitio
+       div.ui.column 
+        a(href="/organization/settings/profile/" + unit._id     class="button ui orange button")  Editar  
 
 
 
 
-   div.ui.bottom.attached.tab.segment(data-tab="second")
-     div.ui.segment
-        div.ui.toggle.checkbox
-         input(type="checkbox" tabindex=0 class="hidden")
-         label Recibir noticias de la industria por correo electrónico  
-    
-
-
-   div.ui.bottom.attached.tab.segment(data-tab="third")
-     h4 Opciones 3
-      div.ui.segment
-      

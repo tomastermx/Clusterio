@@ -2,10 +2,11 @@ extends layout
 
 
 block content
- script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8Aiaah4r5LWNR5vsGIrKxNSh7buf7C5o&libraries=places&callback=initAutocomplete"  async defer)
+ script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-9_7C2p7lafatgUqtEOWlpsXHggKIxcw&libraries=places&callback=initAutocomplete"  async defer)
+
 
  script(src='/javascripts/jquery-company.js')
- script(src='/javascripts/mapsapi-profile.js')   
+ script(src='/javascripts/mapsapi-places.js')   
 
 
 
@@ -20,6 +21,22 @@ block content
 
     }
 
+    #map {
+     position:relative;
+     height:400px;
+    }   
+
+
+ 
+    #placemap{
+     
+     position:relative;  
+     border-color:rgb(240 240 241);
+     border-style:solid;
+     border-width:1px;
+     width:100%;
+   
+    } 
 
 
    h1 {
@@ -33,9 +50,9 @@ block content
    }
 
  div.ui.container
-  h1#tock  ACERCA DE LA EMPRESA	
+  h1  ACERCA DE LA EMPRESA	
   div.ui.segment
-     div.ui.bottom.attached.tab.segment(data-tab="second")
+ 
 
      form.ui.form(id="companyname", method="post", action="/company/new/")
          div.field
@@ -52,7 +69,7 @@ block content
 
     
          div.field
-
+        
 
 
 
@@ -60,15 +77,23 @@ block content
           label(for="companyname") Ubicación* 
           input(type="text"  name="companyname" id="autocomplete"  placeholder="Enter your address" onFocus= "geolocate()" )
          div.field 
-
+       
           table#address
            tbody
+             tr
              tr
                td.label Street address
                td.slimField
                  input#street_number.field(disabled='true')
                td.wideField(colspan='2')
-                 input#route.field(disabled ='true')
+                input#route.field(disabled ='true')
+               td( width="60%" colspan='11' rowspan='11')
+                div#placemap
+                 h3.textcenter(height="30%" ) Con el marcador, Indique el lugar exacto del domicilio 
+                 div#map(height="70%")
+                
+                
+
              tr
                td.label Ciudad
                td.wideField(colspan='3')
@@ -94,8 +119,20 @@ block content
              tr
                td.label Sitio Web
                td.wideField(colspan='3')
-                 input.field#website(maxlength="18")    
-             
+                 input.field#website(maxlength="18")  
+
+             tr
+               td.label Latitud    
+               td.wideField(colspan='3')
+                 input#latitud(disabled='true') 
+
+             tr
+               td.label Longitud    
+               td.wideField(colspan='3')
+                 input#longitud(disabled='true')                  
+
+         div.field
+            
         
 
          div.field
@@ -146,5 +183,9 @@ block content
          div.ui.segment#list      
                
          div.field 
+               
          button.ui.button.green(type="submit") Guardar
          a(href="/users/profile" class=" ui blue button" ) Cancelar
+
+
+           

@@ -14,8 +14,12 @@ block content
 
     }
 
+    #content{height:900px;}
 
 
+    #map{
+    height:300px;
+    }
 
 
     #pusher{
@@ -30,8 +34,43 @@ block content
   }
 
 
-
+ script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-9_7C2p7lafatgUqtEOWlpsXHggKIxcw&libraries=places&callback=initMap" async defer)
  script.
+    
+
+    let map;
+    var lat =  parseFloat('#{company.latitud}');
+    var long = parseFloat('#{company.longitud}');
+ 
+   function initMap() {
+     map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: lat,  lng: long },
+    zoom: 18,
+
+    });
+  
+    var marker =    new google.maps.Marker({
+      position: {lat: lat , lng: long  },
+      map,
+     title: "Hello World!",
+   });
+
+
+
+
+  }
+
+
+
+
+
+
+
+
+ 
+
+
+
    
   $(document).ready(()=>{
     
@@ -143,9 +182,10 @@ block content
       h3.textcenter Sitio web 💻
       p.textcenter#web  
     div.column
-    
+     div#map
 
  div.ui.container
+  div.ui.segment
   div.ui.segment  
     h2.textcenter Descripción 📃
     p.textcenter#description

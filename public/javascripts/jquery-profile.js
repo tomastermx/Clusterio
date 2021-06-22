@@ -5,7 +5,7 @@ $(document).ready(function(){
 
 var productArray =[];
 
-console.log(productArray);
+
 var i = 0;
 
 
@@ -56,21 +56,7 @@ var i = 0;
 
 
             
-///////////////////////////  Create a Post/////////////////////////////////////////////
-  
-              $('#userpost').submit((event)=>{
 
-                 event.preventDefault();
-
-
-                 var postdata = $('#posting').val();
-
-                 var postcategory = $('#postcategory').val();
-
-                 $.post('/posts/new',{post:postdata, postcategory:postcategory});
-
-              })
-  
        
 
     })

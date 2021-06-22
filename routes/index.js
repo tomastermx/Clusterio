@@ -30,7 +30,19 @@ module.exports = (app)=>{
 
 	app.get('/faq', async(req,res)=>{
        
-         res.render('faq');
+      var image   = req.session.loggedIn?  req.session.user.image :"/images/avataaars4.svg" 
+      //////////// Poner el nombre  usuario, si el usuario esta loggeado  
+      
+
+     var name =  req.session.loggedIn ?  req.session.user.username.split(" ")[0] : ""
+  
+     var logged = req.session.loggedIn
+
+
+
+
+
+         res.render('faq', {image:image,name:name,logged:logged});
       
 
 
@@ -41,8 +53,18 @@ module.exports = (app)=>{
  //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	app.get('/nosotros', async(req,res)=>{
+
        
-         res.render('us');
+     var image   = req.session.loggedIn?  req.session.user.image :"/images/avataaars4.svg" 
+      //////////// Poner el nombre  usuario, si el usuario esta loggeado  
+      
+
+     var name =  req.session.loggedIn ?  req.session.user.username.split(" ")[0] : ""
+  
+     var logged = req.session.loggedIn
+
+       
+         res.render('us' , {image:image,name:name,logged:logged} );
       
 
 
@@ -51,8 +73,20 @@ module.exports = (app)=>{
 
  ////////////////////////////////////////////////////////////////////////////////////////////////////// 
    	app.get('/contacto', async(req,res)=>{
+
+           
+      var image   = req.session.loggedIn?  req.session.user.image :"/images/avataaars4.svg" 
+      //////////// Poner el nombre  usuario, si el usuario esta loggeado  
+      
+
+     var name =  req.session.loggedIn ?  req.session.user.username.split(" ")[0] : ""
+  
+     var logged = req.session.loggedIn
+
+
+
        
-         res.render('contacto');
+         res.render('contacto', {image:image,name:name,logged:logged} );
       
 
 

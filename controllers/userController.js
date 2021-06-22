@@ -9,7 +9,7 @@ User = require('../models/users');
 const passport = require('passport');
 const session = require('express-session');
 
-
+require('dotenv').config();
 
 var failpassword;
 
@@ -51,7 +51,13 @@ exports.doLogin =(req,res,next)=>{
       }
 
 
-/////////////////////////////// User profile ///////////////////////////////////////////////////////////////7
+/********************************************************************************************************************************
+
+
+          --------------------------------------------U-S-E-R-P-R-O-F-I-L-E-----HTTP-GET------
+
+
+*********************************************************************************************************************************/
 
 exports.Profile = async(req,res)=>{
 
@@ -71,7 +77,7 @@ var logged = req.session.loggedIn
 console.log(name);
 
 
-           res.render('user_profile',{image:req.session.user.image,name:name,logged:logged});
+           res.render('user_profile',{image:req.session.user.image,name:name,logged:logged,email:req.session.user.email});
 
 
                } catch(e){console.log(e)}
@@ -135,7 +141,7 @@ exports.Register =(req,res)=>{
 
 }
 
-///////////////// User Profile  Register POST --GOOGLE--FACEBOKK--TWITTER///////////////////////////////////
+///////////////// User Profile  Register POST --GOOGLE--FACEBOOK--TWITTER///////////////////////////////////
 
 exports.doRegister = async (req , res)=>{
 
@@ -152,9 +158,13 @@ exports.doRegister = async (req , res)=>{
 
  const persona = await user.save();
 
+ /// Cambio de datos de la session
+
  req.session.user.username = req.body.username; 
 
- // console.log(persona);
+ req.session.user.rol =  req.body.rol;
+
+
 
  console.log(req.session.user);
  console.log(req.body.rol);
@@ -168,7 +178,7 @@ exports.doRegister = async (req , res)=>{
 
        } else if (req.body.rol ==="univ" ) {res.send("universidad");}
 
-
+        
  
  }
 
@@ -184,21 +194,57 @@ exports.doRegister = async (req , res)=>{
 *
 ****************************************************************************************************************************************************************/
 
-exports.Config=(req,res)=>{
+exports.Config = async (req,res)=>{
  
    //////////// Poner el nombre  usuario, si el usuario esta loggeado  
       
-  var name =  req.session.loggedIn ?  req.session.user.username.split(" ")[0] : "Profile"
+  var name =  req.session.loggedIn ?  req.session.user.username.split(" ")[0] : ""
+
+ var logged = req.session.loggedIn
   
+                 
+            try {
+
+                      if(req.session.user.rol ==="company"){
+             
+                     var unit = await Company.findOne({"creador": req.session.user.email })
  
-              if(req.session.loggedIn === true){ 
+                     console.log(unit+ "d");       
+                    }
+
+
+                    else if (req.session.user.rol ==="org"){
+                
+                    var unit = await Org.findOne({"creador": req.session.user.email})
+
+                    console.log(unit + "x");
+
+                    }  
+
+
+
+     } 
+
+                catch(e){console.log(e)}
+
+
+
+
+      if(req.session.loggedIn === true){ 
   
-          res.render('user_profile_settings',{user: req.session.user,image:req.session.user.image,name:name})    
+          res.render('user_profile_settings',{user: req.session.user,image:req.session.user.image,name:name,logged:logged,unit:unit})    
            console.log(req.session.user.name);
 
-               }   else {  res.redirect('/');    }       
+               }   else {  res.redirect('/');    } 
 
-}
+
+
+
+
+   }
+
+
+
 
 /***************************************************************************************************************************************************************
 *
@@ -242,17 +288,69 @@ const  alias = await User.findOne({'user.username':req.body.newusername});
 
 const user = await User.findOne({$or:[{'google.email':req.session.user.email},{'facebook.email':req.session.user.email}]});
 
+
+
+
      } catch(err){console.log(err)}
 
    
  
 
 
+ }
+
+ 
+ /*********************************************************************************************************************************************
+
+                 -----------------------POSTS---USER ------- HTTP--GET
+
+
+ ************************************************************************************************************************************************/
+
+  exports.PostingUser =(req,res,next)=>{
+
+ var image   = req.session.loggedIn?  req.session.user.image : "/images/avataaars4.svg"  
+
+ var str = req.session.user.username;
+
+ var name = str.split(" ")[0];
+
+ var logged = req.session.loggedIn
+
+
+   res.render('user_posts',{image:image,name:name,logged:logged,email:req.session.user.email});
+
+  } 
+
+
+
+
+
+
+
+/******************************************************************************************************************************************************
+
+                              ADS---USER------HTTP--GET         
+         
+
+********************************************************************************************************************************************************/
+
+
+
+exports.adsUser=(req,res,next)=>{
+
+res.render('user_ads');
+
 }
 
 
 
-//////////////////// User lOGOUT//////////////////////////////////////
+/**********************************************************************************************************************************************************
+
+                                          LOG OUT
+
+************************************************************************************************************************************************************/
+
 
 exports.logout= (req,res)=>{
 

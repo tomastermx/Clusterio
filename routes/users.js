@@ -4,7 +4,7 @@
  var failpassword;
  var test ="prueba";
 
-module.exports  = (app,passport,session,jwt,User,Company,controllerUser) => {
+module.exports  = (app,passport,session,jwt,User,Company,Org,controllerUser) => {
 
 /***********************************************************************************************************************
 *
@@ -61,7 +61,7 @@ module.exports  = (app,passport,session,jwt,User,Company,controllerUser) => {
               } else {
 
            req.session.loggedIn = true ;
-           req.session.user = { "username": req.user.username, "email" : req.user.google.email, "image" :req.user.google.picture , "_id": req.user._id}
+           req.session.user = { "username": req.user.username, "email" : req.user.google.email, "image" :req.user.google.picture , "_id": req.user._id , "rol":req.user.rol }
             
 
  
@@ -100,7 +100,7 @@ app.get('/users/auth/facebook/callback',passport.authenticate('facebook', { fail
          } else {    
 
      req.session.loggedIn = true ;
-        req.session.user = { "username": req.user.username, "email" : req.user.facebook.email, "image":req.user.facebook.picture ,"_id": req.user._id}
+        req.session.user = { "username": req.user.username, "email" : req.user.facebook.email, "image":req.user.facebook.picture ,"_id": req.user._id , "rol":req.user.rol}
           console.log(req.session.user);
            res.redirect('/users/profile/');
 
@@ -302,6 +302,9 @@ app.post('/users/register',controllerUser.doRegister);
 
 /***********************************************************************************************************************
  Datos de perfil json
+
+
+
 **********************************************************************************************************************/
 
 
@@ -309,16 +312,23 @@ app.get('/users/profile/json',controllerUser.userdisplayjson);
 
 
 /*********************************************************************************************************
-                 Posteo de información del usuario ---> POST
+                 Posteo de información del usuario ---> HTTP--GET
 
 **********************************************************************************************************/
 
    
+app.get('/users/profile/posts',controllerUser.PostingUser);
 
 
+/************************************************************************************************************************************
+
+                         POSTEO DE ADS   del usuerio --->HHTP---GET
 
 
+*************************************************************************************************************************************/
 
+
+app.get('/users/profile/ads' , controllerUser.adsUser);
 
 /////////////////////////// //Modificación del nombre de usuario ///////////////////////////
 
@@ -333,9 +343,9 @@ app.get('/users/profile/json',controllerUser.userdisplayjson);
 
 app.get('/users/logout',controllerUser.logout)
 
-app.get('/users/prueba',(req,res)=>{
-  res.render('user_profile_settings');
-})
+
+
+
 
 
 }

@@ -10,11 +10,14 @@ var mongoose = require('mongoose');
 
 const postSchema  = new  mongoose.Schema({
 
-creado: Date,
+creado: { type: Date, default: Date.now },
 creador: String,
-texto : String,
-ranking : Number,
-categoria: String 
+titulo: String,
+contenido:String,
+categoria: String,
+comentarios:[{}],
+raiting_status: Boolean, 
+raiting: Number 
 
 })
 

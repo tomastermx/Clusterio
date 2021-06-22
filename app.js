@@ -17,6 +17,7 @@ const multer = require('multer');
 const User = require('./models/users');
 const Post = require('./models/post');
 const Company = require('./models/company');
+const Org = require('./models/organization');
 const Offer = require('./models/Offers');
 const Message = require('./models/messages');
 
@@ -135,13 +136,13 @@ var emailController = require('./controllers/email');
 
 require('./routes/index.js')(app,session,Company);
 
-require('./routes/users.js')(app,passport,session,jwt,User,Company,controllerUser);
+require('./routes/users.js')(app,passport,session,jwt,User,Company,Org,controllerUser);
 
 require('./routes/companies.js')(app,session,Company,controllerCompany);
 
-require('./routes/organization.js')(app,session,controllerOrg);
+require('./routes/organization.js')(app,session,Org,controllerOrg);
 
-require('./routes/search')(app,session,Company,searchController);
+require('./routes/search')(app,session,Company,Org,searchController);
 
 require('./routes/updates')(app,Company,Post,updatesController);
 

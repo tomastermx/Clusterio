@@ -155,13 +155,16 @@ $(this).parent().parent().parent().fadeOut(1000).remove(1000);
             var website = $('#website').val();
             var badges  = $('#badge').val(); 
             var moreinfo = $('#masinfo').val();
+
+            var latitud = $("#latitud").val();
+            var longitud = $("#longitud").val();
         
            ///// Redirige al usuario a la página
             window.location.assign('/users/profile');   
           
            //event.preventDefault();
              $.post('/company/new',{companyname:cname,street:street,description:description,streetnumber:streetnumber,city:city,state:state,country:country,industry:industry,
-              subindustry:subindustry, phone:phone ,products : productArray,badges:badges, website:website,moreinfo:moreinfo});
+              subindustry:subindustry, phone:phone ,products : productArray,badges:badges, website:website,moreinfo:moreinfo,latitud:latitud,longitud:longitud});
 
             
            });

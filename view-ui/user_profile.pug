@@ -1,50 +1,65 @@
 extends layout
 block variables
 block content 
- style.
-   @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap');
 
-    body .fonts {
+
+  script.
+  style.
+       @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
+
+     h1, h2, h3, h4, p , a, button{
     
     font-family: 'Nunito', sans-serif; 
 
     }
+
  
+    #content{
+   padding-top:43px;
+   padding-left:0;
+   padding-right:0;  
+   background-color:#eeeeee;
+   height:900px;
+    }
+ 
+   #submenu{
+    background-color:white;
+    height:45px;
+    width:100%;
+    border-style:solid;
+    border-color:gray;
+    border-width:1px;
+
+    }
+
+    .options{
+
+     display: inline-block;
+     height:100%;  
+     width:50%;
+
+     
+    }
+
+ 
+    .fa, .fas, .far{
+     margin-left: 50%;
+     margin-bottom:50%;
+    }
+     
   
 
- script(src='/javascripts/jquery-profile.js') 	
+  script(src='/javascripts/jquery-profile.js') 
 
- div.ui.container
-   
-   
-  
-  div.ui.internally.divide.grid
-   div.two.wide.column
  
+  
+  div.topnavbar#submenu  
+   div.options
+     a(href="/users/profile/posts") 
+      i.far.fa-comment.fa-3x 
+      
+   div.options
+     a(href="/users/profile/ads") 
+      i.fas.fa-ad.fa-3x
 
-   div.twelve.wide.column
-    div.ui.segment
-     div.ui.stackable.top.attached.tabular.menu
-      a.item.active(data-tab="first") Post
-      a.item(data-tab="second") Anuncios
-      a.item(data-tab="third") 
-
-     div.ui.bottom.attached.tab.segment.active(data-tab="first") 
-      h2.textcenter Posts
-      form.ui.form(id="userpost")
-       textarea(type="text" name="posting" id="posting" ) 
-       select.ui.dropdown(name="postcategory" id="postcategory")
-               option(value="Plástico") Plástico 
-               option(value="automotriz") Automotríz
-               option(value="agroindustria") Agroindustria
-               option(value="alimenticia-bebidas-tabaco") Alimenticia, Bebidas y Tabaco
-       br
-       br
-       button.ui.button.green(type="submit") Guardar  
-
-     div.ui.bottom.attached.tab.segment(data-tab="second")
-      h2.textcenter Anuncios
-     div.ui.bottom.attached.tab.segment(data-tab="third")   
-     	
-   div.three.wide.column
-    
+  

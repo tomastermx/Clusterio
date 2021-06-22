@@ -2,6 +2,11 @@ extends layout
  
 block content
  
+ 
+
+
+ script( id="owner"  data-user =`${email}`  src='/javascripts/user-posts.js')   
+ 
  style.
      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
 
@@ -10,7 +15,32 @@ block content
     font-family: 'Nunito', sans-serif; 
 
     }
+ 
+ 
 
 
  div.ui.container
   h1.textcenter Posts   
+
+  div.ui.grid
+   div.three.wide.column
+   div.ten.wide.column#principal
+    div.ui.segment
+      form.ui.form( id="postform" method="post" action="/")
+       input(type="text"  id="title" name="title"  placeholder="Título" )
+       div.ui.field
+       textarea(type="text" id="contenido" name="contenido" placeholder="Contenido")
+       div.ui.field
+       div.ui.two.column.stackable.grid
+        div.column
+          button.ui.button.green(type="submit") Enviar 
+        div.column
+         div.ui.selection.dropdown
+          input(type="hidden" id="categoria" name="categoria")
+          i.dropdown.icon
+          div.default.text Tema
+          div.menu          	
+           div.item(data-value="metalmecanica") Industria Metalmecánica
+           div.item(data-value="automotriz") Industria Automotríz
+     
+       div.three.wide.colum

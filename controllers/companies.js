@@ -90,6 +90,8 @@ exports.docompanyQueryResults = async (req,res)=>{
 
 
 
+
+
 exports.newCompany = (req,res)=>{
 
  var image   = req.session.loggedIn?  req.session.user.image : "/images/avataaars4.svg" 
@@ -100,8 +102,9 @@ var str = req.session.user.username;
 
 var name = str.split(" ")[0];
 
+var logged = req.session.loggedIn;
 
-res.render('company_register',{image:image,name:name});
+res.render('company_register',{image:image,name:name,logged:logged});
 console.log("a" + req.session.user);
 } 
 
@@ -119,8 +122,14 @@ console.log("a" + req.session.user);
 
 exports.donewCompany = function(req , res){
  
-       console.log(req.body.moreinfo);
+       
   
+     console.log(req.body.latitud);
+
+     console.log(req.body.longitud);
+
+
+
 
     var newCompany = new Company();
      newCompany.created = new Date(), 
@@ -139,6 +148,8 @@ exports.donewCompany = function(req , res){
      newCompany.creador = req.session.user.email;
      newCompany.productos = req.body.products;
      newCompany.masinformacion = req.body.moreinfo;
+     newCompany.latitud = req.body.latitud;
+     newCompany.longitud =  req.body.longitud;
 
        newCompany.save((err,company)=>{
         console.log(company)
@@ -167,7 +178,9 @@ var  owner
 
    //////////// Poner el nombre  usuario, si el usuario esta loggeado  
       
-    var name =  req.session.loggedIn ?  req.session.user.username.split(" ")[0] : "Profile"
+    var name =  req.session.loggedIn ?  req.session.user.username.split(" ")[0] : ""
+
+     var logged = req.session.loggedIn
 
 
     try {
@@ -177,7 +190,7 @@ var  owner
 
         var owner = req.session.user.email === company.creador ? true : false
 
-        res.render('company_profile',{company:company,image:image,name:name,owner:owner}); 
+        res.render('company_profile',{company:company,image:image,name:name,owner:owner,logged:logged}); 
 
        } else
 
@@ -200,12 +213,25 @@ var  owner
 
 exports.CompanySettings = async (req,res)=>{
 
+      /////////////// Poner la imagen  de perfil de redes sociale
+       var image   = req.session.loggedIn?  req.session.user.image : "/images/avataaars4.svg" 
+
+
+       //////////// Poner el nombre  usuario, si el usuario esta loggeado  
+      
+      var name =  req.session.loggedIn ?  req.session.user.username.split(" ")[0] : ""
+
+      var logged = req.session.loggedIn
+
+
+
+
       try {
-  const company = await Company.findOne({'_id':req.params.id})
+    const company = await Company.findOne({'_id':req.params.id})
 
-  var companyid = company._id;
+     var companyid = company._id;
 
-  res.render('company_profile_settings',{company:companyid,image:req.session.user.image});
+      res.render('company_profile_settings',{company:companyid,image:image,name:name, logged:logged});
 
       }   catch(e){console.log(e)}
 
@@ -248,6 +274,8 @@ res.json(unit);
 
   exports.doCompanySettings = async (req,res)=>{
 
+   console.log(req.body);
+
   try {
   const company = await Company.findOne({'_id':req.params.id})
 
@@ -278,6 +306,19 @@ res.json(unit);
     console.log(req.body.num)
     company.numero=req.body.num;
 
+     }
+
+    if(req.body.tel) {
+
+     console.log(req.body.tel);
+     company.telefono = req.body.tel; 
+
+      }
+
+     
+     if(req.body.web){
+      company.web = req.body.web;   
+        
     }
 
 

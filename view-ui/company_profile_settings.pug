@@ -34,7 +34,9 @@ block content
        var moreinfo="";
        var callenueva="";
        var numnuevo="";
-      
+       var newphone ="";
+       var newweb = "";
+
      ///////////////////Populate Fields//////////////////////////////////////////////7 
      $.get('/company/profile/json/'+ id , (data,status)=>{
      console.log(data);
@@ -45,11 +47,13 @@ block content
       var city =    data.ciudad 
       var calle =  data.calle
       var num =    data.numero
+      var phone = data.telefono
+      var web  = data.web
       var description = data.description
       var more_info = data.masinformacion
       var  address = city + "," + " " + state + "," + " "   + pais
       productArray = data.productos;
-
+    
      
 
         $('#title').text(name)
@@ -60,7 +64,8 @@ block content
         $('#modify_moreinfo').val(more_info);
         $("#modify_street").val(calle);
         $("#modify_number").val(num);
-
+        $("#modify_phone").val(phone);
+        $("#modify_web").val(web);
 
        
             for(i=0;i<productArray.length;i++){
@@ -131,13 +136,15 @@ block content
                   });
 
      //////////////////////////////Modificación de entradas/////////////////////////////////////////
+
+      ////////////////// Solo capturar el dato si cambian ///////////////////////////////////////////
   
            $("#modify_description").change(()=>{
             descripcion = $("#modify_description").val();
            });
 
           
-             $("#modify_moreinfo").change(()=>{
+           $("#modify_moreinfo").change(()=>{
             moreinfo = $("#modify_moreinfo").val();
            });
 
@@ -151,6 +158,20 @@ block content
              $("#modify_number").change(()=>{
              numnuevo  = $("#modify_number").val();
            });
+
+
+
+             $("#modify_phone").change(()=>{
+               newphone = $("#modify_phone").val();  
+
+             });
+
+               $("#modify_web").change(()=>{
+               newweb = $("#modify_web").val();  
+
+             console.log(web);
+
+             });
 
 
       //////////////////////////////////////////Postear los cambios primera pestaña///////////////////                
@@ -168,44 +189,53 @@ block content
 
          $.post('/company/settings/profile/'+ id ,{products : productArray,description:descripcion,moreinfo:moreinfo})
 
-          $('#example').progress({
-         percent: 100  });
+        
 
+
+          $('#example').progress({ percent: 100  });
+
+     
+             
+
+            setTimeout( ()=>{ $("#example").load('/company/settings/profile/' + id +' #example' ) }, 5000);   
+    
 
     })
                      
     ////////////////////////////////////////////////////////////Poster cambios segunda pestaña/////////////////
 
 
-         $("#contact").submit((event)=>{
+         $("#contactdata").submit((event)=>{
 
            event.preventDefault();
 
           
-          $.post('/company/settings/profile/'+ id,{calle:callenueva,num:numnuevo});  
+          $.post('/company/settings/profile/'+ id,{calle:callenueva,num:numnuevo, tel:newphone, web:newweb});  
 
-           $('#example').progress({
-         percent: 100  });
-
-
-         })
+           $('#example').progress({percent: 100  }); 
              
+            setTimeout( window.location.reload(), 10000);
+                  
 
+
+         });
+             
+        
 
     });
 
   
 
    div.ui.container
-   
-    h1.textcenter#title
-    h2.textcenter Configuración
+     div.ui.segment 
+      h1.textcenter#title
+      h2.textcenter Configuración
     
      div.ui.segment
       div.ui.stackable.top.attached.tabular.menu
        a.item.active(data-tab="first") Información General
        a.item(data-tab="second") Ubicación y contacto
-       a.item(data-tab="third")  Otro
+   
 
      div.ui.bottom.attached.tab.segment.active(data-tab="first")
       div.ui.container
@@ -253,7 +283,7 @@ block content
       div.ui.container
        div.ui.segment  
         
-        form.ui.form(id="contact",name="contactdata" action="")
+        form.ui.form(id="contactdata",name="contactdata" action="")
           h1 Ubicación 
           div.ui.two.column.stackable.grid  
            div.column
@@ -269,11 +299,14 @@ block content
             input(type="text" id="modify_phone" name="phone") 
            div.column 
             label(for="web") Sitio web
-            input(type="text" id="web" name="web")
+            input(type="text" id="modify_web" name="web")
 
-          div.ui.container
-            button.ui.button.green(type="submit") Guardar     
         
+          
+          div.ui.container
+           div.field 
+           button.ui.button.green(type="submit") Guardar     
+           a(href='/users/profile/' class="button ui button blue") Cancelar   
    div.ui.progress#example
      div.bar
-     div.progress           
+      div.progress           
