@@ -15,11 +15,14 @@ block content
 
      } 
 
+      #content{padding-bottom:200px;}
+     
+
       #map{
      height:300px;
       } 
 
- script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-9_7C2p7lafatgUqtEOWlpsXHggKIxcw&libraries=places&callback=initMap" async defer)
+ script(src="https://maps.googleapis.com/maps/api/js?key=" + keyapi + "&libraries=places&callback=initMap" async defer)
  
 
  script.

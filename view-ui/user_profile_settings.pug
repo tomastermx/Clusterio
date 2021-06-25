@@ -12,18 +12,28 @@ block content
    h1 , h2 {
  
       text-align:center;
-    
+
    }	
 
+    #content{padding-bottom:200px;}
+
+
+
+ div.ui.progress#example
+  div.bar
+   div.progress    
+
  div.ui.container
+ 
   div.ui.segment
 
+   div.ui.text.container#userdata
 
   
 
-   h1#profileuser
-   h1#profileusermail
-   h1#profileuserrol 
+    h2#nombre   #{user.username}
+    h2 #{user.google.email} 
+    h2#profileuserrol 
 
 
  
@@ -40,7 +50,12 @@ block content
    
    
          div.ui.field
-         button.ui.button.green#botonx(type="submit") Guardar
+        
+             button.ui.secondary.inverted.button#botonx(type="submit") Guardar 
+    
+
+  
+         
 
      
   div.ui.segment  
@@ -53,16 +68,16 @@ block content
     if unit.industria 
       div.ui.two.column.stackable.grid
        div.ui.column  
-        a(href="/company/profile/" + unit._id      class="button ui blue button")  Ver Sitio
+        a(href="/company/profile/" + unit._id      class="button fluid ui  secondary  inverted  button")  Ver Sitio
        div.ui.column 
-        a(href="/company/settings/profile/" + unit._id      class="button ui orange button")  Editar 
+        a(href="/company/settings/profile/" + unit._id      class="button fluid ui  secondary inverted button")  Editar 
      
     if unit.tipo 
       div.ui.two.column.stackable.grid
        div.ui.column  
-        a(href="/organization/profile/" + unit._id      class="button ui blue button")  Ver Sitio
+        a(href="/organization/profile/" + unit._id    class="button fluid ui secondary inverted button")  Ver Sitio
        div.ui.column 
-        a(href="/organization/settings/profile/" + unit._id     class="button ui orange button")  Editar  
+        a(href="/organization/settings/profile/" + unit._id     class="button fluid ui secondary inverted button")  Editar  
 
 
 

@@ -47,15 +47,24 @@ var i = 0;
              $.post('/users/profile/settings',{usernamevalue:namevalue}) 
                 
           
-             $('#profileuser').load('/users/profile/settings   p #profileuser ');
+             $('#profileuser').load('/users/profile/settings   #userdata ');
+
+
+               $('#example').progress({ percent: 100  });
+
+
+                setTimeout( ()=>{ $("#example").load('/users/profile/settings    #example' ) }, 600);  
+                setTimeout( ()=>{ $("#userdata").load('/users/profile/settings    #userdata' ) }, 200); 
+               
      
-              location.reload(false);
               });
 
-            
+          
+        
 
 
-            
+
+
 
        
 

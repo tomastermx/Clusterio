@@ -1,11 +1,12 @@
 
+require('dotenv').config();
+ 
 
 User = require('../models/users');
 const passport = require('passport');
 const session = require('express-session');
 
-require('dotenv').config();
- 
+
  Company = require('../models/company');
  
 
@@ -176,7 +177,7 @@ exports.ProfileCompany = async (req,res)=>{
 
  var  keyapi = process.env.maps     
 
-var  owner
+ var  owner
  
   
    /////////////// Poner la imagen  de perfil de redes sociale

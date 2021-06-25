@@ -197,6 +197,7 @@ exports.doRegister = async (req , res)=>{
 exports.Config = async (req,res)=>{
  
    //////////// Poner el nombre  usuario, si el usuario esta loggeado  
+   var image   = req.session.loggedIn?  req.session.user.image : "/images/avataaars4.sv"  
       
   var name =  req.session.loggedIn ?  req.session.user.username.split(" ")[0] : ""
 
@@ -223,20 +224,25 @@ exports.Config = async (req,res)=>{
 
 
 
-     } 
+                if(req.session.loggedIn === true){ 
 
-                catch(e){console.log(e)}
+                  
+       
 
+               const  persona  =  await User.findOne({$or:[{'google.email':req.session.user.email},{'facebook.email':req.session.user.email}]});
 
+                console.log(persona);
 
-
-      if(req.session.loggedIn === true){ 
   
-          res.render('user_profile_settings',{user: req.session.user,image:req.session.user.image,name:name,logged:logged,unit:unit})    
-           console.log(req.session.user.name);
+                res.render('user_profile_settings',{user: persona ,image:image,name:name,logged:logged,unit:unit})    
+             
 
-               }   else {  res.redirect('/');    } 
+            }    else {  res.redirect('/');    } 
 
+
+           
+
+              } catch(e){console.log(e)};  
 
 
 
@@ -275,23 +281,29 @@ exports.doConfig = async (req,res)=>{
 
 ////El post se hace con jquery con  modify user name
        try {
-console.log(req.body.usernamevalue);
+          console.log(req.body.usernamevalue);
+ 
+           
 
-req.session.user.username = req.body.usernamevalue;
+             const user = await User.findOne({$or:[{'google.email':req.session.user.email},{'facebook.email':req.session.user.email}]});
+         
+             user.username = req.body.usernamevalue;
 
+             user.save(()=>{
+            
 
-
-req.session.save(()=>{console.log(req.session.user)});
-
-
-const  alias = await User.findOne({'user.username':req.body.newusername});
-
-const user = await User.findOne({$or:[{'google.email':req.session.user.email},{'facebook.email':req.session.user.email}]});
-
-
+            req.session.user.username = req.body.usernamevalue;
 
 
-     } catch(err){console.log(err)}
+
+            req.session.save(()=>{console.log(req.session.user)});
+
+
+
+              })
+
+
+        } catch(err){console.log(err)}
 
    
  
@@ -330,7 +342,7 @@ const user = await User.findOne({$or:[{'google.email':req.session.user.email},{'
 
 /******************************************************************************************************************************************************
 
-                              ADS---USER------HTTP--GET         
+                              OPPORTUNITIES---USER------HTTP--GET         
          
 
 ********************************************************************************************************************************************************/
@@ -339,7 +351,19 @@ const user = await User.findOne({$or:[{'google.email':req.session.user.email},{'
 
 exports.adsUser=(req,res,next)=>{
 
-res.render('user_ads');
+    var image   = req.session.loggedIn?  req.session.user.image :"/images/avataaars4.svg" 
+      //////////// Poner el nombre  usuario, si el usuario esta loggeado  
+      
+
+     var name =  req.session.loggedIn ?  req.session.user.username.split(" ")[0] : ""
+  
+     var logged = req.session.loggedIn
+ 
+
+
+
+
+res.render('user_ads',{image:image,name:name,logged:logged});
 
 }
 

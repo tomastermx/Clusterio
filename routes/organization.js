@@ -34,7 +34,15 @@ app.post('/organization/new', controllerOrg.DoorganizationRegister);
 app.get('/organization/profile/:id', controllerOrg.OrganizationProfile);
 
 
+/*************************************************************************************************************************************************
+ * 
+ *                 Configuración de la Organización GET ---HTTP
+ * 
+ * 
+ * *****************************************************************************************************************************************************/
 
+
+app.get('/organization/settings/profile/:id', controllerOrg.OrganizationSettings);
 
 
 }

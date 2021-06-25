@@ -11,12 +11,12 @@ exports.organizationRegister =(req,res)=>{
 
 
 
-  var  keyapi = process.env.maps	
+     var  keyapi = process.env.maps	
  
 
 
 
-  var image   = req.session.loggedIn?  req.session.user.image : "/images/avataaars4.svg" 
+     var image   = req.session.loggedIn?  req.session.user.image : "/images/avataaars4.svg" 
 
      var name =  req.session.loggedIn ?  req.session.user.username.split(" ")[0] : ""
 
@@ -119,4 +119,30 @@ exports.OrganizationProfile = async (req,res)=>{
      console.log(req.params.id);
 
   
-}  
+         } 
+
+
+
+
+
+
+    exports.OrganizationSettings = async (req,res)=>{
+            
+      var image   = req.session.loggedIn?  req.session.user.image : "/images/avataaars4.svg" 
+
+      var name =  req.session.loggedIn ?  req.session.user.username.split(" ")[0] : ""
+ 
+      var logged = req.session.loggedIn
+       
+             try{
+
+               const org = await Org.findOne({'_id':req.params.id}) 
+           
+      
+               res.render('organization_settings',{org:org, image:image,name:name, name:name ,logged:logged});
+       
+
+              } catch(e){console.log(e)};
+
+    }
+

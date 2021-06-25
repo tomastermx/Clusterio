@@ -18,7 +18,7 @@ const User = require('./models/users');
 const Post = require('./models/post');
 const Company = require('./models/company');
 const Org = require('./models/organization');
-const Offer = require('./models/Offers');
+const Opportunity = require('./models/opportunity');
 const Message = require('./models/messages');
 
 /// Modules////////////////////////
