@@ -22,15 +22,7 @@ block content
    height:900px;
     }
  
-   #submenu{
-    background-color:white;
-    height:45px;
-    width:100%;
-    border-style:solid;
-    border-color:gray;
-    border-width:1px;
-
-    }
+   
 
     .options{
 
@@ -47,19 +39,22 @@ block content
      margin-bottom:50%;
     }
      
+     .button.center{
+      margin-left:20%;
+      margin-right: auto;
+      width: 60%;
+    }
+ 
   
 
   script(src='/javascripts/jquery-profile.js') 
 
  
-  
-  div.topnavbar#submenu  
-   div.options
-     a(href="/users/profile/posts") 
-      i.far.fa-comment.fa-3x 
-      
-   div.options
-     a(href="/users/profile/ads") 
-      i.fas.fa-ad.fa-3x
+ 
+  div.ui.segment#submenu
+    div.ui.two.column.stackable.centered.grid
+     div.column
+      a(href="/users/profile/posts" class="button ui inverted secondary button center  ") Publicaciones
+     div.column
+      a(href="/users/profile/ads" class="button ui inverted secondary button center  ") Oportunidades
 
-  

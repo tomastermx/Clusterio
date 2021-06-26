@@ -16,13 +16,27 @@ block content
 
     }
  
- 
+    #content{padding-bottom:200px;}
+
+    #submenu{ }
+
+      .button.center{
+      margin-left:20%;
+      margin-right: auto;
+      width: 60%;
+    }
 
 
- div.ui.container
+
+ div.ui.segment#submenu
+  div.ui.two.column.stackable.centered.grid
+   div.column
+     a.bcenter(href="/users/profile/posts" class="button ui inverted secondary button center  ") Publicaciones
+   div.column
+     a.bcenter(href="/users/profile/ads" class="button ui inverted secondary button center  ") Oportunidades
+ div.ui.container.centeritem
   h1.textcenter Posts   
 
-  div.ui.grid
    div.three.wide.column
    div.ten.wide.column#principal
     div.ui.segment

@@ -9,8 +9,47 @@ block content
     
     font-family: 'Nunito', sans-serif; 
 
+    } 
+
+  #content{padding-bottom:200px;}  
+   
+
+     .button.center{
+      margin-left:20%;
+      margin-right: auto;
+      width: 60%;
     }
 
 
+
+ div.ui.segment#submenu
+  div.ui.two.column.stackable.centered.grid
+   div.column
+     a.bcenter(href="/users/profile/posts" class="button ui inverted secondary button center  ") Publicaciones
+   div.column
+     a.bcenter(href="/users/profile/ads" class="button ui inverted secondary button center  ") Oportunidades
+ 
+
  div.ui.container
-  h1#textcenter.textcenter Oportunidades    
+  h1.textcenter Publicaciones
+  div.three.wide.column
+   div.ten.wide.column#main
+    div.ui.segment
+      form.ui.form( id="postopp" method="post" action="/")
+       input(type="text"  id="title" name="title"  placeholder="Título" )
+       div.ui.field
+       textarea(type="text" id="contenido" name="contenido" placeholder="Contenido")
+       div.ui.field
+       div.ui.two.column.stackable.grid
+        div.column
+          button.ui.button.green(type="submit") Enviar 
+        div.column
+         div.ui.selection.dropdown
+          input(type="hidden" id="categoria" name="categoria")
+          i.dropdown.icon
+          div.default.text Tema
+          div.menu              
+           div.item(data-value="metalmecanica") Industria Metalmecánica
+           div.item(data-value="automotriz") Industria Automotríz
+     
+       div.three.wide.colum
