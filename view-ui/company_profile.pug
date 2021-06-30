@@ -193,28 +193,16 @@ block content
     a(href="/messages/send/to/" + company._id  class="button ui button blue") Mensaje 💬
     button.ui.button.green#email Correo Electrónico 🤝
 
-
+ 
  
 
   div.ui.stackable.top.attached.tabular.menu
-     a.item.active(data-tab="first") Actualizaciones 🔔 
-     a.item(data-tab="second") Productos 🔩
+     a.item.active(data-tab="first") Productos 🔩
+     a.item(data-tab="second") Actualizaciones 🔔
      a.item(data-tab="third") Anuncios 📰
      a.item(data-tab="fourth") Más Información  💾
 
   div.ui.bottom.attached.tab.segment.active(data-tab="first")
-      
-    h2.textcenter Actualizaciones
-    if owner
-      div.ui.segment  
-        form.ui.form(id="updates") 
-         textarea(type="text" name="post" id="post" )
-         br    
-         br
-         button.fluid.ui.button.green(type="submit") Guardar 
-
-
-  div.ui.bottom.attached.tab.segment(data-tab="second")
    div.ui.segment
      h2.textcenter Productos 📦
      table.ui.celled.table
@@ -222,7 +210,20 @@ block content
        tr
         th Nombre  
         th Descripción
-      tbody#productlist     
+      tbody#productlist        
+ 
+
+
+  div.ui.bottom.attached.tab.segment(data-tab="second")
+
+   h2.textcenter Actualizaciones
+    if owner
+      div.ui.segment  
+        form.ui.form(id="updates") 
+         textarea(type="text" name="post" id="post" )
+         br    
+         br
+         button.fluid.ui.button.green(type="submit") Guardar  
 
  
   div.ui.bottom.attached.tab.segment(data-tab="third")

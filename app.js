@@ -125,7 +125,7 @@ var postsController = require('./controllers/posts');
 
 var emailController = require('./controllers/email');
 
-
+var OpportunityController = require('./controllers/opportunity');
 
 /*****************************************************************************************                
 *
@@ -150,6 +150,7 @@ require('./routes/messages')(app,session,Company,Message,controllerMessage);
 
 require('./routes/posts')(app,session,Post,postsController);
 
+require('./routes/opportunity')(app,Opportunity, OpportunityController);
 require('./routes/email');
 
 

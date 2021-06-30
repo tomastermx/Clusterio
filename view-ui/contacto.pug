@@ -15,9 +15,15 @@ block content
 
 
   div.ui.container
-  
-   div.ui.segment
-     h1.textcenter Contáctanos   
-     form.ui.form(id="contactform", method="post", action="")
-      label(for="contactname") Nombre 
-      input(type="text"  name="contactname" id="contactname")  
+   div.ui.text.container 
+    div.ui.segment
+      h1.textcenter Contáctanos   
+      form.ui.form(id="contactform", method="post", action="")
+       label(for="contactname") Nombre 
+       input(type="text"  name="contactname" id="contactname")  
+       label(for="contactemail") Correo electrónico
+       input(type="text" name="contactemail" id="contactemail")
+       label(for="contactphone") Teléfono
+       input(type="text" name="contactphone" id="contactphone")
+       button.ui.button.green(type="submit") Guardar 
+
