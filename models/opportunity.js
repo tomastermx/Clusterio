@@ -8,10 +8,9 @@ var mongoose = require('mongoose');
    
    created: Date,
    descripcion: String,
-   frecuencia:String,
+   modalidad : String,
+   categoria:String,
    creador: String,
-   category:String,
-
   });
 
 

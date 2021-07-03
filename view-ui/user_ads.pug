@@ -1,7 +1,7 @@
 extends layout
  
 block content
- 
+ script(src='/javascripts/opportunity.js')
  style.
      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
 
@@ -22,22 +22,28 @@ block content
 
 
  div.ui.segment#submenu
+  div.ui.mini.modal
+   div.header Publicación de Anuncio
+   div.content
+    p Acabas de publicar un anuncio
+   div.actions
+    div.ui.inverted.green.button.approve Ok  
   div.ui.two.column.stackable.centered.grid
    div.column
      a.bcenter(href="/users/profile/posts" class="button ui inverted secondary button center  ") Publicaciones 📌
    div.column
-     a.bcenter(href="/users/profile/ads" class="button ui inverted secondary button center  ") Oportunidades 📰
+     a.bcenter(href="/users/profile/ads" class="button ui inverted secondary button center  ") Anuncios 📰
  
 
  div.ui.container.centeritem
 
-  h1.textcenter Publicaciones
+  h1.textcenter Anuncios 📰
 
 
    div.three.wide.column
    div.ten.wide.column#principal
     div.ui.segment
-      form.ui.form( id="postopp" method="post" action="/")
+      form.ui.form( id="opportunityform" method="post" action="/")
        input(type="text"  id="title" name="title"  placeholder="Título" )
        div.ui.field
        textarea(type="text" id="contenido" name="contenido" placeholder="Contenido")
@@ -47,12 +53,12 @@ block content
           button.fluid.ui.inverted.button.green(type="submit") Enviar 
         div.column
          div.ui.selection.dropdown
-          input(type="hidden" id="categoria" name="categoria")
+          input(type="hidden" id="modalidad" name="modalidad")
           i.dropdown.icon
-          div.default.text Tema
+          div.default.text Tipo
           div.menu              
-           div.item(data-value="vender")  Se vende 
-           div.item(data-value="comprar") Se compra
+           div.item(data-value="vender")  Se ofrece
+           div.item(data-value="comprar") Se busca 
         div.column 
          div.ui.selection.dropdown
           input(type="hidden" id="categoria" name="categoria")

@@ -50,11 +50,12 @@ $(document).ready(function(){
 
       var  tema =  $('#categoria').val();
 
-     console.log(tema);
-      console.log(contenido);
-     console.log(tema);
- 
-     $.post('/posts/new',{titulo:titulo,contenido:contenido,tema:tema})
+       $('.mini.modal').modal('show');
+      
+      $.post('/posts/new',{titulo:titulo,contenido:contenido,tema:tema});
+           
+          
+
  
 
 

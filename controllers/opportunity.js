@@ -37,3 +37,34 @@ exports.allOportunities = (req,res)=>{
 
 }
 
+
+
+/**********************************************************************************************************************************************+
+ * 
+ *   Crear un  nuevo Aviso
+ * 
+ * ****************************************************************************************************************************/
+
+
+exports.createOportunity = async (req,res)=>{
+  
+  console.log(req.body);
+   
+
+  var newOpportunity = new Opportunity();
+  
+     newOpportunity.descripcion = req.body.contenido;
+
+     newOpportunity.modalidad = req.body.modalidad;
+
+     newOpportunity.categoria = req.body.categoria;
+
+     newOpportunity.creador = req.session.user.email;
+
+ 
+   newOpportunity.save((err, opp)=>{console.log(opp)});
+
+}
+
+
+

@@ -201,3 +201,8 @@ exports.postingNew  = (req,res)=>{
   
 
       }   
+
+
+
+
+       exports.deletePost =(req,res)=>{}
