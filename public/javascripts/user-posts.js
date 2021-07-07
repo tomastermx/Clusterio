@@ -54,7 +54,10 @@ $(document).ready(function(){
       
       $.post('/posts/new',{titulo:titulo,contenido:contenido,tema:tema});
            
-          
+        setTimeout( ()=>{  $("#principal" ).load('/users/profile/posts #principal  ')  }, 1500);  
+
+       setTimeout( ()=>{ location.reload(); },  1500); 
+
 
  
 

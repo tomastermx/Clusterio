@@ -16,12 +16,35 @@ block content
 
       #content{padding-bottom:200px;
                 min-height:500px;}
+     
+      .drops{ display:block;
+              margin-left:28%;
+              margin-right:auto;}
 
 
- div.ui.container
 
-  h1.textcenter Avisos 💡
-  div.ui.segment
+ h1.textcenter Avisos 💡
+ div.ui.segment
+   div.ui.stackable.grid
+    div.eight.wide.column
+     
+     div.ui.selection.dropdown.drops#category
+      input(type="hidden" name="tema" id="tema" placeholder="tema")
+      i.dropdown.icon
+      div.default.text General
 
+      div.menu     
+       div.item(data-value="metalmecanica") Industria Metalmecánica
+       div.item(data-value="automotriz") Industria Automotríz 
+      
+    div.eight.wide.column
+     div.ui.selection.dropdown.drops#mode
+      input(type="hidden" name="tema" id="tema" placeholder="tema")
+      i.dropdown.icon
+      div.default.text General
 
+      div.menu     
+       div.item(data-value="metalmecanica") Industria Metalmecánica
+       div.item(data-value="automotriz") Industria Automotríz 
+  
     

@@ -184,7 +184,7 @@ exports.postingNew  = (req,res)=>{
 
 
 
-      exports.OnepostPage = (req,res )=>{
+         exports.OnepostPage = (req,res )=>{
          
                 var image   = req.session.loggedIn?  req.session.user.image :"/images/avataaars4.svg" 
         //////////// Poner el nombre  usuario, si el usuario esta loggeado  
@@ -200,9 +200,28 @@ exports.postingNew  = (req,res)=>{
           res.render('single_post');
   
 
-      }   
+         }   
+
+       /**************************************************************************************************************************************************************************************************************************************************************************
+        * 
+        *                                                                Borrar  Posts
+        * 
+        *************************************************************************************************************************************************************************************************************************************************************************/  
 
 
 
 
-       exports.deletePost =(req,res)=>{}
+         exports.deletePost = async (req,res)=>{
+
+                  try {
+                  const post =  await Post.deleteOne({"_id":req.params.id});
+                  
+                  console.log("Documento borrado exitosamente"); 
+                  
+                   } catch(e){
+
+        
+           if (!e){  console.log("Doumento borrado con éxito")    } };
+
+
+              }

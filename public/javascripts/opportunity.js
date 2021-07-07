@@ -2,6 +2,32 @@
 
    $(document).ready(function(){
 
+        
+   var script_tag = document.getElementById('owner');
+   var user = script_tag.getAttribute("data-user"); 
+  
+    $.getJSON('/avisos/user/profile/' + user ,(data)=>{
+
+           $.each(data,(i,value)=>{
+           
+
+           var content = '<h2>'+  value.descripcion + '</h2>'
+            
+            var mainblock = ' <div class="ui segment"> ' +  content + '  </div> '    
+             
+
+
+            $("#principal").append(mainblock);
+
+
+
+                });
+      
+
+       });
+
+
+
 
 
  

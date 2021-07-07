@@ -9,7 +9,7 @@ const Opportunity = require('../models/opportunity');
 
 /****************************************************************************************************************
 
-    Show all Opportunities
+    Show Page of opportunities
 
 *****************************************************************************************************************/
 
@@ -65,6 +65,64 @@ exports.createOportunity = async (req,res)=>{
    newOpportunity.save((err, opp)=>{console.log(opp)});
 
 }
+
+
+
+
+/*********************************************************************************************************************************************
+
+                                 Borrar  Oportunidad
+
+************************************************************************************************************************************************/
+
+
+
+
+ exports.deleteOpportunity = async (req,res)=>{
+
+
+       try {
+            
+                   
+
+            const opp = await Opportunity.deleteOne({"_id":req.params.id});
+
+
+        }  catch (e){console.log(e) }
+
+
+
+ }
+
+
+
+
+/************************************************************************************************************************************************************
+ * 
+ *          Los posts de un solo usuario para su pagina de perfil 
+ * 
+ * **********************************************************************************************************************************************************/
+
+
+
+  exports.userOpportunities =  async  (req,res)=>{
+
+        var  creator = req.params.id;
+
+
+
+      try {
+
+           const opp = await Opportunity.find({'creador': creator}).sort({'creado': -1});
+        
+           res.json(opp);
+
+
+      } catch(e){console.log(e)};
+
+
+
+  }
 
 
 

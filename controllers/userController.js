@@ -363,7 +363,7 @@ exports.adsUser=(req,res,next)=>{
 
 
 
-res.render('user_ads',{image:image,name:name,logged:logged});
+res.render('user_ads',{image:image,name:name,logged:logged, email:req.session.user.email});
 
 }
 

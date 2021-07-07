@@ -1,7 +1,7 @@
 extends layout
  
 block content
- script(src='/javascripts/opportunity.js')
+ script( id="owner"  data-user =`${email}`  src='/javascripts/opportunity.js')
  style.
      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
 
@@ -39,7 +39,7 @@ block content
 
   h1.textcenter Anuncios 📰
 
-
+  div.ui.grid 
    div.three.wide.column
    div.ten.wide.column#principal
     div.ui.segment

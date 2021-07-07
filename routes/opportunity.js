@@ -3,7 +3,7 @@
 
 module.exports = (app,Opportunity, OpportunityController)=>{
 
-    app.get('/avisos',OpportunityController.allOportunities);
+  app.get('/avisos',OpportunityController.allOportunities);
 
  
   
@@ -12,7 +12,10 @@ module.exports = (app,Opportunity, OpportunityController)=>{
 
   
 
+   app.get('/avisos/delete/:id', OpportunityController.deleteOpportunity);
 
 
+
+   app.get('/avisos/user/profile/:id', OpportunityController.userOpportunities);
 
  }
