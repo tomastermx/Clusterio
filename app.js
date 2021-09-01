@@ -148,7 +148,7 @@ require('./routes/updates')(app,Company,Post,updatesController);
 
 require('./routes/messages')(app,session,Company,Message,controllerMessage);
 
-require('./routes/posts')(app,session,Post,postsController);
+require('./routes/posts')(app,session,Post,queryString ,postsController);
 
 require('./routes/opportunity')(app,Opportunity, OpportunityController);
 require('./routes/email');

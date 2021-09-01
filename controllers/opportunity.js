@@ -48,11 +48,13 @@ exports.allOportunities = (req,res)=>{
 
 exports.createOportunity = async (req,res)=>{
   
-  console.log(req.body);
+  console.log(req.body.titulo);
    
 
   var newOpportunity = new Opportunity();
   
+     newOpportunity.titulo =  req.body.titulo;
+     
      newOpportunity.descripcion = req.body.contenido;
 
      newOpportunity.modalidad = req.body.modalidad;
@@ -87,8 +89,10 @@ exports.createOportunity = async (req,res)=>{
 
             const opp = await Opportunity.deleteOne({"_id":req.params.id});
 
+            res.sendStatus(200);
+        } 
 
-        }  catch (e){console.log(e) }
+         catch (e){console.log(e) }
 
 
 
@@ -99,7 +103,7 @@ exports.createOportunity = async (req,res)=>{
 
 /************************************************************************************************************************************************************
  * 
- *          Los posts de un solo usuario para su pagina de perfil 
+ *          Las oportunidades de un solo usuario para su pagina de perfil 
  * 
  * **********************************************************************************************************************************************************/
 
@@ -126,3 +130,130 @@ exports.createOportunity = async (req,res)=>{
 
 
 
+/**********************************************************************************************************************************************
+                     Todos los avisos  entrando a la página
+
+***********************************************************************************************************************************************/
+
+
+
+  exports.allOpportunities = async (req,res)=>{
+
+           
+              try{
+
+
+            var opportunities  =  await Opportunity.aggregate([{ $match: {    } },
+
+           
+
+           {
+           
+
+           $lookup:{
+              
+                    from: "users",
+                    localField: "creador",    // field in the orders collection
+                    foreignField: "google.email" || "facebook.email" ,
+                    as:"user"}
+
+                  },
+
+              {$lookup:{from:"companies",
+                    localField: "creador",    // field in the orders collection
+                    foreignField: "creador", 
+                    as:"company"
+                   }} , {$lookup:{from:"orgs",
+                    localField: "creador",    // field in the orders collection
+                    foreignField: "creador", 
+                    as:"org"
+                   }},
+                   
+
+                   {$project:{__v:0, "user.__v":0 ,"user.createdOn":0 ,"user._id":0 , "user.google":{token:0,picture:0, id:0} ,  "company.productos":0, "company.certificados":0, "company.created":0, "company.description":0, "company.pais":0,"company.estado":0,"company.ciudad":0,"company.calle":0,"company.numero":0 , "company.telefono":0, "company.industria":0, "company.subindustria":0, "company.masinformacion":0, "company.__v":0,
+                              "company.creador":0,  "org.created":0, "org.description":0, "org.pais":0, "org.estado":0, "org.ciudad":0, "org.calle":0, "org.latitud":0, "org.longitud":0, "org.__v":0
+
+                               }}
+                  
+        ]);
+
+       
+       console.log(opportunities);
+       res.json(opportunities);  
+
+         
+        } catch(e){console.log(e)}
+
+
+  }
+
+
+
+
+ /*****************************************************************************************************************************************************
+                             Filtrado de Avisos
+ 
+ *****************************************************************************************************************************************************/
+
+
+  exports.filterOpportunities = async (req,res)=>{
+
+    
+        console.log(req.body.categoria);
+        console.log(req.body.modalidad)
+    
+
+              try{
+
+
+            var opportunities  =  await Opportunity.aggregate([{ $match: {  $or:[ {"categoria" : req.body.categoria},{"modalidad":req.body.modalidad}]  } },
+
+           
+
+           {
+           
+
+           $lookup:{
+              
+                    from: "users",
+                    localField: "creador",    // field in the orders collection
+                    foreignField: "google.email" || "facebook.email" ,
+                    as:"user"}
+
+                  },
+
+              {$lookup:{from:"companies",
+                    localField: "creador",    // field in the orders collection
+                    foreignField: "creador", 
+                    as:"company"
+                   }} , {$lookup:{from:"orgs",
+                    localField: "creador",    // field in the orders collection
+                    foreignField: "creador", 
+                    as:"org"
+                   }},
+                   
+
+                   {$project:{__v:0, "user.__v":0 ,"user.createdOn":0 ,"user._id":0 , "user.google":{token:0,picture:0, id:0} ,  "company.productos":0, "company.certificados":0, "company.created":0, "company.description":0, "company.pais":0,"company.estado":0,"company.ciudad":0,"company.calle":0,"company.numero":0 , "company.telefono":0, "company.industria":0, "company.subindustria":0, "company.masinformacion":0, "company.__v":0,
+                              "company.creador":0,  "org.created":0, "org.description":0, "org.pais":0, "org.estado":0, "org.ciudad":0, "org.calle":0, "org.latitud":0, "org.longitud":0, "org.__v":0
+
+                               }}
+                  
+        ]);
+
+       
+       console.log(opportunities);
+       res.json(opportunities);  
+
+         
+        } catch(e){console.log(e)}
+
+
+
+
+
+
+
+
+
+
+  }

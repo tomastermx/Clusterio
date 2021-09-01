@@ -73,42 +73,24 @@ block content
 
 
 
-         div#locationField
-          label(for="companyname") Ubicación* 
-          input(type="text"  name="companyname" id="autocomplete"  placeholder="Enter your address" onFocus= "geolocate()" )
+      
          div.field 
        
           table#address
            tbody
              tr
              tr
-               td.label Street address
-               td.slimField
-                 input#street_number.field(disabled='true')
+          
                td.wideField(colspan='2')
-                input#route.field(disabled ='true')
+                
                td( width="60%" colspan='11' rowspan='11')
-                div#placemap
+                
                  h3.textcenter(height="30%" ) Con el marcador, Indique el lugar exacto del domicilio 
-                 div#map(height="70%")
+                 
                 
                 
 
-             tr
-               td.label Ciudad
-               td.wideField(colspan='3')
-                 input#locality.field(type="text" name="city" disabled ='true')
-             tr
-               td.label Estado
-               td.slimField
-                 input#administrative_area_level_1.field(disabled='true')
-               td.label Zip code
-               td.wideField
-                 input#postal_code.field(disabled ='true')
-             tr
-               td.label País
-               td.wideField(colspan='3')
-                 input#country.field(disabled ='true')
+      
 
              tr
                td.label Teléfono
@@ -120,22 +102,48 @@ block content
                td.label Sitio Web
                td.wideField(colspan='3')
                  input.field#website(maxlength="18")  
-
-             tr
-               td.label Latitud    
-               td.wideField(colspan='3')
-                 input#latitud(disabled='true') 
-
-             tr
-               td.label Longitud    
-               td.wideField(colspan='3')
-                 input#longitud(disabled='true')                  
+                
 
          div.field
             
         
 
          div.field
+          div.ui.segment
+            div.ui.doubling.stackable.two.column.grid
+             div.column
+              h3.textcenter Dirección
+              div#locationField
+               label(for="companyname") Ubicación* 
+               input(type="text"  name="companyname" id="autocomplete"  placeholder="Enter your address" onFocus= "geolocate()" )
+               label(for="street_number") Número de calle
+               input#street_number.field(disabled='true')
+               label(for="route.field") Calle
+               input#route.field(disabled ='true')
+               label(for="locality.field") Ciudad
+               input#locality.field(type="text" name="city" disabled ='true') 
+               label() Estado
+               input#administrative_area_level_1.field(disabled='true')
+               label(for="postal_code.field") Código postal
+               input#postal_code.field(disabled ='true')
+               label(for="") País
+               input#country.field(disabled ='true')
+
+
+
+
+              
+                
+
+             div.column
+              h3.textcenter Mapas 
+              div#placemap
+               div#map(height="70%")   
+              label() Latitud
+              input#latitud(disabled='true')
+              label() Longitud
+              input#longitud(disabled='true')   
+                
           div.ui.segment
            div.ui.doubling.stackable.two.column.grid  
             div.column 

@@ -4,7 +4,7 @@ extends layout
  
 block content
  
- script(src='/javascripts/posts.js')
+ script(src='/javascripts/opportunities.js')
  style.
      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
 
@@ -15,16 +15,18 @@ block content
     }
 
       #content{padding-bottom:200px;
-                min-height:500px;}
+                min-height:800px;
+                padding-top:29px}
      
       .drops{ display:block;
-              margin-left:28%;
+              margin-left:25%;
               margin-right:auto;}
 
 
 
- h1.textcenter Avisos 💡
+ 
  div.ui.segment
+   h1.textcenter Avisos 💡
    div.ui.stackable.grid
     div.eight.wide.column
      
@@ -39,12 +41,16 @@ block content
       
     div.eight.wide.column
      div.ui.selection.dropdown.drops#mode
-      input(type="hidden" name="tema" id="tema" placeholder="tema")
+      input(type="hidden" name="tipo" id="tipo" placeholder="tema")
       i.dropdown.icon
       div.default.text General
 
       div.menu     
-       div.item(data-value="metalmecanica") Industria Metalmecánica
-       div.item(data-value="automotriz") Industria Automotríz 
+       div.item(data-value="busca") Busco
+       div.item(data-value="ofrece")  Ofrezco
   
-    
+  
+ div.ui.grid
+  div.three.wide.column
+  div.ten.wide.column#principal
+  div.three.wide.column  

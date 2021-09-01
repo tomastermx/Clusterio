@@ -6,7 +6,8 @@ var mongoose = require('mongoose');
 
   const opportunity = new mongoose.Schema({
    
-   created: Date,
+   creado: { type: Date, default: Date.now },
+   titulo: String,
    descripcion: String,
    modalidad : String,
    categoria:String,

@@ -6,103 +6,143 @@
 
      $(document).ready(function(){
 
-        
-          $.getJSON('/all/posts/json',(data)=>{ 
+          var id;
 
+        //////////////////////////////////////////////Comentarios cargados al inicio de la página////////////////
+         
+        
+          var pathArray = window.location.pathname.split('/');
+          var onelevelLocation = pathArray[2];
+          var twolevellocation = pathArray[3];
+          
+          let  params = new URLSearchParams(window.location.search)
+          
+          let  parameter = params.get('order'); 
+
+
+         
+
+          
+    
+
+          
+
+
+
+
+
+          $.getJSON('/all/posts/json/' + onelevelLocation + "?order=" + parameter ,(data)=>{ 
+
+               
+
+              
                 $.each(data,(i,value)=>{
 
                  
-
-
-                   var titulo = '<h3 class="textcenter">'     + value.titulo  + '</h3>'
+                           
+               
                    
-                   var contenido = '<h4>'  + value.contenido + '</h4>'
-                   var usuario =   value.user[0].username   
-
+                    meses=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiempre","Octubre"]
+                   
+           
                     var date = new Date(value.creado);
 
-                    var dateformat = date.toDateString();
- 
+                    var dateformat =  date.getUTCDay() + " " + "de" + " "  + meses[date.getMonth()] + " " + "de" + " " + date.getUTCFullYear() + " " + " " + " " +date.getHours() + ":" + date.getMinutes() 
 
+
+                    
+ 
+                    var imagen = '<img  src="' +  value.user[0].google.picture  +'"   class="imageuser"   ><img>' 
 
                    var trabajo = '<a href="/company/profile/' +  value.company[0]._id  + '">' + value.company[0].nombre  + '</a>'
 
              
-                   var blocktitle = '<div class=" ui segment" >' + titulo +  '</div>'
 
-                   var blockcontent = '<div class=" ui segment" >' + contenido +  '</div>'
+                   
 
-                   var blockuser  = '<div class=" ui three column stackable grid" ><div class=" eight wide column">' + usuario +  'de' + " " +  trabajo +  '</div> <div class="four wide column"> ' +  dateformat  + ' </div> <div class=" four wide column"> <h5>Tema</h5>' + value.categoria + '</div></div>'
+                   var blockuser  = '<div class="two wide column "> '+ imagen + ' </div> <div class=  " fourteen wide column"> <p>' +  value.user[0].username  + " " +  trabajo  + '<br>' + dateformat +  " " + " " + "categoria:" + " " + '<strong>'  +  value.categoria  + '</strong>' + '</p></div>'
+                   
+        
+                   
+                   var blockcontent ='<div class="two wide column"></div> <div class="fourteen wide column "><div class="ui container"><p> '+ value.contenido + '</p></div> </div>'
+                  
+                   var commentlike =  '<div class="eight wide column "><a href="/post/' + value._id +  '" class="button ui fluid secondary inverted button  "> ' + " 💬 " + value.comentarios.length + '</a>  </div> <div class="eight wide column "><button  class="ui secondary fluid inverted button  raiting"   id="' +value._id + '" > '+ '👏' + value.raiting  +  '</button> </div>'
 
-                   var commentlike = '<div class="ui two column stackable grid"> <div class ="column"> <h5 class="textcenter"> Rating: '+ value.raiting + ' </h5> </div>  <div class = " column">  <h5 class="textcenter"> Comentarios: ' +  value.comentarios.length  +'  </h5>  </div>  </div>'
+                   var  mainblock =  '<div class="ui segment elements"> <div class="ui grid  ">' + blockuser + blockcontent + commentlike + ' </div></div>'
 
-                   var  mainblock =  ' <div class="ui segment elements "> <div class="  ui segments  ">   ' + blocktitle +  blockcontent +  ' </div>' + blockuser  + commentlike +   ' </div> '
-
-               
+                   
 
                  $("#results").append(mainblock);  
-    
+                   
+                  
+                    
 
-                        
 
                     })
 
 
+                $(".raiting").click(function(e){  
+        
+                     id = e.target.id
+                    
+
+                   $.post('/post/vote', {id:id})
+
+                   
+                      $(this).children().load( '/posts ' + '#' + id +  ' ' );
+                  
+                 
+                   location.reload(false);
+
+
+                  }) 
+  
+
+
               })
 
+
+        
+                    
+
+            
+          //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7       
+
+            
  
-           $('#tema').change(()=>{
+           $('#tema').change((event)=>{
 
-             var category = $('#tema').val();
 
-              console.log(category);
               
-              $(".elements").remove();
 
-            $.post('/all/posts/json',{category:category }).done((data)=>{
+               var category = $('#tema').val();
+               console.log(category);
+
+           
+              window.location.assign('/posts/' + category   );              
+          
+
+   
+        
+          });
+
+
+                $("#rate").click(function(e){
+
+                  e.preventDefault();
+
+                  var pathArray = window.location.pathname.split('/');
+                  var LevelLocation = pathArray[2];            
+
+                 window.location.assign('/posts/' + LevelLocation + "?" + "order=rank" );                  
+  
+
+             });
+
+
+
+
+
                  
-                  
-                $(".elements").remove();                
-                  $.each(data,(i, value)=>{
-
-                   var titulo = '<h3 class="textcenter">'     + value.titulo  + '</h3>'
-                   var contenido = '<h4>'  + value.contenido + '</h4>'
-                   var usuario =   value.user[0].username   
-
-
-                    var date = new Date(value.creado);
-
-                    var dateformat = date.toDateString();
-
-
-
-                   var trabajo = '<a href="/company/profile/' +  value.company[0]._id  + '">' + value.company[0].nombre  + '</a>'                   
-             
-                   var blocktitle = '<div class=" ui segment" >' + titulo +  '</div>'
-                   var blockcontent = '<div class=" ui segment" >' + contenido +  '</div>'
-
-                   var blockuser  = '<div class=" ui three column stackable grid" ><div class=" eight wide column">' + usuario +  'de' + " " +  trabajo +  '</div> <div class="four wide column"> ' +  dateformat  + ' </div> <div class=" four wide column"> <h5>Tema</h5>' + value.categoria + '</div></div>'
-
-                   
-                   var commentlike = '<div class="ui two column stackable grid"> <div class ="column"> <h5 class="textcenter"> Rating: '+ value.raiting + ' </h5> </div>  <div class = " column">  <h5 class="textcenter"> Comentarios: ' +  value.comentarios.length  +'  </h5>  </div>  </div>'
-
-                   var  mainblock =  ' <div class="ui segment elements "> <div class="  ui segments  ">   ' + blocktitle +  blockcontent +  ' </div>' + blockuser  + commentlike +   ' </div> '
-
-                  console.log(value.creado);
-
-                 $("#results").append(mainblock);  
-                   
-                     
-
-                                    })  
-
-
-                     })
-
-
-            })
-
-
-
 
       });

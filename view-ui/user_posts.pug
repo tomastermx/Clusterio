@@ -15,20 +15,33 @@ block content
     font-family: 'Nunito', sans-serif; 
 
     }
- 
-    #content{padding-bottom:200px;}
 
-    #submenu{ }
+    
+     p{
+
+      word-wrap: break-word;      
+
+     }
+
+ 
+    #content{padding-bottom:200px;
+             padding-top:29px;}
+
+    
+    #secondmenu{ position:sticky; 
+
+               z-index:999;}
 
       .button.center{
       margin-left:20%;
       margin-right: auto;
       width: 60%;
+
     }
 
 
 
- div.ui.segment#submenu
+ div.ui.segment#secondmenu
   div.ui.two.column.stackable.centered.grid
    div.ui.mini.modal
     div.header Publicación de Post
@@ -48,7 +61,7 @@ block content
    div.ten.wide.column#principal
     div.ui.segment
       form.ui.form( id="postform" method="post" action="/")
-       input(type="text"  id="title" name="title"  placeholder="Título" )
+     
        div.ui.field
        textarea(type="text" id="contenido" name="contenido" placeholder="Contenido")
        div.ui.field

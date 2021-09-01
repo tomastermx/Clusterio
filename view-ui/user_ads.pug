@@ -11,7 +11,8 @@ block content
 
     } 
 
-    #content{padding-bottom:200px;}  
+    #content{padding-bottom:200px;
+             padding-top:29px;}  
    
 
     .button.center{
@@ -44,7 +45,7 @@ block content
    div.ten.wide.column#principal
     div.ui.segment
       form.ui.form( id="opportunityform" method="post" action="/")
-       input(type="text"  id="title" name="title"  placeholder="Título" )
+   
        div.ui.field
        textarea(type="text" id="contenido" name="contenido" placeholder="Contenido")
        div.ui.field
@@ -57,8 +58,8 @@ block content
           i.dropdown.icon
           div.default.text Tipo
           div.menu              
-           div.item(data-value="vender")  Se ofrece
-           div.item(data-value="comprar") Se busca 
+           div.item(data-value="ofrece")  Se ofrece
+           div.item(data-value="buscar") Se busca 
         div.column 
          div.ui.selection.dropdown
           input(type="hidden" id="categoria" name="categoria")

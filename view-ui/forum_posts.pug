@@ -6,6 +6,8 @@ extends layout
 block content
  
  script(src='/javascripts/posts.js')
+ 
+
  style.
      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
 
@@ -15,22 +17,55 @@ block content
 
     }
 
-     #content{height:900px} 
+     p{
+
+      word-wrap: break-word;      
+
+     }
+
+
+
+
+     #content{padding-bottom:200px;
+                min-height:800px;
+                padding-top:29px} 
+
+
+
+     #mainoptions{
+     z-index:30;
+     }
+
  
+    .imageuser{
+     
+      height:40px;
+      width: 40px;
+      border-radius: 50%;
+     
+     }
 
-
-    #selection{
+     #selection{
 
       width:100%;
 
     }
 
+     .button {
+
+     }
+
+
+
+
+
 
  
  div.ui.container
-  h1.textcenter Posts ✏️	
- div.ui.segment
-  form.ui.form(name="posts" id="posts")
+  	
+ div.ui.segment#mainoptions
+  h1.textcenter Posts ✏️
+  form.ui.form(name="posts" id="posts" method='GET')
    div.ui.two.column.stackable.grid
     div.column
      div.ui.selection.dropdown#selection
@@ -43,12 +78,13 @@ block content
         div.item(data-value="automotriz") Industria Automotríz
 
     div.column  
-      a.sort(href='/' class="button ui secondary inverted button") Por fecha
-      a.sort(href='/' class="button ui secondary inverted button") Por relevancia
- 
+       button.ui.button#date Por fecha
+       button.ui.green.button#rate Por relevancia
+  
 
  div.ui.doubling.stackable.container
    div.ui.three.column.doubing.stackable.grid
     div.three.wide.column
     div.ten.wide.column#results
     div.three.wide.column 	
+

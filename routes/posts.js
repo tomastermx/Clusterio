@@ -1,7 +1,7 @@
 
-module.exports = (app,session,Post,postsController)=>{
+module.exports = (app,session,Post,queryString ,postsController)=>{
 
- app.get('/posts', postsController.Postspage);
+ app.get('/posts/:id', postsController.Postspage);
 
 /*******************************************************************************************************************************
 
@@ -31,18 +31,27 @@ app.get('/user/posts/json/:id', postsController.Userposts);
 ***************************************************************************************************************************************/
 
 
-  app.get('/all/posts/json', postsController.Allposts);
+  app.get('/all/posts/json/:id', postsController.Allposts);
 
 
 /*************************************************************************************************************************************************
  * 
- *             Filtrar posts según  lo que se pide
+ *             Filtrar posts según  categoria
  * 
  * ***********************************************************************************************************************************************/    
 
 
- app.post('/all/posts/json', postsController.notAllposts);
+// app.post('/all/posts/json', postsController.notAllposts);
 
+
+/*************************************************************************************************************************************************
+ * 
+ *             Ordenar los posts por raiting o ranking  y si tienen categoria tambien 
+ * 
+ * ***********************************************************************************************************************************************/    
+
+
+ app.post('/all/posts/raiting/json',postsController.filterByraiting);
 
 
 
@@ -57,6 +66,14 @@ app.get('/user/posts/json/:id', postsController.Userposts);
 
 
 
+  /*************************************************************************************************************************************************
+   *                  Votar por un post
+   * 
+   * ***********************************************************************************************************************************************/
+
+ app.post('/post/vote' ,postsController.votePost);
+
+
 /***************************************************************************************************************************************************
  * 
  *                        Borrar Post
@@ -64,7 +81,7 @@ app.get('/user/posts/json/:id', postsController.Userposts);
  **************************************************************************************************************************************************/
 
 
- app.get('/post/delete/:id', postsController.deletePost);
+ app.delete('/post/delete/:id', postsController.deletePost);
 
 
 

@@ -33,7 +33,7 @@ $(document).ready(function(){
       var posts  = '<div class="four wide column"> Posts :0 </div>'   
 
 
-    	var button  = '<a href="/company/profile/'+value._id + ' " class="ui inverted secondary  button">  Más información </a>'
+    	var button  = '<a href="/company/profile/'+value._id + ' " class="ui   button">  Más información </a>'
 
 
         $("#results").append(' <div class="ui segment"><div class ="ui doubling stackable grid"><div class="eight wide column">' + name + country +  descripcion +' </div> <div class="eight wide column">' + phone +  productos + button  + '</div> </div><div class="container"> <div class="ui doubling stackable grid">' + updates + posts + ' </div> </div></div>')
@@ -55,7 +55,7 @@ $(document).ready(function(){
       var posts  = '<div class="four wide column"> Posts :0 </div>'   
 
 
-      var button  = '<a href="/organization/profile/'+value._id + ' " class="ui secondary basic button">  Más información </a>'
+      var button  = '<a href="/organization/profile/'+value._id + ' " class=" button ui  button">  Más información </a>'
 
 
       $("#results").append(' <div class="ui segment"><div class ="ui doubling stackable grid"><div class="eight wide column">' + name + country +  descripcion +' </div> <div class="eight wide column">' + phone  + button  + '</div> </div><div class="container"> <div class="ui doubling stackable grid">' + updates + posts + ' </div> </div></div>')
