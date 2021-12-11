@@ -10,6 +10,7 @@ const OrganizationSchema = new  mongoose.Schema({
   description:String,
   tipo:String,
   pais: String,
+  codigopostal:String,
   estado:String,
   ciudad: String,
   calle: String,

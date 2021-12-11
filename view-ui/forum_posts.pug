@@ -5,13 +5,13 @@ extends layout
  
 block content
  
- script(src='/javascripts/posts.js')
- 
+ script( id="owner"  data-user =`${email}`  src='/javascripts/posts.js')
+
 
  style.
      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
 
-     h1, h3, p , a, button{
+     h1, h2, h3, p , a, button{
     
     font-family: 'Nunito', sans-serif; 
 
@@ -64,11 +64,13 @@ block content
  div.ui.container
   	
  div.ui.segment#mainoptions
-  h1.textcenter Posts ✏️
-  form.ui.form(name="posts" id="posts" method='GET')
-   div.ui.two.column.stackable.grid
-    div.column
-     div.ui.selection.dropdown#selection
+   div.ui.stackable.grid 
+    
+    div.ui.four.wide.column
+      h1 Posts ✏️  
+    div.ui.four.wide.column
+     form.ui.form(name="posts" id="posts" method='GET')
+      div.ui.selection.dropdown#selection
        input(type="hidden" name="tema" id="tema" placeholder="tema")
        i.dropdown.icon
        div.default.text General
@@ -76,15 +78,18 @@ block content
        div.menu     
         div.item(data-value="metalmecanica") Industria Metalmecánica
         div.item(data-value="automotriz") Industria Automotríz
+    
+    div.ui.four.wide.column
 
-    div.column  
-       button.ui.button#date Por fecha
-       button.ui.green.button#rate Por relevancia
+      button.ui.button#date Por fecha
+    div.ui.four.wide.column  
+      button.ui.green.button#rate Por relevancia
   
 
- div.ui.doubling.stackable.container
-   div.ui.three.column.doubing.stackable.grid
-    div.three.wide.column
-    div.ten.wide.column#results
-    div.three.wide.column 	
+
+ div.ui.three.column.doubing.stackable.grid
+  div.three.wide.column
+   div.ui.segment
+  div.ten.wide.column#results 
+  div.three.wide.column 	
 

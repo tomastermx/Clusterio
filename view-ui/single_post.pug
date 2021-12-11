@@ -5,6 +5,10 @@ extends layout
  
 block content
  
+
+ script(src='/javascripts/comment-post.js')
+
+    
  style.
      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
 
@@ -14,12 +18,34 @@ block content
 
     }
 
+    #postcontent{height:300px;}
+   
+        .imageuser{
+      height:40px;
+      width: 40px;
+      border-radius: 50%;}
+
 
    
 
  div.ui.grid
-  div.one.wide.column
-  div.eleven.wide.column
-   div.ui.segment
-    h3 #{post.contenido}   
+  div.two.wide.column
+   div.ui.segment 
+  div.eleven.wide.column 
+    div.ui.segment
+     div.ui.container#postcontent
+      
+      h3.textcenter #{post.contenido}
+     
+     div.ui.grid
+      div.two.wide.column
+        img.imageuser(src='' + image )  
+      div.fourteen.wide.column   
+
+       form.ui.form( method="post" action="" id="publishpost")
+        input(type="text"  name="posting" id="posting")
+        div.ui.field   
+        button.ui.inverted.green.button(type="submit") Enviar   
+    div.ui.container#comments
+
   div.four.wide.column   

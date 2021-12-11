@@ -10,6 +10,8 @@ const session = require('express-session');
 /////////////////////////////////////////////////////////////////////
  exports.search = (req,res)=>{
 
+       
+  
      var query = req.query.searchunit
      var place = req.query.place
     
@@ -20,7 +22,10 @@ const session = require('express-session');
      var name =  req.session.loggedIn ?  req.session.user.username.split(" ")[0] : ""
   
      var logged = req.session.loggedIn
- 
+     
+     var industry = req.params.industry
+
+     console.log(industry);
 
 
     res.render('search_results',{query:query,place:place,name:name,image:image,logged:logged});
@@ -50,22 +55,28 @@ const session = require('express-session');
      console.log(pattern);
         
 
-   //Variable de  lugar ///////////////////7
 
-    var lugar = req.body.place;
+   //Variable de  lugar /////////////////
+    
+    var queryplace =  req.body.place; 
 
-    rgxplace= str.substring(0,3)
+    var  place =  queryplace.substring(0,3);
 
-    var placepattern = rgxplace + "." 
+    var lugar =  place + ".";
+  
+    
+
+
+
     try {
   
      var results = await Company.aggregate([
          {$match:{   $and:[
         {$or:[{ 'productos.producto':new RegExp( pattern, 'i' )}, { 'nombre':new RegExp( pattern, 'i' )}, { 'industria':new RegExp( pattern, 'i' )} ]},
-        {$or:[{'ciudad': new RegExp (lugar , 'i')  },{'estado': new RegExp (lugar , 'i') },{'pais': new RegExp(lugar, 'i')}] } 
+        {$or:[{'ciudad': new RegExp (lugar , 'i')  },{'estado': new RegExp (lugar , 'i') },{'pais': new RegExp(lugar, 'i')},{'codigopostal':queryplace}] } 
 
 
-          ]}  },
+          ]}},
           { $unionWith: { coll: "orgs",pipeline:[{$match:{ $and:[
         {$or:[{ 'productos.producto':new RegExp( pattern, 'i' )}, { 'nombre':new RegExp( pattern, 'i' )}, { 'tipo':new RegExp( pattern, 'i' )} ]},
         {$or:[{'ciudad': new RegExp (lugar , 'i')  },{'estado': new RegExp (lugar , 'i') },{'pais': new RegExp(lugar, 'i')}] } 

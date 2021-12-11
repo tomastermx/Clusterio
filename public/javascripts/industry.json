@@ -1,25 +1,17 @@
  { "automotriz":{"sub": [{"data":"automotriz","key":"automotriz"},{"data":"maquinaria pesada","value":"maquinaria-pesada"},
-  {"data":"Guadalajara","value":"gdl"}],
+  {"data":"Guadalajara","value":"gdl"}], "badges":[{"data":"iso-9000","key":"Iso-9000"},{"data":"ts","key":"ts"}]
 
- 
-
-   "badges":[{"data":"iso-9000","key":"Iso-9000"},{"data":"ts","key":"ts"}]
-
-
-  },
+},
 
 
 
 
 
- "agroindustria":{},
+ "agroindustria":{ "sub":[{}] , "badges":[{}]}  ,
 
 
-  "alimenticia-bebidas-tabaco":{"sub":[{"data":"consultoria","key":"consultoria"},{"data":"Medellín","value":"med"}],
-       
-
-   "badges":[{"data":"Iso-9000","key":"Iso-9000"}]
-         },
+  "alimenticia-bebidas-tabaco":{"sub":[{"data":"consultoria","key":"consultoria"},
+  {"data":"Medellín","value":"med"}],"badges":[{"data":"Iso-9000","key":"Iso-9000"}] },
 
 
 

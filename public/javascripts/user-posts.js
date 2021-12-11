@@ -35,38 +35,50 @@ $(document).ready(function(){
 
           /*****************************************************************************************************************************************************************************************************+
            * 
-           *              DELETE POST
+           *              DELETE POST QUE SE CARGAN CUANDO  SE TIENE ACCESO AL SITIO DE Perfil
            * 
            * **************************************************************************************************************************************************************************************************/
           
           $(".delete").click(function(e){
 
-          
+      
+           var  dato    =    $(this).parent().parent().parent().attr("class");  
+         
+
+         console.log(dato);
+        
+
+         $(this).parent().parent().parent().fadeOut("slow")
+
+       
           var   id = e.target.id;
   
                          $.ajax({       url: '/post/delete/'+id,
                                         type: 'DELETE',
-                                        success: function(result){
-
+                                        success: function(){
                                           console.log("documento borrado");
-                                         // Do something with the result
-                                          }
-                                       });
+                                          
 
-        
+
+                                          }
+
+                              })
+
+            
 
                 })
 
 
-
+            
+           
 
          })
 
 
       
-    /************************************************
+    /****************************************************************************************************************************
      * Crear nuevos posts
-    * *********************************************/          
+    * *************************************************************************************************************************/          
 
                 
        $("#postform").submit((event)=>{
@@ -81,11 +93,78 @@ $(document).ready(function(){
 
        $('.mini.modal').modal('show');
       
-      $.post('/posts/new',{titulo:titulo,contenido:contenido,tema:tema});
-           
-        setTimeout( ()=>{  $("#principal" ).load('/users/profile/posts #principal  ')  }, 1500);  
+      $.post('/posts/new',{titulo:titulo,contenido:contenido,tema:tema}).done((data)=>{
 
-       setTimeout( ()=>{ location.reload(); },  1500); 
+             console.log(data);
+
+                  var date = new Date(data.creado);        
+             
+ 
+                   var titulo = '<h3 class="textcenter">'     + data.titulo  + '</h3>'
+                   
+                   var contenido = '<p>'  + data.contenido + '</p>'
+
+
+                 var headblock = '<div class="fourteen wide column"><p> Publicado en:' + " " + data.categoria + " pubicado: " + meses[date.getMonth()] + " " + date.getUTCDay() +   ' </p></div><div class="two wide column"> <button class="ui red button delete"  id="' + data._id + ' "> X </button> </div>'
+                
+
+                    var blockcontent =  '<div class="sixteen wide column">' + contenido + '</div>' 
+
+                    var commentlike = '<div class="eight wide column"><a href=" /" class="button ui inverted green button"> Comentarios: ' + data.comentarios.length + ' </a> </div><div class="eight wide column"> ' + '👏'  + data.raiting + ' </div>'
+
+                   
+                   var  mainblock =  ' <div class="ui segment elements "> <div class=" ui stackable  grid ">   ' + headblock  + blockcontent +  commentlike +  '</div> </div> '
+
+
+
+
+
+        $("#items").prepend(mainblock);
+
+
+   /*******************************************************************************************************************************************************************************************+
+    *                             BORRAR POST RECIEN CREADOS
+    * 
+    * ***********************************************************************************************************************************************************************************************/
+
+ 
+           $(".delete").click(function(e){
+
+      
+           var  dato    =    $(this).parent().parent().parent().attr("class");  
+         
+
+         console.log(dato);
+        
+
+         $(this).parent().parent().parent().fadeOut("slow")
+
+       
+          var   id = e.target.id;
+  
+                         $.ajax({       url: '/post/delete/'+id,
+                                        type: 'DELETE',
+                                        success: function(){
+                                          console.log("documento borrado");
+                                          
+
+
+                                          }
+
+                              })
+
+            
+
+                })
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                        })
+       
 
 
             })

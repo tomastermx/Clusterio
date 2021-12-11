@@ -11,7 +11,8 @@ var mongoose = require('mongoose');
    descripcion: String,
    modalidad : String,
    categoria:String,
-   creador: String,
+   tipo: String,
+   creador: String
   });
 
 

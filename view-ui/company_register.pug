@@ -62,49 +62,12 @@ block content
            input(type=text, name="description" id="description" maxlength="80") 
          div.field 
        
-      
-
-
-
-
+    
     
          div.field
         
-
-
-
-      
-         div.field 
-       
-          table#address
-           tbody
-             tr
-             tr
-          
-               td.wideField(colspan='2')
-                
-               td( width="60%" colspan='11' rowspan='11')
-                
-                 h3.textcenter(height="30%" ) Con el marcador, Indique el lugar exacto del domicilio 
-                 
-                
-                
-
       
 
-             tr
-               td.label Teléfono
-               td.wideField(colspan='3')
-                 input.field#phone(maxlength="10")
-
-              
-             tr
-               td.label Sitio Web
-               td.wideField(colspan='3')
-                 input.field#website(maxlength="18")  
-                
-
-         div.field
             
         
 
@@ -128,8 +91,9 @@ block content
                input#postal_code.field(disabled ='true')
                label(for="") País
                input#country.field(disabled ='true')
-
-
+               div.ui.segment
+                label(for="phone") Teléfono  
+                input.field#phone(maxlength="10")
 
 
               

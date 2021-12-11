@@ -148,6 +148,8 @@ $(this).parent().parent().parent().fadeOut(1000).remove(1000);
             var city = $('#locality').val();
             var streetnumber = $('#street_number').val();
             var state = $('#administrative_area_level_1').val();
+            var zipcode = $("#postal_code").val();
+
             var country = $('#country').val();
             var industry = $('#industry').val();
             var subindustry = $('#subindustry').val();
@@ -163,7 +165,7 @@ $(this).parent().parent().parent().fadeOut(1000).remove(1000);
             window.location.assign('/users/profile');   
           
            //event.preventDefault();
-             $.post('/company/new',{companyname:cname,street:street,description:description,streetnumber:streetnumber,city:city,state:state,country:country,industry:industry,
+             $.post('/company/new',{companyname:cname,street:street,description:description,streetnumber:streetnumber,city:city,state:state,zipcode : zipcode ,country:country,industry:industry,
               subindustry:subindustry, phone:phone ,products : productArray,badges:badges, website:website,moreinfo:moreinfo,latitud:latitud,longitud:longitud});
 
             

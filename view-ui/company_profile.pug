@@ -5,16 +5,18 @@ extends layout
 block variables
 
 block content
+
  style.
-   @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
+
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
 
      h1, h2, h3, h4, p , a, button{
     
-    font-family: 'Nunito', sans-serif; 
-
-    }
-
-    #content{padding-bottom:200px;}
+    font-family: 'Nunito', sans-serif; }
+     
+    
+    
+     #content{padding-bottom:200px;}
 
 
     #map{
@@ -22,16 +24,7 @@ block content
     }
 
 
-    #pusher{
-   height:900px;
-   }   
-   
 
-
-  #post{
-   min-height:6em;
-   height: 6em;
-  }
 
 
  script(src="https://maps.googleapis.com/maps/api/js?key=" + keyapi + "&libraries=places&callback=initMap" async defer)
@@ -53,12 +46,9 @@ block content
       position: {lat: lat , lng: long  },
       map,
      title: "Hello World!",
-   });
+     });
 
-
-
-
-  }
+      }
 
 
 
@@ -72,7 +62,7 @@ block content
 
 
    
-  $(document).ready(()=>{
+    $(document).ready(()=>{
     
     var creator ;
     var email ;
@@ -97,6 +87,8 @@ block content
      var  description = data.description
      var  badges = data.certificados
      var  moreinfo  =data.masinformacion
+    
+     var  codigopostal  = data.codigopostal
 
      var  street = data.calle + " " + "#" + " " + data.numero
      var  address = city + "," + " " + state 
@@ -113,6 +105,7 @@ block content
         $('#description').text(description)
         $('#web').text(website)
         $('#moreinfo').text(moreinfo)
+        $("#zip").text(codigopostal)
 
        ///////////////////////////////////////Poblar la lista de productos
         for(i=0;i<Array.length;i++){
@@ -120,9 +113,14 @@ block content
         $("#productlist").append('<tr><td>' + Array[i].producto + '</td><td>'+  Array[i].descripcion +'</td></tr>');
 
                        }
+
         /////////////////////////////////////////////Poblar certificados
            badges.forEach(b=>{
-            console.log(b);
+             
+             var row = '<tr> <td> ' + b + '</td></tr>'
+               
+               $("#badges").append(row);
+
             })             
 
     
@@ -174,9 +172,11 @@ block content
        h3.textcenter Dirección 📍
        p.textcenter#addressx
        p.textcenter#addressw 
+       h3.textcenter Código Postal
+       p.textcenter#zip
        h3.textcenter Teléfono  📞
        p.textcenter#phone
-
+       
     div.column 
        
       h3.textcenter Sitio web 💻
@@ -184,9 +184,12 @@ block content
     div.column
      div#map
 
- div.ui.container
+  div.ui.container
   
-  div.ui.segment  
+  div.ui.segment 
+ 
+    h2.textcenter Industria Principal 🏭 
+    p.textcenter#industry
     h2.textcenter Descripción 📃
     p.textcenter#description
   div.ui.segment
@@ -198,9 +201,10 @@ block content
 
   div.ui.stackable.top.attached.tabular.menu
      a.item.active(data-tab="first") Productos 🔩
-     a.item(data-tab="second") Actualizaciones 🔔
-     a.item(data-tab="third") Anuncios 📰
-     a.item(data-tab="fourth") Más Información  💾
+      a.item(data-tab="second") Más Información  💾
+     a.item(data-tab="third") Actualizaciones 🔔
+     a.item(data-tab="fourth") Anuncios 📰
+    
 
   div.ui.bottom.attached.tab.segment.active(data-tab="first")
    div.ui.segment
@@ -215,6 +219,18 @@ block content
 
 
   div.ui.bottom.attached.tab.segment(data-tab="second")
+    div.ui.segment
+
+     h2.textcenter Más información
+     div.ui.text.container
+      p.textcenter#moreinfo
+      div.ui.text.container
+      div.field   
+       h2.textcenter Certificaciones 
+       table.ui.celled.table#badges 
+        tbody
+         tr  
+  div.ui.bottom.attached.tab.segment(data-tab="third")
 
    h2.textcenter Actualizaciones
     if owner
@@ -223,10 +239,12 @@ block content
          textarea(type="text" name="post" id="post" )
          br    
          br
-         button.fluid.ui.button.green(type="submit") Guardar  
+         button.fluid.ui.button.green(type="submit") Guardar
+
 
  
-  div.ui.bottom.attached.tab.segment(data-tab="third")
+ 
+  div.ui.bottom.attached.tab.segment(data-tab="fourth")
     div.ui.segment
      h2.textcenter Anuncios
      if owner
@@ -235,15 +253,7 @@ block content
        button.fluid.ui.button.green(type="submit") Publicar 
 
 
-  div.ui.bottom.attached.tab.segment(data-tab="fourth")  
-    div.ui.segment
-
-     h2.textcenter Más información
-     div.ui.text.container
-      p.textcenter#moreinfo
-      div.ui.text.container
-      div.field   
-       h2.textcenter Certificaciones   
+  
 
   div.ui.fullscreen.modal 
    div.header Envía un Correo

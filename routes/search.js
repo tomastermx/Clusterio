@@ -6,7 +6,7 @@
 module.exports = (app,session,Company,Org,searchController)=>{
 
 
-app.get('/search',searchController.search);
+app.get('/search/:company',searchController.search);
 
 
 

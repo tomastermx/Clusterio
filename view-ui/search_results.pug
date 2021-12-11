@@ -14,7 +14,7 @@ block content
  style.
      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
 
-     h1, h3, p , a, .ui.button{
+     h1, h2, h3, p , a, .ui.button{
     
     font-family: 'Nunito', sans-serif; 
 
@@ -46,7 +46,7 @@ block content
        label(for="searchunit") Producto , empresa ó industria 	
        input(type="text" name="searchunit" id="searchunit") 
       div.three.wide.column
-       label(for="place") País, Estado ó Ciudad	
+       label(for="place") País, Estado,  Ciudad ó CP	
        input(type="text" name="place" id="place" ) 
       div.three.wide.column 
      
@@ -59,8 +59,20 @@ block content
         button.fluid.ui.inverted.green.button(type="submit") Enviar	
 
    
- div.ui.internally.divide.grid
-      div.two.wide.column
+ div.ui.three.column.doubing.stackable.grid
+      div.three.wide.column#panel
+        
+         h2.textcenter Industrias
+          
+         br 
+         a(href="/search/metalmecanica") 
+          p.textcenter Metalmecánica
+         br
+         a(href="/search/automotriz") 
+           p.textcenter Automotríz
+         br
+         a(href="/search/alimentos") 
+           p.textcenter Alimentos 
       div.twelve.wide.column#results
       
       

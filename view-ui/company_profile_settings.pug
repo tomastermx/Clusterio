@@ -11,9 +11,28 @@ block content
 
     }
 
-    
 
-   script(src='/javascripts/mapsapi-profile.js')
+        #map {
+     position:relative;
+     height:400px;
+    }   
+
+
+ 
+    #placemap{
+     
+     position:relative;  
+     border-color:rgb(240 240 241);
+     border-style:solid;
+     border-width:1px;
+     width:100%;
+   
+    } 
+
+
+    
+   script(src="https://maps.googleapis.com/maps/api/js?key=" + keyapi + "&libraries=places&callback=initAutocomplete"  async defer)
+   script(src='/javascripts/mapsapi-places.js')
    script(src='/javascripts/jquery-company.settings.js') 
    script.
    
@@ -57,15 +76,9 @@ block content
      
 
         $('#title').text(name)
-        $('#addressw').text(address)
-        $('#addressx').text(calle)
 
         $('#modify_description').val(description);
         $('#modify_moreinfo').val(more_info);
-        $("#modify_street").val(calle);
-        $("#modify_number").val(num);
-        $("#modify_phone").val(phone);
-        $("#modify_web").val(web);
 
        
             for(i=0;i<productArray.length;i++){
@@ -150,38 +163,21 @@ block content
 
 
 
-            $("#modify_street").change(()=>{
-            callenueva  = $("#modify_street").val();
-           });
+
+      /****************************************************************************************************
+                                     Modificación de la primera pestaña
+
+      *****************************************************************************************************/
 
 
-             $("#modify_number").change(()=>{
-             numnuevo  = $("#modify_number").val();
-           });
-
-
-
-             $("#modify_phone").change(()=>{
-               newphone = $("#modify_phone").val();  
-
-             });
-
-               $("#modify_web").change(()=>{
-               newweb = $("#modify_web").val();  
-
-             console.log(web);
-
-             });
-
-
-      //////////////////////////////////////////Postear los cambios primera pestaña///////////////////                
+      
 
            $("#companyname").submit((event)=>{
        
            event.preventDefault();
 
-          //var description = $("#modify_description").val();
-          //var moreinfo = $("#modify_moreinfo").val();
+          var description = $("#modify_description").val();
+          var moreinfo = $("#modify_moreinfo").val();
 
 
          
@@ -202,15 +198,42 @@ block content
 
     })
                      
-    ////////////////////////////////////////////////////////////Poster cambios segunda pestaña/////////////////
+  
+
+    /*******************************************************************************************************
+                           Modificar cambios segunda pestaña
+    ******************************************************************************************************/
 
 
          $("#contactdata").submit((event)=>{
 
            event.preventDefault();
 
+
+
+           var num = $("#street_number").val();
+
+           var calle = $("#route").val();
+
+           var ciudad = $("#locality").val();
+
+           var  estado = $("#administrative_area_level_1").val();
+
+           var  zipcode = $("#postal_code").val();
+
+           var  pais  =  $("#country").val();
+
+           var latitud  = $("#latitud").val();
+
+           var longitud = $("#longitud").val();
+
+
+           console.log(num + " " + calle + " " + ciudad + " " + estado + " " + zipcode + " " + pais);
+
           
-          $.post('/company/settings/profile/'+ id,{calle:callenueva,num:numnuevo, tel:newphone, web:newweb});  
+          $.post('/company/settings/profile/' + id , {num:num, calle:calle, zipcode:zipcode ,ciudad:ciudad, estado:estado, longitud:longitud, latitud:latitud  })
+
+
 
            $('#example').progress({percent: 100  }); 
              
@@ -285,23 +308,39 @@ block content
         
         form.ui.form(id="contactdata",name="contactdata" action="")
           h1 Ubicación 
-          div.ui.two.column.stackable.grid  
-           div.column
-            label(for="street") Calle
-            input(type="text" id="modify_street" name="street")
-           div.column
-            label(for="number") Número
-            input(type="text" id="modify_number" name="number")
-          h1 Contacto
-          div.ui.two.column.stackable.grid
-           div.column
-            label(for="phone") Teléfono
-            input(type="text" id="modify_phone" name="phone") 
-           div.column 
-            label(for="web") Sitio web
-            input(type="text" id="modify_web" name="web")
+          div.ui.segment
+            div.ui.doubling.stackable.two.column.grid
+             div.column
+              h3.textcenter Dirección
+              div#locationField
+               label(for="companyname") Ubicación* 
+               input(type="text"  name="companyname" id="autocomplete"  placeholder="Enter your address" onFocus= "geolocate()" )
+               label(for="street_number") Número de calle
+               input#street_number.field(disabled='true')
+               label(for="route.field") Calle
+               input#route.field(disabled ='true')
+               label(for="locality.field") Ciudad
+               input#locality.field(type="text" name="city" disabled ='true') 
+               label() Estado
+               input#administrative_area_level_1.field(disabled='true')
+               label(for="postal_code.field") Código postal
+               input#postal_code.field(disabled ='true')
+               label(for="") País
+               input#country.field(disabled ='true')
+               div.ui.segment
+                label(for="phone") Teléfono  
+                input.field#phone(maxlength="10")
+ 
 
-        
+            
+             div.column
+              h3.textcenter Mapas 
+              div#placemap
+               div#map(height="70%")   
+              label() Latitud
+              input#latitud(disabled='true')
+              label() Longitud
+              input#longitud(disabled='true')  
           
           div.ui.container
            div.field 

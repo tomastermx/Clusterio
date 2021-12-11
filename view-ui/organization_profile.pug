@@ -9,7 +9,7 @@ block content
  style.
      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
 
-     h1, h3, p , a, button{
+     h1, h2, h3, p , a, button{
     
     font-family: 'Nunito', sans-serif; 
 
@@ -74,4 +74,20 @@ block content
    div.ui.container
     div.ui.segment 
      h2.textcenter Descripción 📃
-     p.textcenter  #{org.description}   	
+     p.textcenter  #{org.description}   
+
+   div.ui.segment
+    a(href="/messages/send/to/"   class="button ui button blue") Mensaje 💬
+    button.ui.button.green#email Correo Electrónico 🤝
+
+   div.ui.stackable.top.attached.tabular.menu
+      a.item.active(data-tab="first") Más Información 💾
+    
+    
+    
+
+  
+
+   div.ui.bottom.attached.tab.segment.active(data-tab="first")
+    div.ui.segment
+      h2.textcenter Más Información 💾

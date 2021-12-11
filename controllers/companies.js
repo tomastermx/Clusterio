@@ -145,6 +145,7 @@ exports.donewCompany = function(req , res){
      newCompany.estado = req.body.state;
      newCompany.ciudad = req.body.city;
      newCompany.calle = req.body.street;
+     newCompany.codigopostal = req.body.zipcode;  ///nuevo
      newCompany.numero = req.body.streetnumber;
      newCompany.telefono =req.body.phone;
      newCompany.web = req.body.website;
@@ -175,34 +176,29 @@ exports.donewCompany = function(req , res){
 
 exports.ProfileCompany = async (req,res)=>{
 
- var  keyapi = process.env.maps     
-
- var  owner
- 
-  
-   /////////////// Poner la imagen  de perfil de redes sociale
-   var image   = req.session.loggedIn?  req.session.user.image : "/images/avataaars4.svg" 
+      var  keyapi = process.env.maps  
 
 
-   //////////// Poner el nombre  usuario, si el usuario esta loggeado  
+      /////////////// Poner la imagen  de perfil de redes sociale
+       var image   = req.session.loggedIn?  req.session.user.image : "/images/avataaars4.svg" 
+
+
+       //////////// Poner el nombre  usuario, si el usuario esta loggeado  
       
-    var name =  req.session.loggedIn ?  req.session.user.username.split(" ")[0] : ""
+      var name =  req.session.loggedIn ?  req.session.user.username.split(" ")[0] : "";
 
-     var logged = req.session.loggedIn
-
+      var logged = req.session.loggedIn
 
     try {
     const company = await Company.findOne({'_id':req.params.id}) 
        
-       if(req.session.user){
+        if(req.session.user){
 
-        var owner = req.session.user.email === company.creador ? true : false
+         var owner = req.session.user.email === company.creador ? true : false
 
-        res.render('company_profile',{company:company,image:image,name:name,owner:owner,logged:logged,keyapi:keyapi}); 
+         res.render('company_profile',{company:company,image:image,name:name,owner:owner,logged:logged,keyapi:keyapi}); 
 
-       } else
-
-        {res.render('company_profile',{company:company,image:image,name:name,keyapi:keyapi}); }     
+       } else{res.render('company_profile',{company:company,image:image,name:name,keyapi:keyapi}); }     
 
  
      } catch(e) {console.log(e)} 
@@ -319,6 +315,39 @@ res.json(unit);
 
      }
 
+
+    if(req.body.ciudad){
+      console.log(req.body.ciudad)
+
+       company.ciudad = req.body.ciudad; 
+     
+     } 
+
+
+     if(req.body.zipcode){
+       console.log(req.body.zipcode)
+       company.codigopostal= req.body.zipcode;  
+        
+     }
+
+     
+     if(req.body.longitud){
+        console.log(req.body.longitud)
+        company.longitud = req.body.longiud;
+
+     }
+
+
+     if(req.body.latitud){
+
+        console.log(req.body.latitud)
+
+        company.latitud = req.body.latitud;
+
+     }
+
+
+
     if(req.body.tel) {
 
      console.log(req.body.tel);
@@ -326,12 +355,7 @@ res.json(unit);
 
       }
 
-     
-     if(req.body.web){
-      company.web = req.body.web;   
-        
-    }
-
+  
 
 
 

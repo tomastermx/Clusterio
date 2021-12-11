@@ -66,6 +66,8 @@ exports.createOportunity = async (req,res)=>{
  
    newOpportunity.save((err, opp)=>{console.log(opp)});
 
+   res.json(newOpportunity);
+
 }
 
 
@@ -86,13 +88,20 @@ exports.createOportunity = async (req,res)=>{
        try {
             
                    
+           const opp = await Opportunity.deleteOne({"_id" : req.params.id});
 
-            const opp = await Opportunity.deleteOne({"_id":req.params.id});
+
+           
+        
+            console.log(req.params.id );
 
             res.sendStatus(200);
-        } 
 
-         catch (e){console.log(e) }
+           console.log("documento borrado")
+
+
+
+        } catch(e){   }
 
 
 

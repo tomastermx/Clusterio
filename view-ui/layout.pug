@@ -77,7 +77,7 @@ html
     }
 
 
-     #signup{
+     #signup, #post {
       padding-top: 4px;
       padding-bottom:auto;
      }
@@ -94,15 +94,21 @@ html
      a.toc.item
       i.sidebar.icon
      a.active.item(href="/") Cluster.iO
-     a.item(href="/search") Buscador
+     a.item(href="/search/general") Buscador
      a.item(href="/avisos") Avisos 
      a.item(href="/posts/general") Clústers
     div.right.menu
+      if logged
+       item#post 
+         a(href="/users/login"  class=" ui  green button") Anuncio
+       item#post
+        a(href="/users/login"  class=" ui  green button") Post  
   
       div#imageprofile 
         img#img(src = `${image} ` )
 
     if logged    
+
       div.ui.dropdown.item#test #{name}
 
        i.dropdown.icon
